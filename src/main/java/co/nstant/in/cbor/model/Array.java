@@ -1,0 +1,49 @@
+package co.nstant.in.cbor.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Array extends ChunkableDataItem {
+
+	private final ArrayList<DataItem> objects = new ArrayList<>();
+
+	public Array() {
+		super(MajorType.ARRAY);
+	}
+
+	public Array add(DataItem object) {
+		objects.add(object);
+		return this;
+	}
+
+	public List<DataItem> getDataItems() {
+		return objects;
+	}
+
+	@Override
+	public boolean equals(Object object) {
+		if (this == object) {
+			return true;
+		}
+		if (object instanceof Array) {
+			Array other = (Array) object;
+			return objects.equals(other.objects);
+		}
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return objects.hashCode();
+	}
+
+	@Override
+	public String toString() {
+		if (isChunked()) {
+			return "[_ " + objects + "]";
+		} else {
+			return "[" + objects + "]";
+		}
+	}
+
+}

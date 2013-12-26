@@ -1,0 +1,111 @@
+package co.nstant.in.cbor.builder;
+
+import co.nstant.in.cbor.model.Array;
+import co.nstant.in.cbor.model.DataItem;
+import co.nstant.in.cbor.model.Map;
+
+public class MapBuilder<T extends AbstractBuilder<?>> extends
+                AbstractBuilder<T> {
+
+    private final Map map;
+
+    public MapBuilder(T parent, Map map) {
+        super(parent);
+        this.map = map;
+    }
+
+    public MapBuilder<T> put(DataItem key, DataItem value) {
+        map.put(key, value);
+        return this;
+    }
+
+    public MapBuilder<T> put(long key, long value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(long key, boolean value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(long key, float value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(long key, double value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(long key, byte[] value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(long key, String value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(String key, long value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(String key, boolean value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(String key, float value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(String key, double value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(String key, byte[] value) {
+        map.put(convert(key), convert(value));
+        return this;
+    }
+
+    public MapBuilder<T> put(String key, String value) {
+        put(convert(key), convert(value));
+        return this;
+    }
+
+    public ArrayBuilder<MapBuilder<T>> putArray(long key) {
+        Array array = new Array();
+        put(convert(key), array);
+        return new ArrayBuilder<>(this, array);
+    }
+
+    public ArrayBuilder<MapBuilder<T>> putArray(String key) {
+        Array array = new Array();
+        put(convert(key), array);
+        return new ArrayBuilder<>(this, array);
+    }
+
+    public ArrayBuilder<MapBuilder<T>> startArray(String key) {
+        Array array = new Array();
+        array.setChunked(true);
+        put(convert(key), array);
+        return new ArrayBuilder<>(this, array);
+    }
+
+    public MapBuilder<MapBuilder<T>> putMap(long key) {
+        Map nestedMap = new Map();
+        put(convert(key), nestedMap);
+        return new MapBuilder<>(this, nestedMap);
+    }
+
+    public T end() {
+        return getParent();
+    }
+
+}
