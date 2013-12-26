@@ -3,6 +3,10 @@ cbor-java
 
 Java implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise Binary Object Representation (CBOR), developed by [Carsten Bormann](http://www.tzi.de/~cabo/).
 
+## Build Status
+
+[![Build Status](https://travis-ci.org/c-rack/cbor-java.png)](https://travis-ci.org/c-rack/cbor-java)
+
 ## Features
 
 * Can encode and decode all examples in the RFC
