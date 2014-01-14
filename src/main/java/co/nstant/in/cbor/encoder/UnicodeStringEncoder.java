@@ -19,7 +19,7 @@ public class UnicodeStringEncoder extends AbstractEncoder<UnicodeString> {
 
     @Override
     public void encode(UnicodeString dataItem) throws CborException {
-        String string = dataItem.toString();
+        String string = dataItem.getString();
         if (dataItem.isChunked()) {
             encodeTypeChunked(MajorType.UNICODE_STRING);
             if (string != null) {

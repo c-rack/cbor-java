@@ -11,6 +11,14 @@ public class UnicodeString extends ChunkableDataItem {
 
     @Override
     public String toString() {
+        if (string == null) {
+            return "null";
+        } else {
+            return string;
+        }
+    }
+
+    public String getString() {
         return string;
     }
 

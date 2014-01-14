@@ -17,13 +17,14 @@ public class SinglePrecisionFloatDecoder extends
     @Override
     public SinglePrecisionFloat decode(int initialByte) throws CborException {
         int bits = 0;
-        bits |= (nextSymbol() & 0xFF);
+        bits |= nextSymbol() & 0xFF;
         bits <<= 8;
-        bits |= (nextSymbol() & 0xFF);
+        bits |= nextSymbol() & 0xFF;
         bits <<= 8;
-        bits |= (nextSymbol() & 0xFF);
+        bits |= nextSymbol() & 0xFF;
         bits <<= 8;
-        bits |= (nextSymbol() & 0xFF);
+        bits |= nextSymbol() & 0xFF;
         return new SinglePrecisionFloat(Float.intBitsToFloat(bits));
     }
+
 }

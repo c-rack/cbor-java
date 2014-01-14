@@ -54,15 +54,27 @@ public class SpecialEncoder extends AbstractEncoder<Special> {
         case UNALLOCATED:
             throw new CborException("Unallocated special type");
         case IEEE_754_HALF_PRECISION_FLOAT:
+            if (!(dataItem instanceof HalfPrecisionFloat)) {
+                throw new CborException("Wrong data item type");
+            }
             halfPrecisionFloatEncoder.encode((HalfPrecisionFloat) dataItem);
             break;
         case IEEE_754_SINGLE_PRECISION_FLOAT:
+            if (!(dataItem instanceof SinglePrecisionFloat)) {
+                throw new CborException("Wrong data item type");
+            }
             singlePrecisionFloatEncoder.encode((SinglePrecisionFloat) dataItem);
             break;
         case IEEE_754_DOUBLE_PRECISION_FLOAT:
+            if (!(dataItem instanceof DoublePrecisionFloat)) {
+                throw new CborException("Wrong data item type");
+            }
             doublePrecisionFloatEncoder.encode((DoublePrecisionFloat) dataItem);
             break;
         case SIMPLE_VALUE_NEXT_BYTE:
+            if (!(dataItem instanceof SimpleValue)) {
+                throw new CborException("Wrong data item type");
+            }
             SimpleValue simpleValueNextByte = (SimpleValue) dataItem;
             write((7 << 5) | 24);
             write(simpleValueNextByte.getValue());

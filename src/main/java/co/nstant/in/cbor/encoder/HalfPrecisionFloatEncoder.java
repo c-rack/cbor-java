@@ -30,7 +30,7 @@ public class HalfPrecisionFloatEncoder extends
     public static int fromFloat(float fval) {
         int fbits = Float.floatToIntBits(fval);
         int sign = fbits >>> 16 & 0x8000; // sign only
-        int val = (fbits & 0x7fffffff) + 0x1000; // rounded value
+        int val = 0x1000 + fbits & 0x7fffffff; // rounded value
 
         if (val >= 0x47800000) // might be or become NaN/Inf
         { // avoid Inf due to rounding

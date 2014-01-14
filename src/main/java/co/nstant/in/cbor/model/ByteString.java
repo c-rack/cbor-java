@@ -8,11 +8,19 @@ public class ByteString extends ChunkableDataItem {
 
     public ByteString(byte[] bytes) {
         super(MajorType.BYTE_STRING);
-        this.bytes = bytes;
+        if (bytes == null) {
+            this.bytes = null;
+        } else {
+            this.bytes = bytes.clone();
+        }
     }
 
     public byte[] getBytes() {
-        return bytes;
+        if (bytes == null) {
+            return null;
+        } else {
+            return bytes.clone();
+        }
     }
 
     @Override
@@ -29,7 +37,7 @@ public class ByteString extends ChunkableDataItem {
 
     @Override
     public int hashCode() {
-        return bytes.hashCode();
+        return Arrays.hashCode(bytes);
     }
 
 }

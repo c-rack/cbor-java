@@ -47,21 +47,21 @@ public abstract class AbstractDecoder<T> {
             return twoByteValue;
         case FOUR_BYTES:
             long fourByteValue = 0L;
-            fourByteValue |= ((long) nextSymbol() << 24);
-            fourByteValue |= ((long) nextSymbol() << 16);
-            fourByteValue |= ((long) nextSymbol() << 8);
-            fourByteValue |= ((long) nextSymbol() << 0);
+            fourByteValue |= (long) nextSymbol() << 24;
+            fourByteValue |= (long) nextSymbol() << 16;
+            fourByteValue |= (long) nextSymbol() << 8;
+            fourByteValue |= (long) nextSymbol() << 0;
             return fourByteValue;
         case EIGHT_BYTES:
             long eightByteValue = 0;
-            eightByteValue |= ((long) nextSymbol() << 56);
-            eightByteValue |= ((long) nextSymbol() << 48);
-            eightByteValue |= ((long) nextSymbol() << 40);
-            eightByteValue |= ((long) nextSymbol() << 32);
-            eightByteValue |= ((long) nextSymbol() << 24);
-            eightByteValue |= ((long) nextSymbol() << 16);
-            eightByteValue |= ((long) nextSymbol() << 8);
-            eightByteValue |= ((long) nextSymbol() << 0);
+            eightByteValue |= (long) nextSymbol() << 56;
+            eightByteValue |= (long) nextSymbol() << 48;
+            eightByteValue |= (long) nextSymbol() << 40;
+            eightByteValue |= (long) nextSymbol() << 32;
+            eightByteValue |= (long) nextSymbol() << 24;
+            eightByteValue |= (long) nextSymbol() << 16;
+            eightByteValue |= (long) nextSymbol() << 8;
+            eightByteValue |= (long) nextSymbol() << 0;
             return eightByteValue;
         case INDEFINITE:
             return INFINITY;
@@ -85,10 +85,10 @@ public abstract class AbstractDecoder<T> {
             return BigInteger.valueOf(twoByteValue);
         case FOUR_BYTES:
             long fourByteValue = 0L;
-            fourByteValue |= ((long) nextSymbol() << 24);
-            fourByteValue |= ((long) nextSymbol() << 16);
-            fourByteValue |= ((long) nextSymbol() << 8);
-            fourByteValue |= ((long) nextSymbol() << 0);
+            fourByteValue |= (long) nextSymbol() << 24;
+            fourByteValue |= (long) nextSymbol() << 16;
+            fourByteValue |= (long) nextSymbol() << 8;
+            fourByteValue |= (long) nextSymbol() << 0;
             return BigInteger.valueOf(fourByteValue);
         case EIGHT_BYTES:
             BigInteger eightByteValue = BigInteger.ZERO;
