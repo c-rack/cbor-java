@@ -1,7 +1,7 @@
 cbor-java
 =========
 
-Java implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise Binary Object Representation (CBOR), developed by [Carsten Bormann](http://www.tzi.de/~cabo/).
+Java implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise Binary Object Representation (CBOR)
 
 ## Build Status
 
@@ -22,7 +22,7 @@ Java implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise B
 
 ## License
 
-Copyright 2013 Constantin Rack
+Copyright 2014 Constantin Rack
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
