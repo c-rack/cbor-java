@@ -1,11 +1,11 @@
-cbor-java
+cbor-java [![Build Status](https://travis-ci.org/c-rack/cbor-java.png)](https://travis-ci.org/c-rack/cbor-java)
 =========
 
-Java implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise Binary Object Representation (CBOR)
+Java 7 implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise Binary Object Representation (CBOR)
 
-### Build Status
+## Goal
 
-[![Build Status](https://travis-ci.org/c-rack/cbor-java.png)](https://travis-ci.org/c-rack/cbor-java)
+Become the reference implementation of CBOR in Java
 
 ## Features
 
@@ -14,10 +14,6 @@ Java implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise B
 * Support for semantic tags
 * Support for 64-bit integer values
 * Passes all [CPD](http://c-rack.github.io/cbor-java/cpd.html), [PMD](http://c-rack.github.io/cbor-java/pmd.html) and [FindBugs](http://c-rack.github.io/cbor-java/findbugs.html) tests
-
-## Requirements
-
-* Java 7
 
 ## Documentation
 
