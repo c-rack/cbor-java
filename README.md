@@ -9,22 +9,30 @@ Java implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise B
 
 ## Features
 
-* Can encode and decode all examples in the RFC
-* Fluent builder for CBOR messages
+* Can encode and decode **all examples** described in RFC 7049
+* Fluent interface builder for CBOR messages
 * Support for semantic tags
 * Support for 64-bit integer values
 * Passes all [CPD](http://c-rack.github.io/cbor-java/cpd.html), [PMD](http://c-rack.github.io/cbor-java/pmd.html) and [FindBugs](http://c-rack.github.io/cbor-java/findbugs.html) tests
+
+## Requirements
+
+* Java 7
 
 ## Documentation
 
 * [Documentation](http://c-rack.github.io/cbor-java/)
 * [JavaDoc](http://c-rack.github.io/cbor-java/apidocs/index.html)
 
-### Other Java implementations
+## Installation
 
-* https://github.com/twh270/cbor-java
-* https://github.com/jawi/jacob
-* https://github.com/peteroupc/CBOR
+Add this to the dependencies section of your pom.xml file:
+
+    <dependency>
+        <groupId>co.nstant.in</groupId>
+        <artifactId>cbor</artifactId>
+        <version>0.3</version>
+    </dependency>
 
 ### License
 
