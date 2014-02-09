@@ -8,6 +8,7 @@ import co.nstant.in.cbor.encoder.ArrayEncoder;
 import co.nstant.in.cbor.encoder.ByteStringEncoder;
 import co.nstant.in.cbor.encoder.MapEncoder;
 import co.nstant.in.cbor.encoder.NegativeIntegerEncoder;
+import co.nstant.in.cbor.encoder.RationalNumberEncoder;
 import co.nstant.in.cbor.encoder.SpecialEncoder;
 import co.nstant.in.cbor.encoder.TagEncoder;
 import co.nstant.in.cbor.encoder.UnicodeStringEncoder;
@@ -17,6 +18,7 @@ import co.nstant.in.cbor.model.ByteString;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.Map;
 import co.nstant.in.cbor.model.NegativeInteger;
+import co.nstant.in.cbor.model.RationalNumber;
 import co.nstant.in.cbor.model.SimpleValue;
 import co.nstant.in.cbor.model.Special;
 import co.nstant.in.cbor.model.Tag;
@@ -36,6 +38,7 @@ public class CborEncoder {
 	private final MapEncoder mapEncoder;
 	private final TagEncoder tagEncoder;
 	private final SpecialEncoder specialEncoder;
+	private final RationalNumberEncoder rationalNumberEncoder;
 
 	/**
 	 * Initialize a new encoder which writes the binary encoded data to an
@@ -51,6 +54,7 @@ public class CborEncoder {
 		mapEncoder = new MapEncoder(this, outputStream);
 		tagEncoder = new TagEncoder(this, outputStream);
 		specialEncoder = new SpecialEncoder(this, outputStream);
+		rationalNumberEncoder = new RationalNumberEncoder(this, outputStream);
 	}
 
 	/**
@@ -110,6 +114,10 @@ public class CborEncoder {
 		default:
 			throw new IllegalArgumentException("Unknown major type");
 		}
+	}
+
+	public void encode(RationalNumber rationalNumber) throws CborException {
+		rationalNumberEncoder.encode(rationalNumber);
 	}
 
 }
