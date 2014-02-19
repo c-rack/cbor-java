@@ -1,18 +1,14 @@
 cbor-java [![Build Status](https://travis-ci.org/c-rack/cbor-java.png)](https://travis-ci.org/c-rack/cbor-java)
 =========
 
-Java 7 implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise Binary Object Representation (CBOR)
-
-## Goal
-
-Become the reference implementation of CBOR in Java
+A Java 7 implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise Binary Object Representation (CBOR)
 
 ## Features
 
-* Can encode and decode **all examples** described in RFC 7049
-* Fluent interface builder for CBOR messages
-* Support for semantic tags
-* Support for 64-bit integer values
+* Encodes and decodes **all examples** described in RFC 7049
+* Provides a **fluent interface builder** for CBOR messages
+* Supports semantic tags
+* Supports 64-bit integer values
 * Passes all [CPD](http://c-rack.github.io/cbor-java/cpd.html), [PMD](http://c-rack.github.io/cbor-java/pmd.html) and [FindBugs](http://c-rack.github.io/cbor-java/findbugs.html) tests
 
 ## Documentation
@@ -20,7 +16,7 @@ Become the reference implementation of CBOR in Java
 * [Documentation](http://c-rack.github.io/cbor-java/)
 * [JavaDoc](http://c-rack.github.io/cbor-java/apidocs/index.html)
 
-## Installation
+## Maven Dependency
 
 Add this to the dependencies section of your pom.xml file:
 
@@ -30,9 +26,50 @@ Add this to the dependencies section of your pom.xml file:
         <version>0.3</version>
     </dependency>
 
+## Usage
+
+### Encoding Example
+
+    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    CborEncoder encoder = new CborEncoder(baos);
+    encoder.encode(new CborBuilder()
+        .add("text")                // add string
+        .add(1234)                  // add integer
+        .add(new byte[] { 0x10 })   // add byte array
+        .addArray()                 // add array
+            .add(1)
+            .add("text")
+            .end()
+        .build());
+    byte[] encodedBytes = baos.toByteArray();
+
+### Decoding Example
+
+    ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
+    CborDecoder decoder = new CborDecoder(bais);
+    List<DataItem> dataItems = decoder.decode();
+    for(DataItem dataItem : dataItems) {
+        // process data item
+    }
+
+### Streaming Decoding Example
+
+    ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
+    CborDecoder decoder = new CborDecoder(bais);
+    decoder.decode(new DataItemListener() {
+
+        @Override
+        public void onDataItem(DataItem dataItem) {
+            // process data item
+        }
+
+    });
+
+---
+
 ### License
 
-Copyright 2014 Constantin Rack
+Copyright 2013-2014 Constantin Rack
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
