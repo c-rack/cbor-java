@@ -20,54 +20,60 @@ A Java 7 implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Conci
 
 Add this to the dependencies section of your pom.xml file:
 
-    <dependency>
-        <groupId>co.nstant.in</groupId>
-        <artifactId>cbor</artifactId>
-        <version>0.3</version>
-    </dependency>
+```xml
+<dependency>
+    <groupId>co.nstant.in</groupId>
+    <artifactId>cbor</artifactId>
+    <version>0.3</version>
+</dependency>
+```
 
 ## Usage
 
 ### Encoding Example
 
-    ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    CborEncoder encoder = new CborEncoder(baos);
-    encoder.encode(new CborBuilder()
-        .add("text")                // add string
-        .add(1234)                  // add integer
-        .add(new byte[] { 0x10 })   // add byte array
-        .addArray()                 // add array
-            .add(1)
-            .add("text")
-            .end()
-        .build());
-    byte[] encodedBytes = baos.toByteArray();
+```java
+ByteArrayOutputStream baos = new ByteArrayOutputStream();
+CborEncoder encoder = new CborEncoder(baos);
+encoder.encode(new CborBuilder()
+    .add("text")                // add string
+    .add(1234)                  // add integer
+    .add(new byte[] { 0x10 })   // add byte array
+    .addArray()                 // add array
+        .add(1)
+        .add("text")
+        .end()
+    .build());
+byte[] encodedBytes = baos.toByteArray();
+```
 
 ### Decoding Example
 
-    ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
-    CborDecoder decoder = new CborDecoder(bais);
-    List<DataItem> dataItems = decoder.decode();
-    for(DataItem dataItem : dataItems) {
-        // process data item
-    }
+```java
+ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
+CborDecoder decoder = new CborDecoder(bais);
+List<DataItem> dataItems = decoder.decode();
+for(DataItem dataItem : dataItems) {
+    // process data item
+}
+```
 
 ### Streaming Decoding Example
 
-    ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
-    CborDecoder decoder = new CborDecoder(bais);
-    decoder.decode(new DataItemListener() {
+```java
+ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
+CborDecoder decoder = new CborDecoder(bais);
+decoder.decode(new DataItemListener() {
 
-        @Override
-        public void onDataItem(DataItem dataItem) {
-            // process data item
-        }
+    @Override
+    public void onDataItem(DataItem dataItem) {
+        // process data item
+    }
 
-    });
-
----
-
-### License
+});
+```
+	
+## License
 
 Copyright 2013-2014 Constantin Rack
 
