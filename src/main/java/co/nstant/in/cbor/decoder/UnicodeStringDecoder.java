@@ -14,57 +14,56 @@ import co.nstant.in.cbor.model.UnicodeString;
 
 public class UnicodeStringDecoder extends AbstractDecoder<UnicodeString> {
 
-    private static final Charset UTF8 = Charset.forName("UTF8");
+	private static final Charset UTF8 = Charset.forName("UTF8");
 
-    public UnicodeStringDecoder(CborDecoder decoder, InputStream inputStream) {
-        super(decoder, inputStream);
-    }
+	public UnicodeStringDecoder(CborDecoder decoder, InputStream inputStream) {
+		super(decoder, inputStream);
+	}
 
-    @Override
-    public UnicodeString decode(int initialByte) throws CborException {
-        long length = getLength(initialByte);
-        if (length == INFINITY) {
-            if (decoder.isAutoDecodeInfinitiveUnicodeStrings()) {
-                return decodeInfinitiveLength();
-            } else {
-                UnicodeString unicodeString = new UnicodeString(null);
-                unicodeString.setChunked(true);
-                return unicodeString;
-            }
-        } else {
-            return decodeFixedLength(length);
-        }
-    }
+	@Override
+	public UnicodeString decode(int initialByte) throws CborException {
+		long length = getLength(initialByte);
+		if (length == INFINITY) {
+			if (decoder.isAutoDecodeInfinitiveUnicodeStrings()) {
+				return decodeInfinitiveLength();
+			} else {
+				UnicodeString unicodeString = new UnicodeString(null);
+				unicodeString.setChunked(true);
+				return unicodeString;
+			}
+		} else {
+			return decodeFixedLength(length);
+		}
+	}
 
-    private UnicodeString decodeInfinitiveLength() throws CborException {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        DataItem dataItem;
-        for (;;) {
-            dataItem = decoder.decodeNext();
-            MajorType majorType = dataItem.getMajorType();
-            if (Special.BREAK.equals(dataItem)) {
-                break;
-            } else if (majorType == MajorType.UNICODE_STRING) {
-                UnicodeString unicodeString = (UnicodeString) dataItem;
-                try {
-                    bytes.write(unicodeString.toString().getBytes(UTF8));
-                } catch (IOException ioException) {
-                    throw new CborException(ioException);
-                }
-            } else {
-                throw new CborException("Unexpected major type "
-                                + majorType);
-            }
-        }
-        return new UnicodeString(new String(bytes.toByteArray(), UTF8));
-    }
+	private UnicodeString decodeInfinitiveLength() throws CborException {
+		ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+		DataItem dataItem;
+		for (;;) {
+			dataItem = decoder.decodeNext();
+			MajorType majorType = dataItem.getMajorType();
+			if (Special.BREAK.equals(dataItem)) {
+				break;
+			} else if (majorType == MajorType.UNICODE_STRING) {
+				UnicodeString unicodeString = (UnicodeString) dataItem;
+				try {
+					bytes.write(unicodeString.toString().getBytes(UTF8));
+				} catch (IOException ioException) {
+					throw new CborException(ioException);
+				}
+			} else {
+				throw new CborException("Unexpected major type " + majorType);
+			}
+		}
+		return new UnicodeString(new String(bytes.toByteArray(), UTF8));
+	}
 
-    private UnicodeString decodeFixedLength(long length) throws CborException {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream((int) length);
-        for (long i = 0; i < length; i++) {
-            bytes.write(nextSymbol());
-        }
-        return new UnicodeString(new String(bytes.toByteArray(), UTF8));
-    }
+	private UnicodeString decodeFixedLength(long length) throws CborException {
+		ByteArrayOutputStream bytes = new ByteArrayOutputStream((int) length);
+		for (long i = 0; i < length; i++) {
+			bytes.write(nextSymbol());
+		}
+		return new UnicodeString(new String(bytes.toByteArray(), UTF8));
+	}
 
 }

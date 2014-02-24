@@ -18,8 +18,7 @@ public class NegativeIntegerEncoder extends AbstractEncoder<NegativeInteger> {
 
 	@Override
 	public void encode(NegativeInteger dataItem) throws CborException {
-		encodeTypeAndLength(MajorType.NEGATIVE_INTEGER,
-				MINUS_ONE.subtract(dataItem.getValue()).abs());
+		encodeTypeAndLength(MajorType.NEGATIVE_INTEGER, MINUS_ONE.subtract(dataItem.getValue()).abs());
 	}
 
 }

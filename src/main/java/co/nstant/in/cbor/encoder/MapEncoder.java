@@ -15,86 +15,86 @@ import co.nstant.in.cbor.model.SimpleValue;
 
 public class MapEncoder extends AbstractEncoder<Map> {
 
-    public MapEncoder(CborEncoder encoder, OutputStream outputStream) {
-        super(encoder, outputStream);
-    }
+	public MapEncoder(CborEncoder encoder, OutputStream outputStream) {
+		super(encoder, outputStream);
+	}
 
-    @Override
-    public void encode(Map map) throws CborException {
-        Collection<DataItem> keys = map.getKeys();
-        if (map.isChunked()) {
-            encodeTypeChunked(MajorType.MAP);
-        } else {
-            encodeTypeAndLength(MajorType.MAP, keys.size());
-        }
+	@Override
+	public void encode(Map map) throws CborException {
+		Collection<DataItem> keys = map.getKeys();
 
-        if (keys.isEmpty()) {
-            return;
-        }
+		if (map.isChunked()) {
+			encodeTypeChunked(MajorType.MAP);
+		} else {
+			encodeTypeAndLength(MajorType.MAP, keys.size());
+		}
 
-        if (map.isChunked()) {
-            for (DataItem key : keys) {
-                encoder.encode(key);
-                encoder.encode(map.get(key));
-            }
-            encoder.encode(SimpleValue.BREAK);
-            return;
-        }
+		if (keys.isEmpty()) {
+			return;
+		}
 
-        /**
-         * The keys in every map must be sorted lowest value to highest. Sorting
-         * is performed on the bytes of the representation of the key data items
-         * without paying attention to the 3/5 bit splitting for major types.
-         * (Note that this rule allows maps that have keys of different types,
-         * even though that is probably a bad practice that could lead to errors
-         * in some canonicalization implementations.) The sorting rules are:
-         * 
-         * If two keys have different lengths, the shorter one sorts earlier;
-         * 
-         * If two keys have the same length, the one with the lower value in
-         * (byte-wise) lexical order sorts earlier.
-         */
+		if (map.isChunked()) {
+			for (DataItem key : keys) {
+				encoder.encode(key);
+				encoder.encode(map.get(key));
+			}
+			encoder.encode(SimpleValue.BREAK);
+			return;
+		}
 
-        TreeMap<byte[], byte[]> sortedMap = new TreeMap<>(
-                        new Comparator<byte[]>() {
+		/**
+		 * The keys in every map must be sorted lowest value to highest. Sorting
+		 * is performed on the bytes of the representation of the key data items
+		 * without paying attention to the 3/5 bit splitting for major types.
+		 * (Note that this rule allows maps that have keys of different types,
+		 * even though that is probably a bad practice that could lead to errors
+		 * in some canonicalization implementations.) The sorting rules are:
+		 * 
+		 * If two keys have different lengths, the shorter one sorts earlier;
+		 * 
+		 * If two keys have the same length, the one with the lower value in
+		 * (byte-wise) lexical order sorts earlier.
+		 */
 
-                            @Override
-                            public int compare(byte[] o1, byte[] o2) {
-                                if (o1.length < o2.length) {
-                                    return -1;
-                                }
-                                if (o1.length > o2.length) {
-                                    return 1;
-                                }
-                                for (int i = 0; i < o1.length; i++) {
-                                    if (o1[i] < o2[i]) {
-                                        return -1;
-                                    }
-                                    if (o1[i] > o2[i]) {
-                                        return 1;
-                                    }
-                                }
-                                return 0;
-                            }
+		TreeMap<byte[], byte[]> sortedMap = new TreeMap<>(new Comparator<byte[]>() {
 
-                        });
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        CborEncoder e = new CborEncoder(byteArrayOutputStream);
-        for (DataItem key : keys) {
-            // Key
-            e.encode(key);
-            byte[] keyBytes = byteArrayOutputStream.toByteArray();
-            byteArrayOutputStream.reset();
-            // Value
-            e.encode(map.get(key));
-            byte[] valueBytes = byteArrayOutputStream.toByteArray();
-            byteArrayOutputStream.reset();
-            sortedMap.put(keyBytes, valueBytes);
-        }
-        for (java.util.Map.Entry<byte[], byte[]> entry : sortedMap.entrySet()) {
-            write(entry.getKey());
-            write(entry.getValue());
-        }
-    }
+			@Override
+			public int compare(byte[] o1, byte[] o2) {
+				if (o1.length < o2.length) {
+					return -1;
+				}
+				if (o1.length > o2.length) {
+					return 1;
+				}
+				for (int i = 0; i < o1.length; i++) {
+					if (o1[i] < o2[i]) {
+						return -1;
+					}
+					if (o1[i] > o2[i]) {
+						return 1;
+					}
+				}
+				return 0;
+			}
+
+		});
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		CborEncoder e = new CborEncoder(byteArrayOutputStream);
+		for (DataItem key : keys) {
+			// Key
+			e.encode(key);
+			byte[] keyBytes = byteArrayOutputStream.toByteArray();
+			byteArrayOutputStream.reset();
+			// Value
+			e.encode(map.get(key));
+			byte[] valueBytes = byteArrayOutputStream.toByteArray();
+			byteArrayOutputStream.reset();
+			sortedMap.put(keyBytes, valueBytes);
+		}
+		for (java.util.Map.Entry<byte[], byte[]> entry : sortedMap.entrySet()) {
+			write(entry.getKey());
+			write(entry.getValue());
+		}
+	}
 
 }
