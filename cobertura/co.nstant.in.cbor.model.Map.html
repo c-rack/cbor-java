@@ -31,42 +31,42 @@
   <td class="src"><pre class="src">&nbsp;<span class="keyword">import</span> java.util.List;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;7</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;8</td>  <td class="nbHitsCovered">&nbsp;63</td>  <td class="src"><pre class="src">&nbsp;<span class="keyword">public</span> <span class="keyword">class</span> Map <span class="keyword">extends</span> ChunkableDataItem {</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;8</td>  <td class="nbHitsCovered">&nbsp;42</td>  <td class="src"><pre class="src">&nbsp;<span class="keyword">public</span> <span class="keyword">class</span> Map <span class="keyword">extends</span> ChunkableDataItem {</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;9</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;10</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">final</span> HashMap&lt;DataItem, DataItem&gt; map;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;11</td>  <td class="nbHitsCovered">&nbsp;48</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">final</span> List&lt;DataItem&gt; keys = <span class="keyword">new</span> LinkedList&lt;&gt;();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;11</td>  <td class="nbHitsCovered">&nbsp;32</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">final</span> List&lt;DataItem&gt; keys = <span class="keyword">new</span> LinkedList&lt;&gt;();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;12</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;13</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> Map() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;14</td>  <td class="nbHitsCovered">&nbsp;33</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">super</span>(MajorType.MAP);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;15</td>  <td class="nbHitsCovered">&nbsp;33</td>  <td class="src"><pre class="src">&nbsp;                map = <span class="keyword">new</span> HashMap&lt;&gt;();</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;16</td>  <td class="nbHitsCovered">&nbsp;33</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;14</td>  <td class="nbHitsCovered">&nbsp;22</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">super</span>(MajorType.MAP);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;15</td>  <td class="nbHitsCovered">&nbsp;22</td>  <td class="src"><pre class="src">&nbsp;                map = <span class="keyword">new</span> HashMap&lt;&gt;();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;16</td>  <td class="nbHitsCovered">&nbsp;22</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;17</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;18</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> Map(<span class="keyword">int</span> initialCapacity) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;19</td>  <td class="nbHitsCovered">&nbsp;15</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">super</span>(MajorType.MAP);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;20</td>  <td class="nbHitsCovered">&nbsp;15</td>  <td class="src"><pre class="src">&nbsp;                map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;21</td>  <td class="nbHitsCovered">&nbsp;15</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;19</td>  <td class="nbHitsCovered">&nbsp;10</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">super</span>(MajorType.MAP);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;20</td>  <td class="nbHitsCovered">&nbsp;10</td>  <td class="src"><pre class="src">&nbsp;                map = <span class="keyword">new</span> HashMap&lt;&gt;(initialCapacity);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;21</td>  <td class="nbHitsCovered">&nbsp;10</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;22</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;23</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> Map put(DataItem key, DataItem value) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;24</td>  <td class="nbHitsCovered"><a title="Line 24: Conditional coverage 100% (2/2).">&nbsp;93</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 24: Conditional coverage 100% (2/2).">                <span class="keyword">if</span> (map.put(key, value) == <span class="keyword">null</span>) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;25</td>  <td class="nbHitsCovered">&nbsp;90</td>  <td class="src"><pre class="src">&nbsp;                        keys.add(key);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;24</td>  <td class="nbHitsCovered"><a title="Line 24: Conditional coverage 100% (2/2).">&nbsp;62</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 24: Conditional coverage 100% (2/2).">                <span class="keyword">if</span> (map.put(key, value) == <span class="keyword">null</span>) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;25</td>  <td class="nbHitsCovered">&nbsp;60</td>  <td class="src"><pre class="src">&nbsp;                        keys.add(key);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;26</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;27</td>  <td class="nbHitsCovered">&nbsp;93</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">this</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;27</td>  <td class="nbHitsCovered">&nbsp;62</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">this</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;28</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;29</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;30</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> DataItem get(DataItem key) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;31</td>  <td class="nbHitsCovered">&nbsp;45</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> map.get(key);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;31</td>  <td class="nbHitsCovered">&nbsp;30</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> map.get(key);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;32</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;33</td>  <td class="nbHits">&nbsp;</td>
@@ -80,7 +80,7 @@
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;38</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> Collection&lt;DataItem&gt; getKeys() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;39</td>  <td class="nbHitsCovered">&nbsp;24</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> keys;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;39</td>  <td class="nbHitsCovered">&nbsp;16</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> keys;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;40</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;41</td>  <td class="nbHits">&nbsp;</td>
@@ -96,13 +96,13 @@
   <td class="src"><pre class="src">&nbsp;        @Override</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;47</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> <span class="keyword">boolean</span> equals(Object object) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;48</td>  <td class="nbHitsUncovered"><a title="Line 48: Conditional coverage 50% (1/2).">&nbsp;24</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 48: Conditional coverage 50% (1/2).">                <span class="keyword">if</span> (<span class="keyword">this</span> == object) {</a></span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;48</td>  <td class="nbHitsUncovered"><a title="Line 48: Conditional coverage 50% (1/2).">&nbsp;16</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 48: Conditional coverage 50% (1/2).">                <span class="keyword">if</span> (<span class="keyword">this</span> == object) {</a></span></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;49</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                        <span class="keyword">return</span> <span class="keyword">true</span>;</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;50</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;51</td>  <td class="nbHitsUncovered"><a title="Line 51: Conditional coverage 50% (1/2).">&nbsp;24</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 51: Conditional coverage 50% (1/2).">                <span class="keyword">if</span> (object <span class="keyword">instanceof</span> Map) {</a></span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;52</td>  <td class="nbHitsCovered">&nbsp;24</td>  <td class="src"><pre class="src">&nbsp;                        Map other = (Map) object;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;53</td>  <td class="nbHitsCovered">&nbsp;24</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> map.equals(other.map);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;51</td>  <td class="nbHitsUncovered"><a title="Line 51: Conditional coverage 50% (1/2).">&nbsp;16</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 51: Conditional coverage 50% (1/2).">                <span class="keyword">if</span> (object <span class="keyword">instanceof</span> Map) {</a></span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;52</td>  <td class="nbHitsCovered">&nbsp;16</td>  <td class="src"><pre class="src">&nbsp;                        Map other = (Map) object;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;53</td>  <td class="nbHitsCovered">&nbsp;16</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> map.equals(other.map);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;54</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;55</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                <span class="keyword">return</span> <span class="keyword">false</span>;</span></pre></td></tr>
@@ -148,6 +148,6 @@
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 2.0.3 on 12.04.14 11:35.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 2.0.3 on 12.04.14 12:08.</div>
 </body>
 </html>

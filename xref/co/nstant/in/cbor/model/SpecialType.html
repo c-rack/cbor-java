@@ -21,7 +21,7 @@
 <a class="jxr_linenumber" name="11" href="#11">11</a>      BREAK;
 <a class="jxr_linenumber" name="12" href="#12">12</a>  
 <a class="jxr_linenumber" name="13" href="#13">13</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../co/nstant/in/cbor/model/SpecialType.html">SpecialType</a> ofByte(<strong class="jxr_keyword">int</strong> b) {
-<a class="jxr_linenumber" name="14" href="#14">14</a>          <strong class="jxr_keyword">switch</strong> (b &amp; 0b11111) {
+<a class="jxr_linenumber" name="14" href="#14">14</a>          <strong class="jxr_keyword">switch</strong> (b &amp; 31) {
 <a class="jxr_linenumber" name="15" href="#15">15</a>          <strong class="jxr_keyword">case</strong> 24:
 <a class="jxr_linenumber" name="16" href="#16">16</a>              <strong class="jxr_keyword">return</strong> SIMPLE_VALUE_NEXT_BYTE;
 <a class="jxr_linenumber" name="17" href="#17">17</a>          <strong class="jxr_keyword">case</strong> 25:

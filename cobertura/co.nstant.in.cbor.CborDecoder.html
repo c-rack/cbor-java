@@ -88,10 +88,10 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">final</span> SpecialDecoder specialDecoder;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;35</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;36</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">boolean</span> autoDecodeInfinitiveArrays = <span class="keyword">true</span>;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;37</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">boolean</span> autoDecodeInfinitiveMaps = <span class="keyword">true</span>;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;38</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">boolean</span> autoDecodeInfinitiveByteStrings = <span class="keyword">true</span>;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;39</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">boolean</span> autoDecodeInfinitiveUnicodeStrings = <span class="keyword">true</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;36</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">boolean</span> autoDecodeInfinitiveArrays = <span class="keyword">true</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;37</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">boolean</span> autoDecodeInfinitiveMaps = <span class="keyword">true</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;38</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">boolean</span> autoDecodeInfinitiveByteStrings = <span class="keyword">true</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;39</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">private</span> <span class="keyword">boolean</span> autoDecodeInfinitiveUnicodeStrings = <span class="keyword">true</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;40</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;41</td>  <td class="nbHits">&nbsp;</td>
@@ -102,18 +102,18 @@
   <td class="src"><pre class="src">&nbsp;<span class="comment">         * {@link InputStream}.</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;44</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;<span class="comment">         */</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;45</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> CborDecoder(InputStream inputStream) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;46</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;                Objects.requireNonNull(inputStream);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;47</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">this</span>.inputStream = inputStream;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;48</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;                unsignedIntegerDecoder = <span class="keyword">new</span> UnsignedIntegerDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;49</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;                negativeIntegerDecoder = <span class="keyword">new</span> NegativeIntegerDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;50</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;                byteStringDecoder = <span class="keyword">new</span> ByteStringDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;51</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;                unicodeStringDecoder = <span class="keyword">new</span> UnicodeStringDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;52</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;                arrayDecoder = <span class="keyword">new</span> ArrayDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;53</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;                mapDecoder = <span class="keyword">new</span> MapDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;54</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;                tagDecoder = <span class="keyword">new</span> TagDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;55</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;                specialDecoder = <span class="keyword">new</span> SpecialDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;56</td>  <td class="nbHitsCovered">&nbsp;600276</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;45</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> CborDecoder(InputStream inputStream) {</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;46</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;                Objects.requireNonNull(inputStream);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;47</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">this</span>.inputStream = inputStream;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;48</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;                unsignedIntegerDecoder = <span class="keyword">new</span> UnsignedIntegerDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;49</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;                negativeIntegerDecoder = <span class="keyword">new</span> NegativeIntegerDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;50</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;                byteStringDecoder = <span class="keyword">new</span> ByteStringDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;51</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;                unicodeStringDecoder = <span class="keyword">new</span> UnicodeStringDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;52</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;                arrayDecoder = <span class="keyword">new</span> ArrayDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;53</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;                mapDecoder = <span class="keyword">new</span> MapDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;54</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;                tagDecoder = <span class="keyword">new</span> TagDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;55</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;                specialDecoder = <span class="keyword">new</span> SpecialDecoder(<span class="keyword">this</span>, inputStream);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;56</td>  <td class="nbHitsCovered">&nbsp;400184</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;57</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;58</td>  <td class="nbHits">&nbsp;</td>
@@ -136,7 +136,7 @@
   <td class="src"><pre class="src">&nbsp;<span class="comment">         */</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;67</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> <span class="keyword">static</span> List&lt;DataItem&gt; decode(<span class="keyword">byte</span>[] bytes) <span class="keyword">throws</span> CborException {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;68</td>  <td class="nbHitsCovered">&nbsp;600030</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> CborDecoder(<span class="keyword">new</span> ByteArrayInputStream(bytes)).decode();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;68</td>  <td class="nbHitsCovered">&nbsp;400020</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> <span class="keyword">new</span> CborDecoder(<span class="keyword">new</span> ByteArrayInputStream(bytes)).decode();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;69</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;70</td>  <td class="nbHits">&nbsp;</td>
@@ -157,14 +157,14 @@
   <td class="src"><pre class="src">&nbsp;<span class="comment">         */</span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;78</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> List&lt;DataItem&gt; decode() <span class="keyword">throws</span> CborException {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;79</td>  <td class="nbHitsCovered">&nbsp;600099</td>  <td class="src"><pre class="src">&nbsp;                List&lt;DataItem&gt; dataItems = <span class="keyword">new</span> LinkedList&lt;&gt;();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;79</td>  <td class="nbHitsCovered">&nbsp;400066</td>  <td class="src"><pre class="src">&nbsp;                List&lt;DataItem&gt; dataItems = <span class="keyword">new</span> LinkedList&lt;&gt;();</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;80</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                DataItem dataItem;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;81</td>  <td class="nbHitsCovered"><a title="Line 81: Conditional coverage 100% (2/2).">&nbsp;1200273</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 81: Conditional coverage 100% (2/2).">                <span class="keyword">while</span> ((dataItem = decodeNext()) != <span class="keyword">null</span>) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;82</td>  <td class="nbHitsCovered">&nbsp;600174</td>  <td class="src"><pre class="src">&nbsp;                        dataItems.add(dataItem);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;81</td>  <td class="nbHitsCovered"><a title="Line 81: Conditional coverage 100% (2/2).">&nbsp;800182</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 81: Conditional coverage 100% (2/2).">                <span class="keyword">while</span> ((dataItem = decodeNext()) != <span class="keyword">null</span>) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;82</td>  <td class="nbHitsCovered">&nbsp;400116</td>  <td class="src"><pre class="src">&nbsp;                        dataItems.add(dataItem);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;83</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;84</td>  <td class="nbHitsCovered">&nbsp;600099</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> dataItems;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;84</td>  <td class="nbHitsCovered">&nbsp;400066</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> dataItems;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;85</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;86</td>  <td class="nbHits">&nbsp;</td>
@@ -219,39 +219,39 @@
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">int</span> symbol;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;114</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">try</span> {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;115</td>  <td class="nbHitsCovered">&nbsp;1200831</td>  <td class="src"><pre class="src">&nbsp;                        symbol = inputStream.read();</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;115</td>  <td class="nbHitsCovered">&nbsp;800554</td>  <td class="src"><pre class="src">&nbsp;                        symbol = inputStream.read();</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;116</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                } <span class="keyword">catch</span> (IOException ioException) {</span></pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;117</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                        <span class="keyword">throw</span> <span class="keyword">new</span> CborException(ioException);</span></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;118</td>  <td class="nbHitsCovered">&nbsp;1200831</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;119</td>  <td class="nbHitsCovered"><a title="Line 119: Conditional coverage 100% (2/2).">&nbsp;1200831</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 119: Conditional coverage 100% (2/2).">                <span class="keyword">if</span> (symbol == -1) {</a></pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;120</td>  <td class="nbHitsCovered">&nbsp;600099</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> <span class="keyword">null</span>;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;118</td>  <td class="nbHitsCovered">&nbsp;800554</td>  <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;119</td>  <td class="nbHitsCovered"><a title="Line 119: Conditional coverage 100% (2/2).">&nbsp;800554</a></td>  <td class="src"><pre class="src">&nbsp;<a title="Line 119: Conditional coverage 100% (2/2).">                <span class="keyword">if</span> (symbol == -1) {</a></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;120</td>  <td class="nbHitsCovered">&nbsp;400066</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> <span class="keyword">null</span>;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;121</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                }</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;122</td>  <td class="nbHitsUncovered"><a title="Line 122: Conditional coverage 88% (8/9).">&nbsp;600732</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 122: Conditional coverage 88% (8/9).">                <span class="keyword">switch</span> (MajorType.ofByte(symbol)) {</a></span></pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;122</td>  <td class="nbHitsUncovered"><a title="Line 122: Conditional coverage 88% (8/9).">&nbsp;400488</a></td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;<a title="Line 122: Conditional coverage 88% (8/9).">                <span class="keyword">switch</span> (MajorType.ofByte(symbol)) {</a></span></pre></td></tr>
 <tr>  <td class="numLine">&nbsp;123</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">case</span> ARRAY:</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;124</td>  <td class="nbHitsCovered">&nbsp;72</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> arrayDecoder.decode(symbol);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;124</td>  <td class="nbHitsCovered">&nbsp;48</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> arrayDecoder.decode(symbol);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;125</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">case</span> BYTE_STRING:</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;126</td>  <td class="nbHitsCovered">&nbsp;30</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> byteStringDecoder.decode(symbol);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;126</td>  <td class="nbHitsCovered">&nbsp;20</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> byteStringDecoder.decode(symbol);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;127</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">case</span> MAP:</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;128</td>  <td class="nbHitsCovered">&nbsp;24</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> mapDecoder.decode(symbol);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;128</td>  <td class="nbHitsCovered">&nbsp;16</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> mapDecoder.decode(symbol);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;129</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">case</span> NEGATIVE_INTEGER:</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;130</td>  <td class="nbHitsCovered">&nbsp;300033</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> negativeIntegerDecoder.decode(symbol);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;130</td>  <td class="nbHitsCovered">&nbsp;200022</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> negativeIntegerDecoder.decode(symbol);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;131</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">case</span> UNICODE_STRING:</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;132</td>  <td class="nbHitsCovered">&nbsp;105</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> unicodeStringDecoder.decode(symbol);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;132</td>  <td class="nbHitsCovered">&nbsp;70</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> unicodeStringDecoder.decode(symbol);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;133</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">case</span> UNSIGNED_INTEGER:</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;134</td>  <td class="nbHitsCovered">&nbsp;300312</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> unsignedIntegerDecoder.decode(symbol);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;134</td>  <td class="nbHitsCovered">&nbsp;200208</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> unsignedIntegerDecoder.decode(symbol);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;135</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">case</span> SPECIAL:</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;136</td>  <td class="nbHitsCovered">&nbsp;132</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> specialDecoder.decode(symbol);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;136</td>  <td class="nbHitsCovered">&nbsp;88</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> specialDecoder.decode(symbol);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;137</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">case</span> TAG:</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;138</td>  <td class="nbHitsCovered">&nbsp;24</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> tagDecoder.decode(symbol);</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;138</td>  <td class="nbHitsCovered">&nbsp;16</td>  <td class="src"><pre class="src">&nbsp;                        <span class="keyword">return</span> tagDecoder.decode(symbol);</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;139</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                <span class="keyword">default</span>:</pre></td></tr>
 <tr>  <td class="numLineCover">&nbsp;140</td>  <td class="nbHitsUncovered">&nbsp;0</td>  <td class="src"><pre class="src"><span class="srcUncovered">&nbsp;                        <span class="keyword">throw</span> <span class="keyword">new</span> CborException(<span class="string">"Not implemented major type "</span> + symbol);</span></pre></td></tr>
@@ -263,20 +263,20 @@
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;144</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> <span class="keyword">boolean</span> isAutoDecodeInfinitiveArrays() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;145</td>  <td class="nbHitsCovered">&nbsp;24</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> autoDecodeInfinitiveArrays;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;145</td>  <td class="nbHitsCovered">&nbsp;16</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> autoDecodeInfinitiveArrays;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;146</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;147</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;148</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> <span class="keyword">void</span> setAutoDecodeInfinitiveArrays(<span class="keyword">boolean</span> autoDecodeInfinitiveArrays) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;149</td>  <td class="nbHitsCovered">&nbsp;9</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">this</span>.autoDecodeInfinitiveArrays = autoDecodeInfinitiveArrays;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;150</td>  <td class="nbHitsCovered">&nbsp;9</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;149</td>  <td class="nbHitsCovered">&nbsp;6</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">this</span>.autoDecodeInfinitiveArrays = autoDecodeInfinitiveArrays;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;150</td>  <td class="nbHitsCovered">&nbsp;6</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;151</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;152</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> <span class="keyword">boolean</span> isAutoDecodeInfinitiveMaps() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;153</td>  <td class="nbHitsCovered">&nbsp;9</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> autoDecodeInfinitiveMaps;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;153</td>  <td class="nbHitsCovered">&nbsp;6</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> autoDecodeInfinitiveMaps;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;154</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;155</td>  <td class="nbHits">&nbsp;</td>
@@ -289,7 +289,7 @@
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;160</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> <span class="keyword">boolean</span> isAutoDecodeInfinitiveByteStrings() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;161</td>  <td class="nbHitsCovered">&nbsp;3</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> autoDecodeInfinitiveByteStrings;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;161</td>  <td class="nbHitsCovered">&nbsp;2</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> autoDecodeInfinitiveByteStrings;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;162</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;163</td>  <td class="nbHits">&nbsp;</td>
@@ -298,13 +298,13 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> <span class="keyword">void</span> setAutoDecodeInfinitiveByteStrings(</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;165</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        <span class="keyword">boolean</span> autoDecodeInfinitiveByteStrings) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;166</td>  <td class="nbHitsCovered">&nbsp;3</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">this</span>.autoDecodeInfinitiveByteStrings = autoDecodeInfinitiveByteStrings;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;167</td>  <td class="nbHitsCovered">&nbsp;3</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;166</td>  <td class="nbHitsCovered">&nbsp;2</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">this</span>.autoDecodeInfinitiveByteStrings = autoDecodeInfinitiveByteStrings;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;167</td>  <td class="nbHitsCovered">&nbsp;2</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;168</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;169</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> <span class="keyword">boolean</span> isAutoDecodeInfinitiveUnicodeStrings() {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;170</td>  <td class="nbHitsCovered">&nbsp;3</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> autoDecodeInfinitiveUnicodeStrings;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;170</td>  <td class="nbHitsCovered">&nbsp;2</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">return</span> autoDecodeInfinitiveUnicodeStrings;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;171</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;172</td>  <td class="nbHits">&nbsp;</td>
@@ -313,14 +313,14 @@
   <td class="src"><pre class="src">&nbsp;        <span class="keyword">public</span> <span class="keyword">void</span> setAutoDecodeInfinitiveUnicodeStrings(</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;174</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;                        <span class="keyword">boolean</span> autoDecodeInfinitiveUnicodeStrings) {</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;175</td>  <td class="nbHitsCovered">&nbsp;3</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">this</span>.autoDecodeInfinitiveUnicodeStrings = autoDecodeInfinitiveUnicodeStrings;</pre></td></tr>
-<tr>  <td class="numLineCover">&nbsp;176</td>  <td class="nbHitsCovered">&nbsp;3</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;175</td>  <td class="nbHitsCovered">&nbsp;2</td>  <td class="src"><pre class="src">&nbsp;                <span class="keyword">this</span>.autoDecodeInfinitiveUnicodeStrings = autoDecodeInfinitiveUnicodeStrings;</pre></td></tr>
+<tr>  <td class="numLineCover">&nbsp;176</td>  <td class="nbHitsCovered">&nbsp;2</td>  <td class="src"><pre class="src">&nbsp;        }</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;177</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;</pre></td></tr>
 <tr>  <td class="numLine">&nbsp;178</td>  <td class="nbHits">&nbsp;</td>
   <td class="src"><pre class="src">&nbsp;}</pre></td></tr>
 </table>
 
-<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 2.0.3 on 12.04.14 11:35.</div>
+<div class="footer">Report generated by <a href="http://cobertura.sourceforge.net/" target="_top">Cobertura</a> 2.0.3 on 12.04.14 12:08.</div>
 </body>
 </html>
