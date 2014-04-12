@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import co.nstant.in.cbor.AbstractDataItemTest;
 import co.nstant.in.cbor.CborException;
-import co.nstant.in.cbor.model.NegativeInteger;
 
 public class NegativeIntegerTest extends AbstractDataItemTest {
 
@@ -14,8 +13,10 @@ public class NegativeIntegerTest extends AbstractDataItemTest {
         for (long i = -1L; i >= maxInteger; i += (maxInteger / 100_000L)) {
             shouldEncodeAndDecode(String.valueOf(i), new NegativeInteger(i));
         }
-        shouldEncodeAndDecode(String.valueOf(maxInteger), new NegativeInteger(
-                        maxInteger));
+        shouldEncodeAndDecode(String.valueOf(maxInteger), new NegativeInteger(maxInteger));
+
+        // Test for issue #1: Creation of 64-bit NegativeInteger >= -4294967296L fails
+        shouldEncodeAndDecode("Long.MIN_VALUE", new NegativeInteger(Long.MIN_VALUE));
     }
 
 }

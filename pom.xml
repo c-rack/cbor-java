@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>co.nstant.in</groupId>
 	<artifactId>cbor</artifactId>
-	<version>0.3</version>
+	<version>0.4</version>
 	<name>CBOR for Java</name>
 	<description>Java implementation of RFC 7049: Concise Binary Object Representation (CBOR)</description>
 	<url>https://github.com/c-rack/cbor-java</url>
