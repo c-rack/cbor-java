@@ -20,7 +20,7 @@ public enum SimpleValueType {
     }
 
     public static SimpleValueType ofByte(int b) {
-        switch (b & 0b11111) {
+        switch (b & 31) {
         case 20:
             return FALSE;
         case 21:

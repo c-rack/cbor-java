@@ -32,7 +32,7 @@ public enum AdditionalInformation {
     }
 
     public static AdditionalInformation ofByte(int b) {
-        switch (b & 0b11111) {
+        switch (b & 31) {
         case 24:
             return ONE_BYTE;
         case 25:

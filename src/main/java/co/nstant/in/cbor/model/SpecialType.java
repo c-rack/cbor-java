@@ -11,7 +11,7 @@ public enum SpecialType {
     BREAK;
 
     public static SpecialType ofByte(int b) {
-        switch (b & 0b11111) {
+        switch (b & 31) {
         case 24:
             return SIMPLE_VALUE_NEXT_BYTE;
         case 25:

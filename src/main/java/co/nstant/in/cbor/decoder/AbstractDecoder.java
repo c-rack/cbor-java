@@ -37,7 +37,7 @@ public abstract class AbstractDecoder<T> {
     protected long getLength(int initialByte) throws CborException {
         switch (AdditionalInformation.ofByte(initialByte)) {
         case DIRECT:
-            return initialByte & 0b11111;
+            return initialByte & 31;
         case ONE_BYTE:
             return nextSymbol();
         case TWO_BYTES:
@@ -75,7 +75,7 @@ public abstract class AbstractDecoder<T> {
                     throws CborException {
         switch (AdditionalInformation.ofByte(initialByte)) {
         case DIRECT:
-            return BigInteger.valueOf(initialByte & 0b11111);
+            return BigInteger.valueOf(initialByte & 31);
         case ONE_BYTE:
             return BigInteger.valueOf(nextSymbol());
         case TWO_BYTES:
