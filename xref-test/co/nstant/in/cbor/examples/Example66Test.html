@@ -1,69 +1,68 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<head><meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>Example66Test xref</title>
 <link type="text/css" rel="stylesheet" href="../../../../../stylesheet.css" />
 </head>
 <body>
 <div id="overview"><a href="../../../../../../testapidocs/co/nstant/in/cbor/examples/Example66Test.html">View Javadoc</a></div><pre>
-
-<a class="jxr_linenumber" name="1" href="#1">1</a>   <strong class="jxr_keyword">package</strong> co.nstant.in.cbor.examples;
-<a class="jxr_linenumber" name="2" href="#2">2</a>   
-<a class="jxr_linenumber" name="3" href="#3">3</a>   <strong class="jxr_keyword">import</strong> java.io.ByteArrayInputStream;
-<a class="jxr_linenumber" name="4" href="#4">4</a>   <strong class="jxr_keyword">import</strong> java.io.ByteArrayOutputStream;
-<a class="jxr_linenumber" name="5" href="#5">5</a>   <strong class="jxr_keyword">import</strong> java.io.InputStream;
-<a class="jxr_linenumber" name="6" href="#6">6</a>   <strong class="jxr_keyword">import</strong> java.util.List;
-<a class="jxr_linenumber" name="7" href="#7">7</a>   
-<a class="jxr_linenumber" name="8" href="#8">8</a>   <strong class="jxr_keyword">import</strong> org.junit.Assert;
-<a class="jxr_linenumber" name="9" href="#9">9</a>   <strong class="jxr_keyword">import</strong> org.junit.Test;
-<a class="jxr_linenumber" name="10" href="#10">10</a>  
-<a class="jxr_linenumber" name="11" href="#11">11</a>  <strong class="jxr_keyword">import</strong> co.nstant.in.cbor.CborBuilder;
-<a class="jxr_linenumber" name="12" href="#12">12</a>  <strong class="jxr_keyword">import</strong> co.nstant.in.cbor.CborDecoder;
-<a class="jxr_linenumber" name="13" href="#13">13</a>  <strong class="jxr_keyword">import</strong> co.nstant.in.cbor.CborEncoder;
-<a class="jxr_linenumber" name="14" href="#14">14</a>  <strong class="jxr_keyword">import</strong> co.nstant.in.cbor.CborException;
-<a class="jxr_linenumber" name="15" href="#15">15</a>  <strong class="jxr_keyword">import</strong> co.nstant.in.cbor.model.DataItem;
-<a class="jxr_linenumber" name="16" href="#16">16</a>  
-<a class="jxr_linenumber" name="17" href="#17">17</a>  <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="18" href="#18">18</a>  <em class="jxr_javadoccomment"> * [1, 2, 3, 4, 5, 6,7, 8, 9, 10, 11, 12,13, 14, 15, 16, 17,18, 19, 20, 21, 22,</em>
-<a class="jxr_linenumber" name="19" href="#19">19</a>  <em class="jxr_javadoccomment"> * 23, 24, 25] -&gt; 0x98 190102030405060708090a0b0c0d0e0f101112131415161718181819</em>
-<a class="jxr_linenumber" name="20" href="#20">20</a>  <em class="jxr_javadoccomment"> */</em>
-<a class="jxr_linenumber" name="21" href="#21">21</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../co/nstant/in/cbor/examples/Example66Test.html">Example66Test</a> {
-<a class="jxr_linenumber" name="22" href="#22">22</a>  
-<a class="jxr_linenumber" name="23" href="#23">23</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> List&lt;DataItem&gt; VALUE = <strong class="jxr_keyword">new</strong> CborBuilder()
-<a class="jxr_linenumber" name="24" href="#24">24</a>                      .addArray()
-<a class="jxr_linenumber" name="25" href="#25">25</a>                      .add(1).add(2).add(3).add(4).add(5)
-<a class="jxr_linenumber" name="26" href="#26">26</a>                      .add(6).add(7).add(8).add(9).add(10)
-<a class="jxr_linenumber" name="27" href="#27">27</a>                      .add(11).add(12).add(13).add(14).add(15)
-<a class="jxr_linenumber" name="28" href="#28">28</a>                      .add(16).add(17).add(18).add(19).add(20)
-<a class="jxr_linenumber" name="29" href="#29">29</a>                      .add(21).add(22).add(23).add(24).add(25)
-<a class="jxr_linenumber" name="30" href="#30">30</a>                      .end()
-<a class="jxr_linenumber" name="31" href="#31">31</a>                      .build();
-<a class="jxr_linenumber" name="32" href="#32">32</a>  
-<a class="jxr_linenumber" name="33" href="#33">33</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> byte[] ENCODED_VALUE = <strong class="jxr_keyword">new</strong> byte[] { (byte) 0x98,
-<a class="jxr_linenumber" name="34" href="#34">34</a>                      0x19, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
-<a class="jxr_linenumber" name="35" href="#35">35</a>                      0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13,
-<a class="jxr_linenumber" name="36" href="#36">36</a>                      0x14, 0x15, 0x16, 0x17, 0x18, 0x18, 0x18, 0x19
-<a class="jxr_linenumber" name="37" href="#37">37</a>      };
-<a class="jxr_linenumber" name="38" href="#38">38</a>  
-<a class="jxr_linenumber" name="39" href="#39">39</a>      @Test
-<a class="jxr_linenumber" name="40" href="#40">40</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> shouldEncode() <strong class="jxr_keyword">throws</strong> CborException {
-<a class="jxr_linenumber" name="41" href="#41">41</a>          ByteArrayOutputStream byteOutputStream = <strong class="jxr_keyword">new</strong> ByteArrayOutputStream();
-<a class="jxr_linenumber" name="42" href="#42">42</a>          CborEncoder encoder = <strong class="jxr_keyword">new</strong> CborEncoder(byteOutputStream);
-<a class="jxr_linenumber" name="43" href="#43">43</a>          encoder.encode(VALUE);
-<a class="jxr_linenumber" name="44" href="#44">44</a>          Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
-<a class="jxr_linenumber" name="45" href="#45">45</a>      }
-<a class="jxr_linenumber" name="46" href="#46">46</a>  
-<a class="jxr_linenumber" name="47" href="#47">47</a>      @Test
-<a class="jxr_linenumber" name="48" href="#48">48</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> shouldDecode() <strong class="jxr_keyword">throws</strong> CborException {
-<a class="jxr_linenumber" name="49" href="#49">49</a>          InputStream inputStream = <strong class="jxr_keyword">new</strong> ByteArrayInputStream(ENCODED_VALUE);
-<a class="jxr_linenumber" name="50" href="#50">50</a>          CborDecoder decoder = <strong class="jxr_keyword">new</strong> CborDecoder(inputStream);
-<a class="jxr_linenumber" name="51" href="#51">51</a>          List&lt;DataItem&gt; dataItems = decoder.decode();
-<a class="jxr_linenumber" name="52" href="#52">52</a>          Assert.assertArrayEquals(VALUE.toArray(), dataItems.toArray());
-<a class="jxr_linenumber" name="53" href="#53">53</a>      }
-<a class="jxr_linenumber" name="54" href="#54">54</a>  
-<a class="jxr_linenumber" name="55" href="#55">55</a>  }
+<a class="jxr_linenumber" name="L1" href="#L1">1</a>   <strong class="jxr_keyword">package</strong> co.nstant.in.cbor.examples;
+<a class="jxr_linenumber" name="L2" href="#L2">2</a>   
+<a class="jxr_linenumber" name="L3" href="#L3">3</a>   <strong class="jxr_keyword">import</strong> java.io.ByteArrayInputStream;
+<a class="jxr_linenumber" name="L4" href="#L4">4</a>   <strong class="jxr_keyword">import</strong> java.io.ByteArrayOutputStream;
+<a class="jxr_linenumber" name="L5" href="#L5">5</a>   <strong class="jxr_keyword">import</strong> java.io.InputStream;
+<a class="jxr_linenumber" name="L6" href="#L6">6</a>   <strong class="jxr_keyword">import</strong> java.util.List;
+<a class="jxr_linenumber" name="L7" href="#L7">7</a>   
+<a class="jxr_linenumber" name="L8" href="#L8">8</a>   <strong class="jxr_keyword">import</strong> org.junit.Assert;
+<a class="jxr_linenumber" name="L9" href="#L9">9</a>   <strong class="jxr_keyword">import</strong> org.junit.Test;
+<a class="jxr_linenumber" name="L10" href="#L10">10</a>  
+<a class="jxr_linenumber" name="L11" href="#L11">11</a>  <strong class="jxr_keyword">import</strong> co.nstant.in.cbor.CborBuilder;
+<a class="jxr_linenumber" name="L12" href="#L12">12</a>  <strong class="jxr_keyword">import</strong> co.nstant.in.cbor.CborDecoder;
+<a class="jxr_linenumber" name="L13" href="#L13">13</a>  <strong class="jxr_keyword">import</strong> co.nstant.in.cbor.CborEncoder;
+<a class="jxr_linenumber" name="L14" href="#L14">14</a>  <strong class="jxr_keyword">import</strong> co.nstant.in.cbor.CborException;
+<a class="jxr_linenumber" name="L15" href="#L15">15</a>  <strong class="jxr_keyword">import</strong> co.nstant.in.cbor.model.DataItem;
+<a class="jxr_linenumber" name="L16" href="#L16">16</a>  
+<a class="jxr_linenumber" name="L17" href="#L17">17</a>  <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="L18" href="#L18">18</a>  <em class="jxr_javadoccomment"> * [1, 2, 3, 4, 5, 6,7, 8, 9, 10, 11, 12,13, 14, 15, 16, 17,18, 19, 20, 21, 22,</em>
+<a class="jxr_linenumber" name="L19" href="#L19">19</a>  <em class="jxr_javadoccomment"> * 23, 24, 25] -&gt; 0x98 190102030405060708090a0b0c0d0e0f101112131415161718181819</em>
+<a class="jxr_linenumber" name="L20" href="#L20">20</a>  <em class="jxr_javadoccomment"> */</em>
+<a class="jxr_linenumber" name="L21" href="#L21">21</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../co/nstant/in/cbor/examples/Example66Test.html">Example66Test</a> {
+<a class="jxr_linenumber" name="L22" href="#L22">22</a>  
+<a class="jxr_linenumber" name="L23" href="#L23">23</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> List&lt;DataItem&gt; VALUE = <strong class="jxr_keyword">new</strong> CborBuilder()
+<a class="jxr_linenumber" name="L24" href="#L24">24</a>                      .addArray()
+<a class="jxr_linenumber" name="L25" href="#L25">25</a>                      .add(1).add(2).add(3).add(4).add(5)
+<a class="jxr_linenumber" name="L26" href="#L26">26</a>                      .add(6).add(7).add(8).add(9).add(10)
+<a class="jxr_linenumber" name="L27" href="#L27">27</a>                      .add(11).add(12).add(13).add(14).add(15)
+<a class="jxr_linenumber" name="L28" href="#L28">28</a>                      .add(16).add(17).add(18).add(19).add(20)
+<a class="jxr_linenumber" name="L29" href="#L29">29</a>                      .add(21).add(22).add(23).add(24).add(25)
+<a class="jxr_linenumber" name="L30" href="#L30">30</a>                      .end()
+<a class="jxr_linenumber" name="L31" href="#L31">31</a>                      .build();
+<a class="jxr_linenumber" name="L32" href="#L32">32</a>  
+<a class="jxr_linenumber" name="L33" href="#L33">33</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> byte[] ENCODED_VALUE = <strong class="jxr_keyword">new</strong> byte[] { (byte) 0x98,
+<a class="jxr_linenumber" name="L34" href="#L34">34</a>                      0x19, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09,
+<a class="jxr_linenumber" name="L35" href="#L35">35</a>                      0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13,
+<a class="jxr_linenumber" name="L36" href="#L36">36</a>                      0x14, 0x15, 0x16, 0x17, 0x18, 0x18, 0x18, 0x19
+<a class="jxr_linenumber" name="L37" href="#L37">37</a>      };
+<a class="jxr_linenumber" name="L38" href="#L38">38</a>  
+<a class="jxr_linenumber" name="L39" href="#L39">39</a>      @Test
+<a class="jxr_linenumber" name="L40" href="#L40">40</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> shouldEncode() <strong class="jxr_keyword">throws</strong> CborException {
+<a class="jxr_linenumber" name="L41" href="#L41">41</a>          ByteArrayOutputStream byteOutputStream = <strong class="jxr_keyword">new</strong> ByteArrayOutputStream();
+<a class="jxr_linenumber" name="L42" href="#L42">42</a>          CborEncoder encoder = <strong class="jxr_keyword">new</strong> CborEncoder(byteOutputStream);
+<a class="jxr_linenumber" name="L43" href="#L43">43</a>          encoder.encode(VALUE);
+<a class="jxr_linenumber" name="L44" href="#L44">44</a>          Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>      }
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>  
+<a class="jxr_linenumber" name="L47" href="#L47">47</a>      @Test
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> shouldDecode() <strong class="jxr_keyword">throws</strong> CborException {
+<a class="jxr_linenumber" name="L49" href="#L49">49</a>          InputStream inputStream = <strong class="jxr_keyword">new</strong> ByteArrayInputStream(ENCODED_VALUE);
+<a class="jxr_linenumber" name="L50" href="#L50">50</a>          CborDecoder decoder = <strong class="jxr_keyword">new</strong> CborDecoder(inputStream);
+<a class="jxr_linenumber" name="L51" href="#L51">51</a>          List&lt;DataItem&gt; dataItems = decoder.decode();
+<a class="jxr_linenumber" name="L52" href="#L52">52</a>          Assert.assertArrayEquals(VALUE.toArray(), dataItems.toArray());
+<a class="jxr_linenumber" name="L53" href="#L53">53</a>      }
+<a class="jxr_linenumber" name="L54" href="#L54">54</a>  
+<a class="jxr_linenumber" name="L55" href="#L55">55</a>  }
 </pre>
-<hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
+<hr/>
+<div id="footer">Copyright &#169; 2014. All rights reserved.</div>
+</body>
 </html>
-
