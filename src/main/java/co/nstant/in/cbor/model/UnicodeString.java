@@ -24,9 +24,6 @@ public class UnicodeString extends ChunkableDataItem {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
         if (object instanceof UnicodeString) {
             UnicodeString other = (UnicodeString) object;
             if (string == null) {

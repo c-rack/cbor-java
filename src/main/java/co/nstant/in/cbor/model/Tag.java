@@ -15,9 +15,6 @@ public class Tag extends DataItem {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
         if (object instanceof Tag) {
             Tag other = (Tag) object;
             return value == other.value;
