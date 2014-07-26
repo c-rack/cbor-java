@@ -45,4 +45,11 @@ public class UnicodeStringTest {
         Assert.assertFalse(unicodeString.equals("string"));
     }
 
+    @Test
+    public void shouldNotEquals() {
+        UnicodeString unicodeString1 = new UnicodeString(null);
+        UnicodeString unicodeString2 = new UnicodeString("");
+        Assert.assertFalse(unicodeString1.equals(unicodeString2));
+    }
+
 }

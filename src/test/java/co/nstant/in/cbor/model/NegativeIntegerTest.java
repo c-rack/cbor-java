@@ -19,4 +19,9 @@ public class NegativeIntegerTest extends AbstractDataItemTest {
         shouldEncodeAndDecode("Long.MIN_VALUE", new NegativeInteger(Long.MIN_VALUE));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void shouldNotAcceptPositiveValues() {
+        new NegativeInteger(0);
+    }
+
 }
