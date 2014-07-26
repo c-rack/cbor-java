@@ -16,7 +16,7 @@
 		</license>
 	</licenses>
 	<prerequisites>
-		<maven>2.2.1</maven>
+		<maven>3.0.1</maven>
 	</prerequisites>
 	<scm>
 		<url>https://github.com/c-rack/cbor-java</url>
@@ -52,7 +52,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>2.2.1</version>
+				<version>2.3</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -78,7 +78,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-site-plugin</artifactId>
-				<version>3.3</version>
+				<version>3.4</version>
 				<configuration>
 					<locales>en</locales>
 				</configuration>
@@ -129,7 +129,7 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>2.5.3</version>
+				<version>3.0.0</version>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
