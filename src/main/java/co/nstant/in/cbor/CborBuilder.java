@@ -68,9 +68,7 @@ public class CborBuilder extends AbstractBuilder<CborBuilder> {
     }
 
     public ByteStringBuilder<CborBuilder> startByteString() {
-        ByteString byteString = new ByteString(null);
-        byteString.setChunked(true);
-        add(byteString);
+        add(new ByteString(null).setChunked(true));
         return new ByteStringBuilder<CborBuilder>(this);
     }
 
@@ -80,9 +78,7 @@ public class CborBuilder extends AbstractBuilder<CborBuilder> {
     }
 
     public UnicodeStringBuilder<CborBuilder> startString() {
-        UnicodeString unicodeString = new UnicodeString(null);
-        unicodeString.setChunked(true);
-        add(unicodeString);
+        add(new UnicodeString(null).setChunked(true));
         return new UnicodeStringBuilder<CborBuilder>(this);
     }
 
