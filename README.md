@@ -1,4 +1,4 @@
-cbor-java [![Build Status](https://travis-ci.org/c-rack/cbor-java.png)](https://travis-ci.org/c-rack/cbor-java)
+cbor-java [![Build Status](https://img.shields.io/travis/c-rack/cbor-java.svg?branch=master&style=flat)](https://travis-ci.org/c-rack/cbor-java)
 =========
 
 A Java 7 implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise Binary Object Representation ([CBOR](http://cbor.io/))
