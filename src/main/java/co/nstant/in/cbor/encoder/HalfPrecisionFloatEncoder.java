@@ -21,7 +21,7 @@ public class HalfPrecisionFloatEncoder extends AbstractEncoder<HalfPrecisionFloa
 	}
 
 	/**
-	 * @see http://stackoverflow.com/a/6162687
+	 * @see <a href="http://stackoverflow.com/a/6162687">Stack Overflow</a>
 	 */
 
 	// returns all higher 16 bits as 0 for all results
