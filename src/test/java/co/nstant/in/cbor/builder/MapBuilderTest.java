@@ -33,12 +33,14 @@ public class MapBuilderTest {
                         .put("12", "value")
                         .putMap(13)
                         .end()
+						.putMap("14")
+						.end()
                         .end()
                         .build();
         assertEquals(1, dataItems.size());
         assertTrue(dataItems.get(0) instanceof Map);
         Map map = (Map) dataItems.get(0);
-        assertEquals(14, map.getKeys().size());
+        assertEquals(15, map.getKeys().size());
     }
 
 }
