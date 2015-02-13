@@ -27,7 +27,7 @@ Add this to the dependencies section of your pom.xml file:
 <dependency>
     <groupId>co.nstant.in</groupId>
     <artifactId>cbor</artifactId>
-    <version>0.4</version>
+    <version>0.4.1</version>
 </dependency>
 ```
 
@@ -75,7 +75,7 @@ decoder.decode(new DataItemListener() {
 
 });
 ```
-	
+
 ## License
 
 Copyright 2013-2015 Constantin Rack
