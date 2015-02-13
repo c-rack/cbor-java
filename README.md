@@ -78,7 +78,7 @@ decoder.decode(new DataItemListener() {
 	
 ## License
 
-Copyright 2013-2014 Constantin Rack
+Copyright 2013-2015 Constantin Rack
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

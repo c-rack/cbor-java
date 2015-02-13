@@ -104,7 +104,7 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends
         return new MapBuilder<>(this, nestedMap);
     }
 
-	public MapBuilder<MapBuilder<T>> putMap(String key) {
+    public MapBuilder<MapBuilder<T>> putMap(String key) {
         Map nestedMap = new Map();
         put(convert(key), nestedMap);
         return new MapBuilder<>(this, nestedMap);
