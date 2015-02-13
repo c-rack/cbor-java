@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>co.nstant.in</groupId>
 	<artifactId>cbor</artifactId>
-	<version>0.4</version>
+	<version>0.4.1</version>
 	<name>CBOR for Java</name>
 	<description>Java implementation of RFC 7049: Concise Binary Object Representation (CBOR)</description>
 	<url>https://github.com/c-rack/cbor-java</url>
@@ -32,6 +32,16 @@
 			<name>Constantin Rack</name>
 			<email>constantin@rack.li</email>
 			<url>http://co.nstant.in/</url>
+			<roles>
+				<role>developer</role>
+			</roles>
+			<timezone>Europe/Berlin</timezone>
+		</developer>
+		<developer>
+			<id>marandus</id>
+			<name>Thomas Rix</name>
+			<email>rix@decoit.de</email>
+			<url>http://www.decoit.de/</url>
 			<roles>
 				<role>developer</role>
 			</roles>
