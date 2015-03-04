@@ -15,16 +15,20 @@ public class Tag extends DataItem {
 
     @Override
     public boolean equals(Object object) {
-        if (object instanceof Tag) {
-            Tag other = (Tag) object;
-            return value == other.value;
-        }
+		if (super.equals(object)) {
+			if (object instanceof Tag) {
+				Tag other = (Tag) object;
+				return value == other.value;
+			}
+		}
         return false;
     }
 
     @Override
     public int hashCode() {
-        return Long.valueOf(value).hashCode();
+		int hash = super.hashCode();
+		hash += Long.valueOf(value).hashCode();
+		return hash;
     }
 
 }

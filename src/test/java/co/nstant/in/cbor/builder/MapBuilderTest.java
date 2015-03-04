@@ -11,6 +11,7 @@ import co.nstant.in.cbor.CborBuilder;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.Map;
 import co.nstant.in.cbor.model.UnicodeString;
+import co.nstant.in.cbor.model.UnsignedInteger;
 
 public class MapBuilderTest {
 
@@ -35,12 +36,20 @@ public class MapBuilderTest {
                         .end()
 						.putMap("14")
 						.end()
+						.putMap(new UnsignedInteger(15))
+						.end()
+						.putArray(16)
+                        .end()
+						.putArray("17")
+						.end()
+						.putArray(new UnsignedInteger(18))
+						.end()
                         .end()
                         .build();
         assertEquals(1, dataItems.size());
         assertTrue(dataItems.get(0) instanceof Map);
         Map map = (Map) dataItems.get(0);
-        assertEquals(15, map.getKeys().size());
+        assertEquals(19, map.getKeys().size());
     }
 
 }

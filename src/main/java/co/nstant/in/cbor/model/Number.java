@@ -17,19 +17,20 @@ public abstract class Number extends DataItem {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object instanceof Number) {
-            Number other = (Number) object;
-            return value.equals(other.value);
-        }
+        if (super.equals(object)) {
+			if (object instanceof Number) {
+				Number other = (Number) object;
+				return value.equals(other.value);
+			}
+		}
         return false;
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+		int hash = super.hashCode();
+		hash += value.hashCode();
+		return hash;
     }
 
     @Override

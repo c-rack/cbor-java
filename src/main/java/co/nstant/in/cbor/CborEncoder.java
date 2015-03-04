@@ -59,7 +59,7 @@ public class CborEncoder {
 
 	/**
 	 * Encode a list of {@link DataItem}s, also known as a stream.
-	 * 
+	 *
 	 * @param dataItems
 	 *            a list of {@link DataItem}s
 	 * @throws CborException
@@ -74,7 +74,7 @@ public class CborEncoder {
 
 	/**
 	 * Encode a single {@link DataItem}.
-	 * 
+	 *
 	 * @param dataItem
 	 *            the {@link DataItem} to encode. If null, encoder encodes a
 	 *            {@link SimpleValue} NULL value.
@@ -86,6 +86,12 @@ public class CborEncoder {
 		if (dataItem == null) {
 			dataItem = SimpleValue.NULL;
 		}
+
+		if(dataItem.hasTag()) {
+			Tag tagDi = dataItem.getTag();
+			tagEncoder.encode(tagDi);
+		}
+
 		switch (dataItem.getMajorType()) {
 		case UNSIGNED_INTEGER:
 			unsignedIntegerEncoder.encode((UnsignedInteger) dataItem);
