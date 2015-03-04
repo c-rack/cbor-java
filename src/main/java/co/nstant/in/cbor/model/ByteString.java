@@ -25,19 +25,20 @@ public class ByteString extends ChunkableDataItem {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-        if (object instanceof ByteString) {
-            ByteString other = (ByteString) object;
-            return Arrays.equals(bytes, other.bytes);
-        }
+        if (super.equals(object)) {
+			if (object instanceof ByteString) {
+				ByteString other = (ByteString) object;
+				return Arrays.equals(bytes, other.bytes);
+			}
+		}
         return false;
     }
 
     @Override
     public int hashCode() {
-        return Arrays.hashCode(bytes);
+		int hash = super.hashCode();
+		hash += Arrays.hashCode(bytes);
+		return hash;
     }
 
 }

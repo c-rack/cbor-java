@@ -15,19 +15,20 @@ public class DoublePrecisionFloat extends Special {
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		}
-		if (object instanceof DoublePrecisionFloat) {
-			DoublePrecisionFloat other = (DoublePrecisionFloat) object;
-			return value == other.value;
+		if (super.equals(object)) {
+			if (object instanceof DoublePrecisionFloat) {
+				DoublePrecisionFloat other = (DoublePrecisionFloat) object;
+				return value == other.value;
+			}
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return Double.valueOf(value).hashCode();
+		int hash = super.hashCode();
+		hash += Double.valueOf(value).hashCode();
+		return hash;
 	}
 
 	@Override

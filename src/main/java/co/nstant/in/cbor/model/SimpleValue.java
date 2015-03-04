@@ -36,19 +36,20 @@ public class SimpleValue extends Special {
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object) {
-			return true;
-		}
-		if (object instanceof SimpleValue) {
-			SimpleValue other = (SimpleValue) object;
-			return value == other.value;
+		if (super.equals(object)) {
+			if (object instanceof SimpleValue) {
+				SimpleValue other = (SimpleValue) object;
+				return value == other.value;
+			}
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return value;
+		int hash = super.hashCode();
+		hash += value;
+		return hash;
 	}
 
 }

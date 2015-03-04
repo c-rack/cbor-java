@@ -12,6 +12,7 @@ import co.nstant.in.cbor.CborBuilder;
 import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
+import co.nstant.in.cbor.model.ByteString;
 import co.nstant.in.cbor.model.DataItem;
 
 /**
@@ -19,11 +20,17 @@ import co.nstant.in.cbor.model.DataItem;
  */
 public class Example52Test {
 
-	private static final List<DataItem> VALUE = new CborBuilder().addTag(24)
-			.add(new byte[] { 0x64, 0x49, 0x45, 0x54, 0x46 }).build();
+	private final List<DataItem> VALUE;
 
-	private static final byte[] ENCODED_VALUE = new byte[] { (byte) 0xd8, 0x18,
+	private final byte[] ENCODED_VALUE = new byte[] { (byte) 0xd8, 0x18,
 			0x45, 0x64, 0x49, 0x45, 0x54, 0x46 };
+
+	public Example52Test() {
+		DataItem di = new ByteString(new byte[] { 0x64, 0x49, 0x45, 0x54, 0x46 });
+		di.setTag(24);
+
+		VALUE = new CborBuilder().add(di).build();
+	}
 
 	@Test
 	public void shouldEncode() throws CborException {

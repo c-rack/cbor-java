@@ -37,11 +37,10 @@ public class Example14Test {
 				new byte[] { (byte) 0xc3, 0x49, 0x01, 0x00, 0x00, 0x00, 0x00,
 						0x00, 0x00, 0x00, 0x00 });
 		CborDecoder decoder = new CborDecoder(byteArrayInputStream);
-		DataItem a = decoder.decodeNext();
 		DataItem b = decoder.decodeNext();
 
-		Assert.assertTrue(a instanceof Tag);
-		Tag tag = (Tag) a;
+		Assert.assertTrue(b.hasTag());
+		Tag tag = b.getTag();
 		Assert.assertEquals(3, tag.getValue());
 
 		Assert.assertTrue(b instanceof ByteString);

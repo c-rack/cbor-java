@@ -17,6 +17,7 @@ import co.nstant.in.cbor.decoder.UnicodeStringDecoder;
 import co.nstant.in.cbor.decoder.UnsignedIntegerDecoder;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.MajorType;
+import co.nstant.in.cbor.model.Tag;
 
 /**
  * Decoder for the CBOR format based.
@@ -57,7 +58,7 @@ public class CborDecoder {
 
 	/**
 	 * Convenience method to decode a byte array directly.
-	 * 
+	 *
 	 * @param bytes
 	 *            the CBOR encoded data
 	 * @return a list of {@link DataItem}s
@@ -70,7 +71,7 @@ public class CborDecoder {
 
 	/**
 	 * Decode the {@link InputStream} to a list of {@link DataItem}s.
-	 * 
+	 *
 	 * @return the list of {@link DataItem}s
 	 * @throws CborException
 	 *             if decoding failed
@@ -87,7 +88,7 @@ public class CborDecoder {
 	/**
 	 * Streaming decoding of an input stream. On each decoded DataItem, the
 	 * callback listener is invoked.
-	 * 
+	 *
 	 * @param dataItemListener
 	 *            the callback listener
 	 * @throws CborException
@@ -104,7 +105,7 @@ public class CborDecoder {
 
 	/**
 	 * Decodes exactly one DataItem from the input stream.
-	 * 
+	 *
 	 * @return a {@link DataItem} or null if end of stream has reached.
 	 * @throws CborException
 	 *             if decoding failed
@@ -135,7 +136,12 @@ public class CborDecoder {
 		case SPECIAL:
 			return specialDecoder.decode(symbol);
 		case TAG:
-			return tagDecoder.decode(symbol);
+			Tag tagDi = tagDecoder.decode(symbol);
+			DataItem nextDi = decodeNext();
+			nextDi.setTag(tagDi);
+
+			return nextDi;
+			//return tagDecoder.decode(symbol);
 		default:
 			throw new CborException("Not implemented major type " + symbol);
 		}
