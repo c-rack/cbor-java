@@ -27,7 +27,7 @@ Add this to the dependencies section of your pom.xml file:
 <dependency>
     <groupId>co.nstant.in</groupId>
     <artifactId>cbor</artifactId>
-    <version>0.4.1</version>
+    <version>0.5</version>
 </dependency>
 ```
 
