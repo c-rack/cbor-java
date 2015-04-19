@@ -10,29 +10,29 @@ import co.nstant.in.cbor.CborException;
 
 public class RationalNumber {
 
-	private final Number numerator;
-	private final Number denominator;
+    private final Number numerator;
+    private final Number denominator;
 
-	protected RationalNumber(Number numerator, Number denomiator) throws CborException {
-		if (numerator == null) {
-			throw new CborException("Numerator is null");
-		}
-		if (denomiator == null) {
-			throw new CborException("Denomiator is null");
-		}
-		if (denomiator.getValue().equals(BigInteger.ZERO)) {
-			throw new CborException("Denomiator is zero");
-		}
-		this.numerator = numerator;
-		this.denominator = denomiator;
-	}
+    public RationalNumber(Number numerator, Number denomiator) throws CborException {
+        if (numerator == null) {
+            throw new CborException("Numerator is null");
+        }
+        if (denomiator == null) {
+            throw new CborException("Denomiator is null");
+        }
+        if (denomiator.getValue().equals(BigInteger.ZERO)) {
+            throw new CborException("Denomiator is zero");
+        }
+        this.numerator = numerator;
+        this.denominator = denomiator;
+    }
 
-	public Number getNumerator() {
-		return numerator;
-	}
+    public Number getNumerator() {
+        return numerator;
+    }
 
-	public Number getDennominator() {
-		return denominator;
-	}
+    public Number getDennominator() {
+        return denominator;
+    }
 
 }
