@@ -78,7 +78,11 @@ public class CborBuilder extends AbstractBuilder<CborBuilder> {
     }
 
     public UnicodeStringBuilder<CborBuilder> startString() {
-        add(new UnicodeString(null).setChunked(true));
+        return startString(null);
+    }
+
+    public UnicodeStringBuilder<CborBuilder> startString(String string) {
+        add(new UnicodeString(string).setChunked(true));
         return new UnicodeStringBuilder<CborBuilder>(this);
     }
 
