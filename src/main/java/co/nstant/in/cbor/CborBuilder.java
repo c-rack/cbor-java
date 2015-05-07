@@ -68,7 +68,11 @@ public class CborBuilder extends AbstractBuilder<CborBuilder> {
     }
 
     public ByteStringBuilder<CborBuilder> startByteString() {
-        add(new ByteString(null).setChunked(true));
+        return startByteString(null);
+    }
+
+    public ByteStringBuilder<CborBuilder> startByteString(byte[] bytes) {
+        add(new ByteString(bytes).setChunked(true));
         return new ByteStringBuilder<CborBuilder>(this);
     }
 
