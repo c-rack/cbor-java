@@ -83,9 +83,4 @@ public class ArrayBuilder<T extends AbstractBuilder<?>> extends
         return getParent();
     }
 
-    @Override
-    protected void addChunk(DataItem dataItem) {
-        add(dataItem);
-    }
-
 }

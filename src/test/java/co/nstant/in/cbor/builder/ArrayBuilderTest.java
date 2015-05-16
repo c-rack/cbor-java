@@ -22,13 +22,15 @@ public class ArrayBuilderTest {
         CborBuilder builder = new CborBuilder();
         List<DataItem> dataItems = builder.addArray()
             .add(true)
+            .add(false)
             .end()
             .build();
         assertEquals(1, dataItems.size());
         assertTrue(dataItems.get(0) instanceof Array);
         Array array = (Array) dataItems.get(0);
-        assertEquals(1, array.getDataItems().size());
+        assertEquals(2, array.getDataItems().size());
         assertTrue(array.getDataItems().get(0) instanceof SimpleValue);
+        assertTrue(array.getDataItems().get(1) instanceof SimpleValue);
     }
 
     @Test

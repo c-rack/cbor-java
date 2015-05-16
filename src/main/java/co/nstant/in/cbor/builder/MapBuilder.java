@@ -85,7 +85,7 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends
         return new ArrayBuilder<>(this, array);
     }
 
-	public ArrayBuilder<MapBuilder<T>> putArray(long key) {
+    public ArrayBuilder<MapBuilder<T>> putArray(long key) {
         Array array = new Array();
         put(convert(key), array);
         return new ArrayBuilder<>(this, array);
@@ -104,14 +104,11 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends
         return new ArrayBuilder<>(this, array);
     }
 
-	public ArrayBuilder<MapBuilder<T>> startArray(long key) {
-        Array array = new Array();
-        array.setChunked(true);
-        put(convert(key), array);
-        return new ArrayBuilder<>(this, array);
+    public ArrayBuilder<MapBuilder<T>> startArray(long key) {
+        return startArray(convert(key));
     }
 
-	public ArrayBuilder<MapBuilder<T>> startArray(String key) {
+    public ArrayBuilder<MapBuilder<T>> startArray(String key) {
         Array array = new Array();
         array.setChunked(true);
         put(convert(key), array);
@@ -124,7 +121,7 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends
         return new MapBuilder<>(this, nestedMap);
     }
 
-	public MapBuilder<MapBuilder<T>> putMap(long key) {
+    public MapBuilder<MapBuilder<T>> putMap(long key) {
         Map nestedMap = new Map();
         put(convert(key), nestedMap);
         return new MapBuilder<>(this, nestedMap);
