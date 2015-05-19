@@ -13,4 +13,13 @@ public class AbstractFloat extends Special {
         return value;
     }
 
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof AbstractFloat) {
+            AbstractFloat other = (AbstractFloat) object;
+            return value == other.value;
+        }
+        return false;
+    }
+
 }
