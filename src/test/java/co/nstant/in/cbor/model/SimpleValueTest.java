@@ -3,6 +3,8 @@ package co.nstant.in.cbor.model;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Objects;
+
 import org.junit.Test;
 
 public class SimpleValueTest {
@@ -11,7 +13,7 @@ public class SimpleValueTest {
     public void testHashcode() {
         for (int i = 0; i < 256; i++) {
             SimpleValue simpleValue = new SimpleValue(i);
-            assertTrue(simpleValue.getValue() == simpleValue.hashCode());
+            assertTrue(simpleValue.hashCode() == (Objects.hash(MajorType.SPECIAL, simpleValue.getTag()) + i));
         }
     }
 

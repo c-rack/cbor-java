@@ -57,7 +57,7 @@ public class UnsignedIntegerTest extends AbstractDataItemTest {
     @Test
     public void testHashcode() {
         UnsignedInteger unsignedInteger = new UnsignedInteger(BigInteger.ZERO);
-        assertEquals(BigInteger.ZERO.hashCode(), unsignedInteger.hashCode());
+        assertEquals(BigInteger.ZERO.hashCode(), unsignedInteger.getValue().hashCode());
     }
 
 }

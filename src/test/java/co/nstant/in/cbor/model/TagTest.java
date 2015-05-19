@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.Objects;
+
 import org.junit.Test;
 
 public class TagTest {
@@ -12,7 +14,7 @@ public class TagTest {
     public void testHashcode() {
         for (long i = 0; i < 256; i++) {
             Tag tag = new Tag(i);
-            assertEquals(i, tag.hashCode());
+            assertEquals(tag.hashCode(), Objects.hash(MajorType.TAG, tag.getTag()) + Long.valueOf(i).hashCode());
         }
     }
 

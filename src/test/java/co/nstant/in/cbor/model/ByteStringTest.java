@@ -16,7 +16,7 @@ public class ByteStringTest extends AbstractDataItemTest {
     @Test
     public void testByteString() throws CborException {
         shouldEncodeAndDecode("1-byte array", new ByteString(
-                        new byte[] { (byte) 0x00 }));
+            new byte[] { (byte) 0x00 }));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class ByteStringTest extends AbstractDataItemTest {
     public void shouldHashcode() {
         byte[] bytes = "string".getBytes();
         ByteString byteString = new ByteString(bytes);
-        assertEquals(Arrays.hashCode(bytes), byteString.hashCode());
+        assertEquals(Arrays.hashCode(bytes), Arrays.hashCode(byteString.getBytes()));
     }
 
 }

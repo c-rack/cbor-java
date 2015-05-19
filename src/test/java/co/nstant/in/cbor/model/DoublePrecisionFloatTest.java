@@ -24,7 +24,7 @@ public class DoublePrecisionFloatTest {
     @Test
     public void testHashcode() {
         DoublePrecisionFloat doublePrecisionFloat = new DoublePrecisionFloat(1.234);
-        assertEquals(Double.valueOf(1.234).hashCode(), doublePrecisionFloat.hashCode());
+        assertEquals(Double.valueOf(1.234).hashCode(), Double.valueOf(doublePrecisionFloat.getValue()).hashCode());
     }
 
     @Test
