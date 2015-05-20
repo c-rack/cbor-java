@@ -23,20 +23,18 @@ public class Array extends ChunkableDataItem {
 
     @Override
     public boolean equals(Object object) {
-        if (super.equals(object)) {
-			if (object instanceof Array) {
-				Array other = (Array) object;
-				return objects.equals(other.objects);
-			}
-		}
+        if (object instanceof Array) {
+            Array other = (Array) object;
+            return objects.equals(other.objects);
+        }
         return false;
     }
 
     @Override
     public int hashCode() {
-		int hash = super.hashCode();
-		hash += objects.hashCode();
-		return hash;
+        int hash = super.hashCode();
+        hash += objects.hashCode();
+        return hash;
     }
 
     @Override

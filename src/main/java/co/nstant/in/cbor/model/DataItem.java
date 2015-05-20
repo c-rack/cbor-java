@@ -50,14 +50,10 @@ public class DataItem {
         if (object instanceof DataItem) {
             DataItem otherDi = (DataItem) object;
             if (this.tag != null) {
-                if (this.tag.equals(otherDi.getTag()) && this.majorType == otherDi.getMajorType()) {
-                    return true;
-                }
+                return (this.tag.equals(otherDi.getTag()) && this.majorType == otherDi.getMajorType());
             }
             else {
-                if (otherDi.getTag() == null && this.majorType == otherDi.getMajorType()) {
-                    return true;
-                }
+                return (otherDi.getTag() == null && this.majorType == otherDi.getMajorType());
             }
         }
 

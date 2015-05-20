@@ -24,29 +24,27 @@ public class UnicodeString extends ChunkableDataItem {
 
     @Override
     public boolean equals(Object object) {
-		if (super.equals(object)) {
-			if (object instanceof UnicodeString) {
-				UnicodeString other = (UnicodeString) object;
-				if (string == null) {
-					return other.string == null;
-				} else {
-					return string.equals(other.string);
-				}
-			}
-		}
+        if (object instanceof UnicodeString) {
+            UnicodeString other = (UnicodeString) object;
+            if (string == null) {
+                return other.string == null;
+            } else {
+                return string.equals(other.string);
+            }
+        }
         return false;
     }
 
     @Override
     public int hashCode() {
-		int hash = 0;
+        int hash = 0;
 
-		if (string != null) {
-			hash = super.hashCode();
-			hash += string.hashCode();
-		}
+        if (string != null) {
+            hash = super.hashCode();
+            hash += string.hashCode();
+        }
 
-		return hash;
+        return hash;
     }
 
 }

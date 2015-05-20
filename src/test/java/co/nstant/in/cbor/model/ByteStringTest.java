@@ -43,6 +43,7 @@ public class ByteStringTest extends AbstractDataItemTest {
         byte[] bytes = "string".getBytes();
         ByteString byteString = new ByteString(bytes);
         assertEquals(Arrays.hashCode(bytes), Arrays.hashCode(byteString.getBytes()));
+        assertEquals(Arrays.hashCode(bytes), byteString.hashCode());
     }
 
 }

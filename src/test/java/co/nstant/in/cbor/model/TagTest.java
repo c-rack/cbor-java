@@ -14,7 +14,7 @@ public class TagTest {
     public void testHashcode() {
         for (long i = 0; i < 256; i++) {
             Tag tag = new Tag(i);
-            assertEquals(tag.hashCode(), Objects.hash(MajorType.TAG, tag.getTag()) + Long.valueOf(i).hashCode());
+            assertEquals(tag.hashCode(), Objects.hash(MajorType.TAG, tag.getTag(), i));
         }
     }
 
@@ -42,6 +42,12 @@ public class TagTest {
         assertFalse(tag.equals(""));
         assertFalse(tag.equals(1));
         assertFalse(tag.equals(1.1));
+    }
+
+    @Test
+    public void testToString() {
+        assertEquals("Tag(0)", new Tag(0).toString());
+        assertEquals("Tag(123)", new Tag(123).toString());
     }
 
 }

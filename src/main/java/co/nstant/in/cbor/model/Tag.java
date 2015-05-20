@@ -1,5 +1,7 @@
 package co.nstant.in.cbor.model;
 
+import java.util.Objects;
+
 public class Tag extends DataItem {
 
     private final long value;
@@ -15,20 +17,21 @@ public class Tag extends DataItem {
 
     @Override
     public boolean equals(Object object) {
-        if (super.equals(object)) {
-            if (object instanceof Tag) {
-                Tag other = (Tag) object;
-                return value == other.value;
-            }
+        if (object instanceof Tag) {
+            Tag other = (Tag) object;
+            return value == other.value;
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        int hash = super.hashCode();
-        hash += Long.valueOf(value).hashCode();
-        return hash;
+        return Objects.hash(getMajorType(), getTag(), value);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Tag(%d)", value);
     }
 
 }

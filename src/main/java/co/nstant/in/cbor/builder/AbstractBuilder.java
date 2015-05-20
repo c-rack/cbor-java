@@ -2,9 +2,10 @@ package co.nstant.in.cbor.builder;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigInteger;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.decoder.HalfPrecisionFloatDecoder;
 import co.nstant.in.cbor.encoder.HalfPrecisionFloatEncoder;
@@ -32,7 +33,7 @@ public abstract class AbstractBuilder<T> {
     }
 
     protected void addChunk(DataItem dataItem) {
-        throw new NotImplementedException();
+        throw new IllegalStateException();
     }
 
     protected DataItem convert(long value) {
@@ -86,18 +87,25 @@ public abstract class AbstractBuilder<T> {
     private boolean isHalfPrecisionEnough(float value) {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            HalfPrecisionFloatEncoder encoder = new HalfPrecisionFloatEncoder(
-                null, outputStream);
+            HalfPrecisionFloatEncoder encoder = getHalfPrecisionFloatEncoder(outputStream);
             encoder.encode(new HalfPrecisionFloat(value));
-            ByteArrayInputStream inputStream = new ByteArrayInputStream(
-                outputStream.toByteArray());
-            HalfPrecisionFloatDecoder decoder = new HalfPrecisionFloatDecoder(
-                null, inputStream);
+            byte[] bytes = outputStream.toByteArray();
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
+            HalfPrecisionFloatDecoder decoder = getHalfPrecisionFloatDecoder(inputStream);
+            inputStream.read(); // to skip type byte
             HalfPrecisionFloat halfPrecisionFloat = decoder.decode(0);
             return value == halfPrecisionFloat.getValue();
         } catch (CborException cborException) {
             return false;
         }
+    }
+
+    protected HalfPrecisionFloatEncoder getHalfPrecisionFloatEncoder(OutputStream outputStream) {
+        return new HalfPrecisionFloatEncoder(null, outputStream);
+    }
+
+    protected HalfPrecisionFloatDecoder getHalfPrecisionFloatDecoder(InputStream inputStream) {
+        return new HalfPrecisionFloatDecoder(null, inputStream);
     }
 
 }

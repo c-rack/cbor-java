@@ -8,12 +8,10 @@ import co.nstant.in.cbor.CborException;
  * Rational Numbers: http://peteroupc.github.io/CBOR/rational.html
  */
 
-public class RationalNumber {
-
-    private final Number numerator;
-    private final Number denominator;
+public class RationalNumber extends Array {
 
     public RationalNumber(Number numerator, Number denomiator) throws CborException {
+        setTag(30);
         if (numerator == null) {
             throw new CborException("Numerator is null");
         }
@@ -23,16 +21,16 @@ public class RationalNumber {
         if (denomiator.getValue().equals(BigInteger.ZERO)) {
             throw new CborException("Denomiator is zero");
         }
-        this.numerator = numerator;
-        this.denominator = denomiator;
+        add(numerator);
+        add(denomiator);
     }
 
     public Number getNumerator() {
-        return numerator;
+        return (Number) getDataItems().get(0);
     }
 
     public Number getDennominator() {
-        return denominator;
+        return (Number) getDataItems().get(1);
     }
 
 }

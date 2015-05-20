@@ -12,8 +12,8 @@ import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.ByteString;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.DoublePrecisionFloat;
+import co.nstant.in.cbor.model.HalfPrecisionFloat;
 import co.nstant.in.cbor.model.SimpleValue;
-import co.nstant.in.cbor.model.SinglePrecisionFloat;
 
 public class ArrayBuilderTest {
 
@@ -44,7 +44,7 @@ public class ArrayBuilderTest {
         assertTrue(dataItems.get(0) instanceof Array);
         Array array = (Array) dataItems.get(0);
         assertEquals(1, array.getDataItems().size());
-        assertTrue(array.getDataItems().get(0) instanceof SinglePrecisionFloat);
+        assertTrue(array.getDataItems().get(0) instanceof HalfPrecisionFloat);
     }
 
     @Test
