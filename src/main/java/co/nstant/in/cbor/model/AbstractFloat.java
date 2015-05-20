@@ -1,6 +1,6 @@
 package co.nstant.in.cbor.model;
 
-import com.sun.org.apache.xalan.internal.utils.Objects;
+import java.util.Objects;
 
 public class AbstractFloat extends Special {
 

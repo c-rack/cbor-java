@@ -3,9 +3,9 @@ package co.nstant.in.cbor.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
-import org.junit.Test;
+import java.util.Objects;
 
-import com.sun.org.apache.xalan.internal.utils.Objects;
+import org.junit.Test;
 
 public class DoublePrecisionFloatTest {
 
