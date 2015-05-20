@@ -43,17 +43,13 @@ public class DataItem {
 
     @Override
     public boolean equals(Object object) {
-        if (this == object) {
-            return true;
-        }
-
         if (object instanceof DataItem) {
-            DataItem otherDi = (DataItem) object;
-            if (this.tag != null) {
-                return (this.tag.equals(otherDi.getTag()) && this.majorType == otherDi.getMajorType());
+            DataItem other = (DataItem) object;
+            if (tag != null) {
+                return (tag.equals(other.tag) && majorType == other.majorType);
             }
             else {
-                return (otherDi.getTag() == null && this.majorType == otherDi.getMajorType());
+                return (other.tag == null && majorType == other.majorType);
             }
         }
 

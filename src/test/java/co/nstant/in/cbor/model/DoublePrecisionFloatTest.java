@@ -5,6 +5,8 @@ import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
+import com.sun.org.apache.xalan.internal.utils.Objects;
+
 public class DoublePrecisionFloatTest {
 
     @Test
@@ -24,9 +26,10 @@ public class DoublePrecisionFloatTest {
 
     @Test
     public void testHashcode() {
-        DoublePrecisionFloat doublePrecisionFloat = new DoublePrecisionFloat(1.234);
-        assertEquals(Double.valueOf(1.234).hashCode(), Double.valueOf(doublePrecisionFloat.getValue()).hashCode());
-        assertEquals(Double.valueOf(1.234).hashCode(), doublePrecisionFloat.hashCode());
+        Special superClass = new Special(SpecialType.IEEE_754_DOUBLE_PRECISION_FLOAT);
+        double value = 1.234;
+        DoublePrecisionFloat doublePrecisionFloat = new DoublePrecisionFloat(value);
+        assertEquals(superClass.hashCode() ^ Objects.hashCode(value), doublePrecisionFloat.hashCode());
     }
 
     @Test

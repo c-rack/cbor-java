@@ -19,14 +19,14 @@ public class DoublePrecisionFloat extends Special {
     public boolean equals(Object object) {
         if (object instanceof DoublePrecisionFloat) {
             DoublePrecisionFloat other = (DoublePrecisionFloat) object;
-            return value == other.value;
+            return super.equals(object) && (value == other.value);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(value);
+        return super.hashCode() ^ Objects.hashCode(value);
     }
 
     @Override

@@ -12,9 +12,10 @@ public class TagTest {
 
     @Test
     public void testHashcode() {
+        DataItem superClass = new DataItem(MajorType.TAG);
         for (long i = 0; i < 256; i++) {
             Tag tag = new Tag(i);
-            assertEquals(tag.hashCode(), Objects.hash(MajorType.TAG, tag.getTag(), i));
+            assertEquals(tag.hashCode(), superClass.hashCode() ^ Objects.hashCode(i));
         }
     }
 

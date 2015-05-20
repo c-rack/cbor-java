@@ -1,6 +1,7 @@
 package co.nstant.in.cbor.model;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
 public abstract class Number extends DataItem {
 
@@ -8,7 +9,7 @@ public abstract class Number extends DataItem {
 
     protected Number(MajorType majorType, BigInteger value) {
         super(majorType);
-        this.value = value;
+        this.value = Objects.requireNonNull(value);
     }
 
     public BigInteger getValue() {
@@ -19,16 +20,14 @@ public abstract class Number extends DataItem {
     public boolean equals(Object object) {
         if (object instanceof Number) {
             Number other = (Number) object;
-            return value.equals(other.value);
+            return super.equals(object) && value.equals(other.value);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        int hash = super.hashCode();
-        hash += value.hashCode();
-        return hash;
+        return super.hashCode() ^ value.hashCode();
     }
 
     @Override

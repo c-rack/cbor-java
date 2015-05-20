@@ -40,10 +40,10 @@ public class ByteStringTest extends AbstractDataItemTest {
 
     @Test
     public void shouldHashcode() {
+        ChunkableDataItem superClass = new ChunkableDataItem(MajorType.BYTE_STRING);
         byte[] bytes = "string".getBytes();
         ByteString byteString = new ByteString(bytes);
-        assertEquals(Arrays.hashCode(bytes), Arrays.hashCode(byteString.getBytes()));
-        assertEquals(Arrays.hashCode(bytes), byteString.hashCode());
+        assertEquals(byteString.hashCode(), superClass.hashCode() ^ Arrays.hashCode(bytes));
     }
 
 }

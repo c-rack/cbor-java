@@ -1,5 +1,7 @@
 package co.nstant.in.cbor.model;
 
+import com.sun.org.apache.xalan.internal.utils.Objects;
+
 class ChunkableDataItem extends DataItem {
 
     private boolean chunked = false;
@@ -15,6 +17,20 @@ class ChunkableDataItem extends DataItem {
     public ChunkableDataItem setChunked(boolean chunked) {
         this.chunked = chunked;
         return this;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof ChunkableDataItem) {
+            ChunkableDataItem other = (ChunkableDataItem) object;
+            return super.equals(object) && (chunked == other.chunked);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode() ^ Objects.hashCode(chunked);
     }
 
 }

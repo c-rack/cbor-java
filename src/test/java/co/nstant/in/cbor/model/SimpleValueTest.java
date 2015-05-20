@@ -1,5 +1,6 @@
 package co.nstant.in.cbor.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -11,9 +12,15 @@ public class SimpleValueTest {
 
     @Test
     public void testHashcode() {
-        for (int i = 0; i < 256; i++) {
+        Special superClass1 = new Special(SpecialType.SIMPLE_VALUE);
+        Special superClass2 = new Special(SpecialType.SIMPLE_VALUE_NEXT_BYTE);
+        for (int i = 1; i < 256; i++) {
             SimpleValue simpleValue = new SimpleValue(i);
-            assertTrue(simpleValue.hashCode() == (Objects.hash(MajorType.SPECIAL, simpleValue.getTag()) + i));
+            if (i <= 23) {
+                assertEquals(simpleValue.hashCode(), superClass1.hashCode() ^ Objects.hashCode(i));
+            } else {
+                assertEquals(simpleValue.hashCode(), superClass2.hashCode() ^ Objects.hashCode(i));
+            }
         }
     }
 

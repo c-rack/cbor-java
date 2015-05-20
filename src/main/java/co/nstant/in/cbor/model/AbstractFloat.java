@@ -1,5 +1,7 @@
 package co.nstant.in.cbor.model;
 
+import com.sun.org.apache.xalan.internal.utils.Objects;
+
 public class AbstractFloat extends Special {
 
     private final float value;
@@ -17,9 +19,14 @@ public class AbstractFloat extends Special {
     public boolean equals(Object object) {
         if (object instanceof AbstractFloat) {
             AbstractFloat other = (AbstractFloat) object;
-            return value == other.value;
+            return super.equals(object) && (value == other.value);
         }
         return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(value);
     }
 
 }

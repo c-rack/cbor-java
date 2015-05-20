@@ -48,16 +48,14 @@ public class Map extends ChunkableDataItem {
     public boolean equals(Object object) {
         if (object instanceof Map) {
             Map other = (Map) object;
-            return map.equals(other.map);
+            return super.equals(object) && map.equals(other.map);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        int hash = super.hashCode();
-        hash += map.hashCode();
-        return hash;
+        return super.hashCode() ^ map.hashCode();
     }
 
     @Override

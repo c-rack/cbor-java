@@ -1,5 +1,7 @@
 package co.nstant.in.cbor.model;
 
+import com.sun.org.apache.xalan.internal.utils.Objects;
+
 public class SimpleValue extends Special {
 
     private final SimpleValueType simpleValueType;
@@ -38,16 +40,14 @@ public class SimpleValue extends Special {
     public boolean equals(Object object) {
         if (object instanceof SimpleValue) {
             SimpleValue other = (SimpleValue) object;
-            return value == other.value;
+            return super.equals(object) && (value == other.value);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        int hash = super.hashCode();
-        hash += value;
-        return hash;
+        return super.hashCode() ^ Objects.hashCode(value);
     }
 
 }

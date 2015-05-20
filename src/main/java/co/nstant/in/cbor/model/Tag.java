@@ -19,14 +19,14 @@ public class Tag extends DataItem {
     public boolean equals(Object object) {
         if (object instanceof Tag) {
             Tag other = (Tag) object;
-            return value == other.value;
+            return super.equals(object) && (value == other.value);
         }
         return false;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getMajorType(), getTag(), value);
+        return super.hashCode() ^ Objects.hashCode(value);
     }
 
     @Override
