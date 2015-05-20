@@ -92,7 +92,9 @@ public abstract class AbstractBuilder<T> {
             byte[] bytes = outputStream.toByteArray();
             ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
             HalfPrecisionFloatDecoder decoder = getHalfPrecisionFloatDecoder(inputStream);
-            inputStream.read(); // to skip type byte
+            if (inputStream.read() == -1) { // to skip type byte
+                throw new CborException("unexpected end of stream");
+            }
             HalfPrecisionFloat halfPrecisionFloat = decoder.decode(0);
             return value == halfPrecisionFloat.getValue();
         } catch (CborException cborException) {

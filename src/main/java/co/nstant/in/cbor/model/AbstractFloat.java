@@ -26,7 +26,7 @@ public class AbstractFloat extends Special {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(value);
+        return super.hashCode() ^ Objects.hashCode(value);
     }
 
 }
