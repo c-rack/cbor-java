@@ -15,8 +15,11 @@ import co.nstant.in.cbor.decoder.SpecialDecoder;
 import co.nstant.in.cbor.decoder.TagDecoder;
 import co.nstant.in.cbor.decoder.UnicodeStringDecoder;
 import co.nstant.in.cbor.decoder.UnsignedIntegerDecoder;
+import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.MajorType;
+import co.nstant.in.cbor.model.Number;
+import co.nstant.in.cbor.model.RationalNumber;
 import co.nstant.in.cbor.model.Tag;
 
 /**
@@ -142,13 +145,46 @@ public class CborDecoder {
             if (next == null) {
                 throw new CborException("Unexpected end of stream: tag without following data item.");
             } else {
-                next.setTag(tag);
-                return next;
+                if (autoDecodeRationalNumbers && (tag.getValue() == 30)) {
+                    return decodeRationalNumber(next);
+                } else {
+                    next.setTag(tag);
+                    return next;
+                }
             }
         case INVALID:
         default:
             throw new CborException("Not implemented major type " + symbol);
         }
+    }
+
+    private DataItem decodeRationalNumber(DataItem dataItem) throws CborException {
+        if (!(dataItem instanceof Array)) {
+            throw new CborException("Error decoding RationalNumber: not an array");
+        }
+
+        Array array = (Array) dataItem;
+
+        if (array.getDataItems().size() != 2) {
+            throw new CborException("Error decoding RationalNumber: array size is not 2");
+        }
+
+        DataItem numeratorDataItem = array.getDataItems().get(0);
+
+        if (!(numeratorDataItem instanceof Number)) {
+            throw new CborException("Error decoding RationalNumber: first data item is not a number");
+        }
+
+        DataItem denominatorDataItem = array.getDataItems().get(1);
+
+        if (!(denominatorDataItem instanceof Number)) {
+            throw new CborException("Error decoding RationalNumber: second data item is not a number");
+        }
+
+        Number numerator = (Number) numeratorDataItem;
+        Number denominator = (Number) denominatorDataItem;
+
+        return new RationalNumber(numerator, denominator);
     }
 
     public boolean isAutoDecodeInfinitiveArrays() {

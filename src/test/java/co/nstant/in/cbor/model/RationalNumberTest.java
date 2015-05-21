@@ -29,7 +29,7 @@ public class RationalNumberTest {
         UnsignedInteger two = new UnsignedInteger(2);
         RationalNumber rationalNumber = new RationalNumber(one, two);
         assertEquals(one, rationalNumber.getNumerator());
-        assertEquals(two, rationalNumber.getDennominator());
+        assertEquals(two, rationalNumber.getDenominator());
     }
 
 }
