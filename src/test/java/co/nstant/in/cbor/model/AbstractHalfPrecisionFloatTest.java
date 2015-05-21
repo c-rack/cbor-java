@@ -1,38 +1,33 @@
-package co.nstant.in.cbor;
+package co.nstant.in.cbor.model;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.math.BigInteger;
-import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import co.nstant.in.cbor.CborDecoder;
+import co.nstant.in.cbor.CborEncoder;
+import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.DataItem;
-import co.nstant.in.cbor.model.Number;
+import co.nstant.in.cbor.model.HalfPrecisionFloat;
 
-public abstract class AbstractNumberTest {
+public abstract class AbstractHalfPrecisionFloatTest {
 
-    private final BigInteger value;
+    private final float value;
     private final byte[] encodedValue;
 
-    public AbstractNumberTest(long value, byte[] encodedValue) {
-        this.value = BigInteger.valueOf(value);
-        this.encodedValue = encodedValue;
-    }
-
-    public AbstractNumberTest(BigInteger value, byte[] encodedValue) {
+    public AbstractHalfPrecisionFloatTest(float value, byte[] encodedValue) {
         this.value = value;
         this.encodedValue = encodedValue;
     }
 
     @Test
     public void shouldEncode() throws CborException {
-        List<DataItem> dataItems = new CborBuilder().add(value).build();
         ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(byteOutputStream);
-        encoder.encode(dataItems.get(0));
+        encoder.encode(new HalfPrecisionFloat(value));
         Assert.assertArrayEquals(encodedValue, byteOutputStream.toByteArray());
     }
 
@@ -41,9 +36,9 @@ public abstract class AbstractNumberTest {
         InputStream inputStream = new ByteArrayInputStream(encodedValue);
         CborDecoder decoder = new CborDecoder(inputStream);
         DataItem dataItem = decoder.decodeNext();
-        Assert.assertTrue(dataItem instanceof Number);
-        Number number = (Number) dataItem;
-        Assert.assertEquals(value, number.getValue());
+        Assert.assertTrue(dataItem instanceof HalfPrecisionFloat);
+        HalfPrecisionFloat halfPrecisionFloat = (HalfPrecisionFloat) dataItem;
+        Assert.assertEquals(value, halfPrecisionFloat.getValue(), 0);
     }
 
 }

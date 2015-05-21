@@ -1,6 +1,6 @@
 package co.nstant.in.cbor.examples;
 
-import co.nstant.in.cbor.AbstractHalfPrecisionFloatTest;
+import co.nstant.in.cbor.model.AbstractHalfPrecisionFloatTest;
 
 /**
  * 1.5 -> 0xf93e00

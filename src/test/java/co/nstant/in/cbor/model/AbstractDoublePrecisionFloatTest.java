@@ -1,4 +1,4 @@
-package co.nstant.in.cbor;
+package co.nstant.in.cbor.model;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -8,6 +8,10 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
+import co.nstant.in.cbor.CborBuilder;
+import co.nstant.in.cbor.CborDecoder;
+import co.nstant.in.cbor.CborEncoder;
+import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.DoublePrecisionFloat;
 

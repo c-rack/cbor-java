@@ -1,9 +1,12 @@
-package co.nstant.in.cbor;
+package co.nstant.in.cbor.model;
 
 import java.io.ByteArrayOutputStream;
 
 import org.junit.Assert;
 
+import co.nstant.in.cbor.CborDecoder;
+import co.nstant.in.cbor.CborEncoder;
+import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.DataItem;
 
 public abstract class AbstractDataItemTest {

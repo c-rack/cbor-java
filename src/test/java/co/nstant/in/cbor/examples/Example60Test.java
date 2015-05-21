@@ -1,6 +1,6 @@
 package co.nstant.in.cbor.examples;
 
-import co.nstant.in.cbor.AbstractStringTest;
+import co.nstant.in.cbor.model.AbstractStringTest;
 
 /**
  * "\u00fc" -> 0x62c3bc

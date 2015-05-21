@@ -1,6 +1,6 @@
 package co.nstant.in.cbor.examples;
 
-import co.nstant.in.cbor.AbstractNumberTest;
+import co.nstant.in.cbor.model.AbstractNumberTest;
 
 /**
  * 25 -> 0x1819

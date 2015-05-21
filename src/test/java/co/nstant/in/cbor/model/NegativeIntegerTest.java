@@ -2,7 +2,6 @@ package co.nstant.in.cbor.model;
 
 import org.junit.Test;
 
-import co.nstant.in.cbor.AbstractDataItemTest;
 import co.nstant.in.cbor.CborException;
 
 public class NegativeIntegerTest extends AbstractDataItemTest {

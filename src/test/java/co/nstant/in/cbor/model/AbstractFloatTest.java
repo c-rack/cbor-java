@@ -3,6 +3,8 @@ package co.nstant.in.cbor.model;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import java.util.Objects;
+
 import org.junit.Test;
 
 public class AbstractFloatTest {
@@ -16,6 +18,13 @@ public class AbstractFloatTest {
         assertFalse(a.equals(b));
         assertFalse(a.equals(null));
         assertFalse(a.equals("test"));
+    }
+
+    @Test
+    public void testHashcode() {
+        Special superClass = new Special(SpecialType.IEEE_754_SINGLE_PRECISION_FLOAT);
+        AbstractFloat f = new AbstractFloat(SpecialType.IEEE_754_SINGLE_PRECISION_FLOAT, 0.0f);
+        assertEquals(superClass.hashCode() ^ Objects.hashCode(0.0f), f.hashCode());
     }
 
 }

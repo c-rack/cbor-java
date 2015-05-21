@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import co.nstant.in.cbor.AbstractDataItemTest;
 import co.nstant.in.cbor.CborException;
 
 public class ByteStringTest extends AbstractDataItemTest {

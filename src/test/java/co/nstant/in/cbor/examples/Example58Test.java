@@ -1,6 +1,6 @@
 package co.nstant.in.cbor.examples;
 
-import co.nstant.in.cbor.AbstractStringTest;
+import co.nstant.in.cbor.model.AbstractStringTest;
 
 /**
  * "IETF" -> 0x64 49 45 54 46

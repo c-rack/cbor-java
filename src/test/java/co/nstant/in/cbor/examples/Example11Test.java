@@ -2,7 +2,7 @@ package co.nstant.in.cbor.examples;
 
 import java.math.BigInteger;
 
-import co.nstant.in.cbor.AbstractNumberTest;
+import co.nstant.in.cbor.model.AbstractNumberTest;
 
 /**
  * 18446744073709551615 -> 0x1bffffffffffffffff

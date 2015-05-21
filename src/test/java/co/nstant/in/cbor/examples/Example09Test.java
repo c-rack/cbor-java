@@ -1,6 +1,6 @@
 package co.nstant.in.cbor.examples;
 
-import co.nstant.in.cbor.AbstractNumberTest;
+import co.nstant.in.cbor.model.AbstractNumberTest;
 
 /**
  * 1000000 -> 0x1a000f4240

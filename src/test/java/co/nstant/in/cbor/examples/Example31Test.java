@@ -1,6 +1,6 @@
 package co.nstant.in.cbor.examples;
 
-import co.nstant.in.cbor.AbstractDoublePrecisionFloatTest;
+import co.nstant.in.cbor.model.AbstractDoublePrecisionFloatTest;
 
 /**
  * -4.1 -> 0xfb c0 10 66 66 66 66 66 66
