@@ -38,6 +38,7 @@ public class CborDecoder {
     private boolean autoDecodeInfinitiveMaps = true;
     private boolean autoDecodeInfinitiveByteStrings = true;
     private boolean autoDecodeInfinitiveUnicodeStrings = true;
+    private boolean autoDecodeRationalNumbers = true;
 
     /**
      * Initialize a new decoder which reads the binary encoded data from an
@@ -178,6 +179,15 @@ public class CborDecoder {
     public void setAutoDecodeInfinitiveUnicodeStrings(
         boolean autoDecodeInfinitiveUnicodeStrings) {
         this.autoDecodeInfinitiveUnicodeStrings = autoDecodeInfinitiveUnicodeStrings;
+    }
+
+    public boolean isAutoDecodeRationalNumbers() {
+        return autoDecodeRationalNumbers;
+    }
+
+    public void setAutoDecodeRationalNumbers(
+        boolean autoDecodeRationalNumbers) {
+        this.autoDecodeRationalNumbers = autoDecodeRationalNumbers;
     }
 
 }
