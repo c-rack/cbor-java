@@ -137,10 +137,14 @@ public class CborDecoder {
         case SPECIAL:
             return specialDecoder.decode(symbol);
         case TAG:
-            Tag tagDi = tagDecoder.decode(symbol);
-            DataItem nextDi = decodeNext();
-            nextDi.setTag(tagDi);
-            return nextDi;
+            Tag tag = tagDecoder.decode(symbol);
+            DataItem next = decodeNext();
+            if (next == null) {
+                throw new CborException("Unexpected end of stream: tag without following data item.");
+            } else {
+                next.setTag(tag);
+                return next;
+            }
         case INVALID:
         default:
             throw new CborException("Not implemented major type " + symbol);
