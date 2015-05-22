@@ -17,10 +17,12 @@ import co.nstant.in.cbor.decoder.UnicodeStringDecoder;
 import co.nstant.in.cbor.decoder.UnsignedIntegerDecoder;
 import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.DataItem;
+import co.nstant.in.cbor.model.LanguageTaggedString;
 import co.nstant.in.cbor.model.MajorType;
 import co.nstant.in.cbor.model.Number;
 import co.nstant.in.cbor.model.RationalNumber;
 import co.nstant.in.cbor.model.Tag;
+import co.nstant.in.cbor.model.UnicodeString;
 
 /**
  * Decoder for the CBOR format based.
@@ -42,6 +44,7 @@ public class CborDecoder {
     private boolean autoDecodeInfinitiveByteStrings = true;
     private boolean autoDecodeInfinitiveUnicodeStrings = true;
     private boolean autoDecodeRationalNumbers = true;
+    private boolean autoDecodeLanguageTaggedStrings = true;
 
     /**
      * Initialize a new decoder which reads the binary encoded data from an
@@ -147,6 +150,8 @@ public class CborDecoder {
             } else {
                 if (autoDecodeRationalNumbers && (tag.getValue() == 30)) {
                     return decodeRationalNumber(next);
+                } else if (autoDecodeLanguageTaggedStrings && (tag.getValue() == 38)) {
+                    return decodeLanguageTaggedString(next);
                 } else {
                     next.setTag(tag);
                     return next;
@@ -156,6 +161,35 @@ public class CborDecoder {
         default:
             throw new CborException("Not implemented major type " + symbol);
         }
+    }
+
+    private DataItem decodeLanguageTaggedString(DataItem dataItem) throws CborException {
+        if (!(dataItem instanceof Array)) {
+            throw new CborException("Error decoding LanguageTaggedString: not an array");
+        }
+
+        Array array = (Array) dataItem;
+
+        if (array.getDataItems().size() != 2) {
+            throw new CborException("Error decoding LanguageTaggedString: array size is not 2");
+        }
+
+        DataItem languageDataItem = array.getDataItems().get(0);
+
+        if (!(languageDataItem instanceof UnicodeString)) {
+            throw new CborException("Error decoding LanguageTaggedString: first data item is not an UnicodeString");
+        }
+
+        DataItem stringDataItem = array.getDataItems().get(1);
+
+        if (!(stringDataItem instanceof UnicodeString)) {
+            throw new CborException("Error decoding LanguageTaggedString: second data item is not an UnicodeString");
+        }
+
+        UnicodeString language = (UnicodeString) languageDataItem;
+        UnicodeString string = (UnicodeString) stringDataItem;
+
+        return new LanguageTaggedString(language, string);
     }
 
     private DataItem decodeRationalNumber(DataItem dataItem) throws CborException {
@@ -228,6 +262,15 @@ public class CborDecoder {
     public void setAutoDecodeRationalNumbers(
         boolean autoDecodeRationalNumbers) {
         this.autoDecodeRationalNumbers = autoDecodeRationalNumbers;
+    }
+
+    public boolean isAutoDecodeLanguageTaggedStrings() {
+        return autoDecodeLanguageTaggedStrings;
+    }
+
+    public void setAutoDecodeLanguageTaggedStrings(
+        boolean autoDecodeLanguageTaggedStrings) {
+        this.autoDecodeLanguageTaggedStrings = autoDecodeLanguageTaggedStrings;
     }
 
 }
