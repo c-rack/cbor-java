@@ -2,6 +2,9 @@ package co.nstant.in.cbor.model;
 
 import java.util.Objects;
 
+/**
+ * See https://peteroupc.github.io/CBOR/langtags.html
+ */
 public class LanguageTaggedString extends Array {
 
     public LanguageTaggedString(String language, String string) {
