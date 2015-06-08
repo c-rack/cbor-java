@@ -87,12 +87,26 @@ This project uses the [C4.1 process](http://rfc.zeromq.org/spec:22) for all code
 > "Everyone, without distinction or discrimination, SHALL have an equal right to become a Contributor under the
 terms of this contract."
 
+### tl;dr
+
+1. Check for [open issues](https://github.com/c-rack/cbor-java/issues) or [open a new issue](https://github.com/c-rack/cbor-java/issues/new) to start a discussion around a feature idea or a bug
+2. Fork the [cbor-java repository on Github](https://github.com/c-rack/cbor-java) to start making your changes
+3. Write a test which shows that the bug was fixed or that the feature works as expected
+4. Send a pull request
+5. Your pull request is merged and you are added to the [list of contributors](https://github.com/c-rack/cbor-java/graphs/contributors)
+
 ## License
 
-Copyright 2013-2015 Constantin Rack
-
-Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
-    
-http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+    Copyright 2013-2015 Constantin Rack
+ 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+ 
+        http://www.apache.org/licenses/LICENSE-2.0
+ 
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
