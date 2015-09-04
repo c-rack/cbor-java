@@ -4,8 +4,8 @@ cbor-java
 A Java 7 implementation of [RFC 7049](http://tools.ietf.org/html/rfc7049): Concise Binary Object Representation ([CBOR](http://cbor.io/))
 
 
-[![Build Status](https://img.shields.io/travis/c-rack/cbor-java.svg?branch=master&style=flat)](https://travis-ci.org/c-rack/cbor-java)
-[![Coverage Status](http://img.shields.io/coveralls/c-rack/cbor-java/master.svg?style=flat)](https://coveralls.io/r/c-rack/cbor-java?branch=master)
+[![Build Status](https://travis-ci.org/c-rack/cbor-java.svg?branch=master)](https://travis-ci.org/c-rack/cbor-java)
+[![Coverage Status](https://coveralls.io/repos/c-rack/cbor-java/badge.svg?branch=master&service=github)](https://coveralls.io/github/c-rack/cbor-java?branch=master)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/1218/badge.svg)](https://scan.coverity.com/projects/1218)
 [![Dependency Status](https://www.versioneye.com/user/projects/555e2fb6634daa30fb000ea0/badge.svg?style=flat)](https://www.versioneye.com/user/projects/555e2fb6634daa30fb000ea0)
 
