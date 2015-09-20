@@ -41,8 +41,7 @@ Add this to the dependencies section of your pom.xml file:
 
 ```java
 ByteArrayOutputStream baos = new ByteArrayOutputStream();
-CborEncoder encoder = new CborEncoder(baos);
-encoder.encode(new CborBuilder()
+new CborEncoder(baos).encode(new CborBuilder()
     .add("text")                // add string
     .add(1234)                  // add integer
     .add(new byte[] { 0x10 })   // add byte array
@@ -58,8 +57,7 @@ byte[] encodedBytes = baos.toByteArray();
 
 ```java
 ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
-CborDecoder decoder = new CborDecoder(bais);
-List<DataItem> dataItems = decoder.decode();
+List<DataItem> dataItems = new CborDecoder(bais).decode();
 for(DataItem dataItem : dataItems) {
     // process data item
 }
@@ -69,8 +67,7 @@ for(DataItem dataItem : dataItems) {
 
 ```java
 ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
-CborDecoder decoder = new CborDecoder(bais);
-decoder.decode(new DataItemListener() {
+new CborDecoder(bais).decode(new DataItemListener() {
 
     @Override
     public void onDataItem(DataItem dataItem) {
@@ -90,7 +87,7 @@ terms of this contract."
 ### tl;dr
 
 1. Check for [open issues](https://github.com/c-rack/cbor-java/issues) or [open a new issue](https://github.com/c-rack/cbor-java/issues/new) to start a discussion around a feature idea or a bug
-2. Fork the [cbor-java repository on Github](https://github.com/c-rack/cbor-java) to start making your changes
+2. Fork the [cbor-java repository on GitHub](https://github.com/c-rack/cbor-java) to start making your changes
 3. Write a test which shows that the bug was fixed or that the feature works as expected
 4. Send a pull request
 5. Your pull request is merged and you are added to the [list of contributors](https://github.com/c-rack/cbor-java/graphs/contributors)
