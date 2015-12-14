@@ -11,7 +11,7 @@ public class ByteString extends ChunkableDataItem {
         if (bytes == null) {
             this.bytes = null;
         } else {
-            this.bytes = bytes.clone();
+            this.bytes = bytes;
         }
     }
 
@@ -19,7 +19,7 @@ public class ByteString extends ChunkableDataItem {
         if (bytes == null) {
             return null;
         } else {
-            return bytes.clone();
+            return bytes;
         }
     }
 
