@@ -45,4 +45,11 @@ public class ByteStringTest extends AbstractDataItemTest {
         assertEquals(byteString.hashCode(), superClass.hashCode() ^ Arrays.hashCode(bytes));
     }
 
+    @Test
+    public void shouldNotClone() {
+        byte[] bytes = "see issue #18".getBytes();
+        ByteString byteString = new ByteString(bytes);
+        assertEquals(byteString.getBytes(), bytes);
+    }
+
 }
