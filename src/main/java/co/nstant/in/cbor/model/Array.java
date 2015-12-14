@@ -6,10 +6,16 @@ import java.util.List;
 
 public class Array extends ChunkableDataItem {
 
-    private final ArrayList<DataItem> objects = new ArrayList<>();
+    private final ArrayList<DataItem> objects;
 
     public Array() {
         super(MajorType.ARRAY);
+        objects = new ArrayList<>();
+    }
+
+    public Array(int initialCapacity) {
+        super(MajorType.ARRAY);
+        objects = new ArrayList<>(initialCapacity);
     }
 
     public Array add(DataItem object) {
