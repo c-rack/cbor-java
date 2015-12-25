@@ -140,6 +140,14 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>3.6</version>
+				<configuration>
+					<skipEmptyReport>false</skipEmptyReport>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>
@@ -162,7 +170,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-pmd-plugin</artifactId>
-				<version>3.5</version>
+				<version>3.6</version>
 				<configuration>
 					<skipEmptyReport>false</skipEmptyReport>
 				</configuration>
