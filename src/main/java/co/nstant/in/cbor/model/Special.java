@@ -21,7 +21,7 @@ public class Special extends DataItem {
     public boolean equals(Object object) {
         if (object instanceof Special) {
             Special other = (Special) object;
-            return super.equals(object) && (specialType == other.specialType);
+            return super.equals(object) && specialType == other.specialType;
         }
         return false;
     }

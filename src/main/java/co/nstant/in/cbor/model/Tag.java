@@ -19,7 +19,7 @@ public class Tag extends DataItem {
     public boolean equals(Object object) {
         if (object instanceof Tag) {
             Tag other = (Tag) object;
-            return super.equals(object) && (value == other.value);
+            return super.equals(object) && value == other.value;
         }
         return false;
     }
