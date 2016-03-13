@@ -30,15 +30,15 @@ public class DataItem {
     }
 
     public void removeTag() {
-        this.tag = null;
+        tag = null;
     }
 
     public Tag getTag() {
-        return this.tag;
+        return tag;
     }
 
     public boolean hasTag() {
-        return (this.tag != null);
+        return tag != null;
     }
 
     @Override
@@ -46,10 +46,9 @@ public class DataItem {
         if (object instanceof DataItem) {
             DataItem other = (DataItem) object;
             if (tag != null) {
-                return (tag.equals(other.tag) && majorType == other.majorType);
-            }
-            else {
-                return (other.tag == null && majorType == other.majorType);
+                return tag.equals(other.tag) && majorType == other.majorType;
+            } else {
+                return other.tag == null && majorType == other.majorType;
             }
         }
 

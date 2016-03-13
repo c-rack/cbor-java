@@ -40,7 +40,7 @@ public class SimpleValue extends Special {
     public boolean equals(Object object) {
         if (object instanceof SimpleValue) {
             SimpleValue other = (SimpleValue) object;
-            return super.equals(object) && (value == other.value);
+            return super.equals(object) && value == other.value;
         }
         return false;
     }

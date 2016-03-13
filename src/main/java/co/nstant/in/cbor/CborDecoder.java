@@ -148,9 +148,9 @@ public class CborDecoder {
             if (next == null) {
                 throw new CborException("Unexpected end of stream: tag without following data item.");
             } else {
-                if (autoDecodeRationalNumbers && (tag.getValue() == 30)) {
+                if (autoDecodeRationalNumbers && tag.getValue() == 30) {
                     return decodeRationalNumber(next);
-                } else if (autoDecodeLanguageTaggedStrings && (tag.getValue() == 38)) {
+                } else if (autoDecodeLanguageTaggedStrings && tag.getValue() == 38) {
                     return decodeLanguageTaggedString(next);
                 } else {
                     next.setTag(tag);

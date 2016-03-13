@@ -23,7 +23,7 @@ class ChunkableDataItem extends DataItem {
     public boolean equals(Object object) {
         if (object instanceof ChunkableDataItem) {
             ChunkableDataItem other = (ChunkableDataItem) object;
-            return super.equals(object) && (chunked == other.chunked);
+            return super.equals(object) && chunked == other.chunked;
         }
         return false;
     }
