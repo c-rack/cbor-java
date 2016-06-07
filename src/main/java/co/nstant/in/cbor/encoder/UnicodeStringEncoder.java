@@ -1,7 +1,7 @@
 package co.nstant.in.cbor.encoder;
 
 import java.io.OutputStream;
-import java.nio.charset.Charset;
+import java.io.UnsupportedEncodingException;
 
 import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
@@ -11,7 +11,7 @@ import co.nstant.in.cbor.model.UnicodeString;
 
 public class UnicodeStringEncoder extends AbstractEncoder<UnicodeString> {
 
-    private static final Charset UTF8 = Charset.forName("UTF8");
+    private static final String UTF8 = "UTF-8";
 
     public UnicodeStringEncoder(CborEncoder encoder, OutputStream outputStream) {
         super(encoder, outputStream);
@@ -28,7 +28,12 @@ public class UnicodeStringEncoder extends AbstractEncoder<UnicodeString> {
         } else if (string == null) {
             encoder.encode(SimpleValue.NULL);
         } else {
-            byte[] bytes = string.getBytes(UTF8);
+            byte[] bytes;
+			try {
+				bytes = string.getBytes(UTF8);
+			} catch (UnsupportedEncodingException e) {
+				throw new CborException(e);
+			}
             encodeTypeAndLength(MajorType.UNICODE_STRING, bytes.length);
             write(bytes);
         }

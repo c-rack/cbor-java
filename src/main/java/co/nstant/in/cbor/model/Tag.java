@@ -31,7 +31,7 @@ public class Tag extends DataItem {
 
     @Override
     public String toString() {
-        return String.format("Tag(%d)", value);
+        return "Tag("+value+")";
     }
 
 }
