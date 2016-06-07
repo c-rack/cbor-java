@@ -3,7 +3,7 @@ package co.nstant.in.cbor.decoder;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
+import java.io.UnsupportedEncodingException;
 
 import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborException;
@@ -14,7 +14,7 @@ import co.nstant.in.cbor.model.UnicodeString;
 
 public class UnicodeStringDecoder extends AbstractDecoder<UnicodeString> {
 
-	private static final Charset UTF8 = Charset.forName("UTF8");
+	private static final String UTF8 = "UTF-8";
 
 	public UnicodeStringDecoder(CborDecoder decoder, InputStream inputStream) {
 		super(decoder, inputStream);
@@ -55,7 +55,11 @@ public class UnicodeStringDecoder extends AbstractDecoder<UnicodeString> {
 				throw new CborException("Unexpected major type " + majorType);
 			}
 		}
-		return new UnicodeString(new String(bytes.toByteArray(), UTF8));
+		try {
+			return new UnicodeString(new String(bytes.toByteArray(), UTF8));
+		} catch (UnsupportedEncodingException e) {
+			throw new CborException(e);
+		}
 	}
 
 	private UnicodeString decodeFixedLength(long length) throws CborException {
@@ -63,7 +67,11 @@ public class UnicodeStringDecoder extends AbstractDecoder<UnicodeString> {
 		for (long i = 0; i < length; i++) {
 			bytes.write(nextSymbol());
 		}
-		return new UnicodeString(new String(bytes.toByteArray(), UTF8));
+		try {
+			return new UnicodeString(new String(bytes.toByteArray(), UTF8));
+		} catch (UnsupportedEncodingException e) {
+			throw new CborException(e);
+		}
 	}
 
 }
