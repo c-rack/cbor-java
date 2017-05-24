@@ -7,11 +7,11 @@ public class SimpleValue extends Special {
     private final SimpleValueType simpleValueType;
 
     public static final SimpleValue FALSE = new SimpleValue(
-        SimpleValueType.FALSE);
+            SimpleValueType.FALSE);
     public static final SimpleValue TRUE = new SimpleValue(SimpleValueType.TRUE);
     public static final SimpleValue NULL = new SimpleValue(SimpleValueType.NULL);
     public static final SimpleValue UNDEFINED = new SimpleValue(
-        SimpleValueType.UNDEFINED);
+            SimpleValueType.UNDEFINED);
 
     private final int value;
 
@@ -23,7 +23,7 @@ public class SimpleValue extends Special {
 
     public SimpleValue(int value) {
         super(value <= 23 ? SpecialType.SIMPLE_VALUE
-            : SpecialType.SIMPLE_VALUE_NEXT_BYTE);
+                : SpecialType.SIMPLE_VALUE_NEXT_BYTE);
         this.value = value;
         this.simpleValueType = SimpleValueType.ofByte(value);
     }
@@ -48,6 +48,11 @@ public class SimpleValue extends Special {
     @Override
     public int hashCode() {
         return super.hashCode() ^ Objects.hashCode(value);
+    }
+
+    @Override
+    public String toString() {
+        return simpleValueType.toString();
     }
 
 }
