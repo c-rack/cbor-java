@@ -79,22 +79,11 @@ new CborDecoder(bais).decode(new DataItemListener() {
 
 ## Contribution Process
 
-This project uses the [C4.1 process](http://rfc.zeromq.org/spec:22) for all code changes.
-
-> "Everyone, without distinction or discrimination, SHALL have an equal right to become a Contributor under the
-terms of this contract."
-
-### tl;dr
-
-1. Check for [open issues](https://github.com/c-rack/cbor-java/issues) or [open a new issue](https://github.com/c-rack/cbor-java/issues/new) to start a discussion around a feature idea or a bug
-2. Fork the [cbor-java repository on GitHub](https://github.com/c-rack/cbor-java) to start making your changes
-3. Write a test which shows that the bug was fixed or that the feature works as expected
-4. Send a pull request
-5. Your pull request is merged and you are added to the [list of contributors](https://github.com/c-rack/cbor-java/graphs/contributors)
+This project uses the [C4 process](https://rfc.zeromq.org/spec:42/C4/) for all code changes.
 
 ## License
 
-    Copyright 2013-2016 Constantin Rack
+    Copyright 2013-2017 Constantin Rack
  
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
