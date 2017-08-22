@@ -1,7 +1,6 @@
 package co.nstant.in.cbor.decoder;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 import co.nstant.in.cbor.CborDecoder;
@@ -45,15 +44,11 @@ public class ByteStringDecoder extends AbstractDecoder<ByteString> {
                 ByteString byteString = (ByteString) dataItem;
                 byte[] byteArray = byteString.getBytes();
                 if (byteArray != null) {
-                    try {
-                        bytes.write(byteArray);
-                    } catch (IOException ioException) {
-                        throw new CborException(ioException);
-                    }
+                    bytes.write(byteArray, 0, byteArray.length);
                 }
             } else {
                 throw new CborException("Unexpected major type "
-                    + majorType);
+                        + majorType);
             }
         }
         return new ByteString(bytes.toByteArray());
