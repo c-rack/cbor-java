@@ -62,4 +62,15 @@ public class ByteStringDecoderTest {
         assertEquals(1, dataItems.size());
     }
 
+    @Test(expected = CborException.class)
+    public void shouldThrowOnIncompleteByteString() throws CborException {
+        byte[] bytes = new byte[] {0x42, 0x20};
+        CborDecoder.decode(bytes);
+    }
+
+    @Test(expected = CborException.class)
+    public void shouldTrowOnMissingBreak() throws CborException {
+        byte[] bytes = new byte[] {0x5f, 0x41, 0x20};
+        CborDecoder.decode(bytes);
+    }
 }

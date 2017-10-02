@@ -33,7 +33,11 @@ public class MapDecoder extends AbstractDecoder<Map> {
                 if (Special.BREAK.equals(key)) {
                     break;
                 }
-                map.put(key, decoder.decodeNext());
+                DataItem value = decoder.decodeNext();
+                if (key == null || value == null) {
+                    throw new CborException("Unexpected end of stream");
+                }
+                map.put(key, value);
             }
         }
         return map;
@@ -42,7 +46,12 @@ public class MapDecoder extends AbstractDecoder<Map> {
     private Map decodeFixedLength(long length) throws CborException {
         Map map = new Map((int) length);
         for (long i = 0; i < length; i++) {
-            map.put(decoder.decodeNext(), decoder.decodeNext());
+            DataItem key = decoder.decodeNext();
+            DataItem value = decoder.decodeNext();
+            if (key == null || value == null) {
+                throw new CborException("Unexpected end of stream");
+            }
+            map.put(key, value);
         }
         return map;
     }

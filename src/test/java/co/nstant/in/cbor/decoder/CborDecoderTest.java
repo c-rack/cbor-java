@@ -144,5 +144,4 @@ public class CborDecoderTest {
         CborDecoder decoder = new CborDecoder(bais);
         assertEquals(new RationalNumber(new UnsignedInteger(1), new UnsignedInteger(2)), decoder.decodeNext());
     }
-
 }
