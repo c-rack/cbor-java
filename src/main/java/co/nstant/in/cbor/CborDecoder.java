@@ -45,6 +45,7 @@ public class CborDecoder {
     private boolean autoDecodeInfinitiveUnicodeStrings = true;
     private boolean autoDecodeRationalNumbers = true;
     private boolean autoDecodeLanguageTaggedStrings = true;
+    private boolean rejectDuplicateKeys = false;
 
     /**
      * Initialize a new decoder which reads the binary encoded data from an
@@ -271,6 +272,14 @@ public class CborDecoder {
     public void setAutoDecodeLanguageTaggedStrings(
         boolean autoDecodeLanguageTaggedStrings) {
         this.autoDecodeLanguageTaggedStrings = autoDecodeLanguageTaggedStrings;
+    }
+
+    public boolean isRejectDuplicateKeys() {
+        return rejectDuplicateKeys;
+    }
+
+    public void setRejectDuplicateKeys(boolean rejectDuplicateKeys) {
+        this.rejectDuplicateKeys = rejectDuplicateKeys;
     }
 
 }

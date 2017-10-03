@@ -37,6 +37,9 @@ public class MapDecoder extends AbstractDecoder<Map> {
                 if (key == null || value == null) {
                     throw new CborException("Unexpected end of stream");
                 }
+                if (decoder.isRejectDuplicateKeys() && map.get(key) != null) {
+                    throw new CborException("Duplicate key found in map");
+                }
                 map.put(key, value);
             }
         }
@@ -50,6 +53,9 @@ public class MapDecoder extends AbstractDecoder<Map> {
             DataItem value = decoder.decodeNext();
             if (key == null || value == null) {
                 throw new CborException("Unexpected end of stream");
+            }
+            if (decoder.isRejectDuplicateKeys() && map.get(key) != null) {
+                throw new CborException("Duplicate key found in map");
             }
             map.put(key, value);
         }
