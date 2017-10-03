@@ -34,9 +34,11 @@ public class ByteStringDecoder extends AbstractDecoder<ByteString> {
 
     private ByteString decodeInfinitiveLength() throws CborException {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        DataItem dataItem;
         for (;;) {
-            dataItem = decoder.decodeNext();
+            DataItem dataItem = decoder.decodeNext();
+            if (dataItem == null) {
+                throw new CborException("Unexpected end of stream");
+            }
             MajorType majorType = dataItem.getMajorType();
             if (Special.BREAK.equals(dataItem)) {
                 break;

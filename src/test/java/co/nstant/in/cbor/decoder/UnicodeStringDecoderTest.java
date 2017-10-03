@@ -35,4 +35,16 @@ public class UnicodeStringDecoderTest {
         assertEquals(1, dataItems.size());
     }
 
+    @Test(expected = CborException.class)
+    public void shouldThrowOnIncompleteString() throws CborException {
+        byte[] bytes = new byte[] {0x62, 0x61};
+        CborDecoder.decode(bytes);
+    }
+
+    @Test(expected = CborException.class)
+    public void shouldThrowOnMissingBreak() throws CborException {
+        byte[] bytes = new byte[] {0x7f, 0x61, 0x61};
+        CborDecoder.decode(bytes);
+    }
+
 }
