@@ -133,6 +133,21 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends
         return new MapBuilder<>(this, nestedMap);
     }
 
+    public MapBuilder<MapBuilder<T>> startMap(DataItem key) {
+        Map nestedMap = new Map();
+        nestedMap.setChunked(true);
+        put(key, nestedMap);
+        return new MapBuilder<>(this, nestedMap);
+    }
+
+    public MapBuilder<MapBuilder<T>> startMap(long key) {
+        return startMap(convert(key));
+    }
+
+    public MapBuilder<MapBuilder<T>> startMap(String key) {
+        return startMap(convert(key));
+    }
+
     public T end() {
         return getParent();
     }

@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.Test;
 
 import co.nstant.in.cbor.CborBuilder;
+import co.nstant.in.cbor.model.ByteString;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.Map;
 import co.nstant.in.cbor.model.UnicodeString;
@@ -54,6 +55,30 @@ public class MapBuilderTest {
         assertTrue(dataItems.get(0) instanceof Map);
         Map map = (Map) dataItems.get(0);
         assertEquals(19, map.getKeys().size());
+    }
+
+    @Test
+    public void startMapInMap() {
+        CborBuilder builder = new CborBuilder();
+        List<DataItem> dataItems = builder.addMap()
+                .startMap(new ByteString(new byte[] {0x01}))
+                    .put(1, 2)
+                    .end()
+                .startMap(1)
+                    .end()
+                .startMap("asdf")
+                    .end()
+                .end().build();
+        Map rootMap = (Map)dataItems.get(0);
+        DataItem keys[] = new DataItem[3];
+        rootMap.getKeys().toArray(keys);
+        assertEquals(keys[0], new ByteString(new byte[] {0x01}));
+        assertEquals(keys[1], new UnsignedInteger(1));
+        assertEquals(keys[2], new UnicodeString("asdf"));
+
+        assertTrue(rootMap.get(keys[0]) instanceof Map);
+        assertTrue(rootMap.get(keys[1]) instanceof Map);
+        assertTrue(rootMap.get(keys[2]) instanceof Map);
     }
 
 }
