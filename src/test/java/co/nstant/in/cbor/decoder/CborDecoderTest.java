@@ -159,17 +159,6 @@ public class CborDecoderTest {
         assertEquals(expected, decoded);
     }
 
-    private final static char[] hexArray = "0123456789ABCDEF".toCharArray();
-    public static String bytesToHex(byte[] bytes) {
-        char[] hexChars = new char[bytes.length * 2];
-        for ( int j = 0; j < bytes.length; j++ ) {
-            int v = bytes[j] & 0xFF;
-            hexChars[j * 2] = hexArray[v >>> 4];
-            hexChars[j * 2 + 1] = hexArray[v & 0x0F];
-        }
-        return new String(hexChars);
-    }
-
     @Test
     public void shouldDecodeTaggedRationalNumber() throws CborException {
         List<DataItem> items = new CborBuilder()
@@ -180,7 +169,6 @@ public class CborDecoderTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);
-        System.out.println(bytesToHex(baos.toByteArray()));
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         CborDecoder decoder = new CborDecoder(bais);
 
