@@ -154,7 +154,10 @@ public class CborDecoder {
                 } else if (autoDecodeLanguageTaggedStrings && tag.getValue() == 38) {
                     return decodeLanguageTaggedString(next);
                 } else {
-                    next.setTag(tag);
+                    DataItem itemToTag = next;
+                    while (itemToTag.hasTag())
+                        itemToTag = itemToTag.getTag();
+                    itemToTag.setTag(tag);
                     return next;
                 }
             }

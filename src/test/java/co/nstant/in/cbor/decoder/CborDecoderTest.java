@@ -18,6 +18,7 @@ import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.RationalNumber;
+import co.nstant.in.cbor.model.Tag;
 import co.nstant.in.cbor.model.UnsignedInteger;
 
 public class CborDecoderTest {
@@ -143,5 +144,36 @@ public class CborDecoderTest {
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
         CborDecoder decoder = new CborDecoder(bais);
         assertEquals(new RationalNumber(new UnsignedInteger(1), new UnsignedInteger(2)), decoder.decodeNext());
+    }
+
+    @Test
+    public void shouldDecodeTaggedTags() throws CborException {
+        DataItem decoded = CborDecoder.decode(new byte[] {(byte) 0xC1, (byte) 0xC2, 0x02}).get(0);
+
+        Tag outer = new Tag(1);
+        Tag inner = new Tag(2);
+        UnsignedInteger expected = new UnsignedInteger(2);
+        inner.setTag(outer);
+        expected.setTag(inner);
+
+        assertEquals(expected, decoded);
+    }
+
+    @Test
+    public void shouldDecodeTaggedRationalNumber() throws CborException {
+        List<DataItem> items = new CborBuilder()
+            .addTag(1)
+            .addTag(30)
+            .addArray().add(1).add(2).end()
+            .build();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        CborEncoder encoder = new CborEncoder(baos);
+        encoder.encode(items);
+        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        CborDecoder decoder = new CborDecoder(bais);
+
+        RationalNumber expected = new RationalNumber(new UnsignedInteger(1), new UnsignedInteger(2));
+        expected.getTag().setTag(new Tag(1));
+        assertEquals(expected, decoder.decodeNext());
     }
 }
