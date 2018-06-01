@@ -13,7 +13,9 @@ import co.nstant.in.cbor.CborBuilder;
 import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
+import co.nstant.in.cbor.model.ByteString;
 import co.nstant.in.cbor.model.DataItem;
+import co.nstant.in.cbor.model.MajorType;
 
 public class ByteStringDecoderTest {
 
@@ -22,12 +24,12 @@ public class ByteStringDecoderTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(new CborBuilder()
-            .startByteString()
-            .add(new byte[] { '\0' })
-            .add(new byte[] { 0x10 })
-            .add(new byte[] { 0x13 })
-            .end()
-            .build());
+                .startByteString()
+                .add(new byte[] { '\0' })
+                .add(new byte[] { 0x10 })
+                .add(new byte[] { 0x13 })
+                .end()
+                .build());
         byte[] encodedBytes = baos.toByteArray();
         ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
         CborDecoder decoder = new CborDecoder(bais);
@@ -64,13 +66,35 @@ public class ByteStringDecoderTest {
 
     @Test(expected = CborException.class)
     public void shouldThrowOnIncompleteByteString() throws CborException {
-        byte[] bytes = new byte[] {0x42, 0x20};
+        byte[] bytes = new byte[] { 0x42, 0x20 };
         CborDecoder.decode(bytes);
     }
 
     @Test(expected = CborException.class)
     public void shouldTrowOnMissingBreak() throws CborException {
-        byte[] bytes = new byte[] {0x5f, 0x41, 0x20};
+        byte[] bytes = new byte[] { 0x5f, 0x41, 0x20 };
         CborDecoder.decode(bytes);
     }
+
+    public void decodingExample() throws CborException {
+        byte bytes[] = { 0, 1, 2, 3 };
+        // Encode
+        ByteArrayOutputStream encodedStream = new ByteArrayOutputStream();
+        new CborEncoder(encodedStream).encode(new ByteString(bytes));
+        byte encodedBytes[] = encodedStream.toByteArray();
+        // Decode
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(encodedBytes);
+        CborDecoder decoder = new CborDecoder(inputStream);
+        DataItem dataItem = decoder.decodeNext();
+        assertEquals(MajorType.BYTE_STRING, dataItem.getMajorType());
+        ByteString byteString = (ByteString) dataItem;
+        byte[] decodedBytes = byteString.getBytes();
+        // Verify
+        assertEquals(bytes.length, decodedBytes.length);
+        assertEquals(bytes[0], decodedBytes[0]);
+        assertEquals(bytes[1], decodedBytes[1]);
+        assertEquals(bytes[2], decodedBytes[2]);
+        assertEquals(bytes[3], decodedBytes[3]);
+    }
+
 }
