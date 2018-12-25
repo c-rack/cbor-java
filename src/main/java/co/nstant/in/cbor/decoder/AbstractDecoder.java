@@ -14,6 +14,7 @@ public abstract class AbstractDecoder<T> {
 
     protected final InputStream inputStream;
     protected final CborDecoder decoder;
+    private int maxPreallocationSize;
 
     public AbstractDecoder(CborDecoder decoder, InputStream inputStream) {
         this.decoder = decoder;
@@ -115,5 +116,14 @@ public abstract class AbstractDecoder<T> {
         default:
             throw new CborException("Reserved additional information");
         }
+    }
+
+    int getPreallocationSize(long length) {
+        int len = Math.abs((int) length);
+        return maxPreallocationSize > 0 ? Math.min(maxPreallocationSize, len) : len;
+    }
+
+    public void setMaxPreallocationSize(int maxPreallocationSize) {
+        this.maxPreallocationSize = maxPreallocationSize;
     }
 }

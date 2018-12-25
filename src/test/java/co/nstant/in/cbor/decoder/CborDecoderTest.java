@@ -3,6 +3,7 @@ package co.nstant.in.cbor.decoder;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -16,7 +17,10 @@ import co.nstant.in.cbor.CborBuilder;
 import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
+import co.nstant.in.cbor.encoder.AbstractEncoder;
+import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.DataItem;
+import co.nstant.in.cbor.model.MajorType;
 import co.nstant.in.cbor.model.RationalNumber;
 import co.nstant.in.cbor.model.Tag;
 import co.nstant.in.cbor.model.UnsignedInteger;
@@ -175,5 +179,27 @@ public class CborDecoderTest {
         RationalNumber expected = new RationalNumber(new UnsignedInteger(1), new UnsignedInteger(2));
         expected.getTag().setTag(new Tag(1));
         assertEquals(expected, decoder.decodeNext());
+    }
+
+    @Test(expected = CborException.class)
+    public void shouldThrowOnItemWithForgedLength() throws CborException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        AbstractEncoder<Array> maliciousEncoder = new AbstractEncoder<Array>(null, buffer) {
+            @Override
+            public void encode(Array array) throws CborException {
+                encodeTypeAndLength(MajorType.ARRAY, Integer.MAX_VALUE - 100);
+            }
+        };
+        maliciousEncoder.encode(new Array());
+        byte[] maliciousArray = buffer.toByteArray();
+        try {
+            CborDecoder.decode(maliciousArray);
+            fail("Should have failed the huge allocation");
+        } catch (OutOfMemoryError e) {
+            // Expected without limit
+        }
+        CborDecoder decoder = new CborDecoder(new ByteArrayInputStream(maliciousArray));
+        decoder.setMaxPreallocationSize(1024);
+        decoder.decode();
     }
 }

@@ -45,7 +45,7 @@ public class ArrayDecoder extends AbstractDecoder<Array> {
     }
 
     private Array decodeFixedLength(long length) throws CborException {
-        Array array = new Array();
+        Array array = new Array(getPreallocationSize(length));
         for (long i = 0; i < length; i++) {
             DataItem dataItem = decoder.decodeNext();
             if (dataItem == null) {

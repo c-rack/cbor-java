@@ -285,4 +285,22 @@ public class CborDecoder {
         this.rejectDuplicateKeys = rejectDuplicateKeys;
     }
 
+    /**
+     * Sets the given amount of bytes as maximum preallocation limit for arrays in all decoders. This prevents
+     * OutOfMemory exceptions on malicious CBOR with forged fixed length items. Note that items may exceed the given
+     * size when the decoded data actually contains much data. This may be limited by using a limiting stream.
+     *
+     * @param maxSize Maximum number of bytes to preallocate in array-based items. Set to 0 to disable.
+     */
+    public void setMaxPreallocationSize(int maxSize) {
+        unsignedIntegerDecoder.setMaxPreallocationSize(maxSize);
+        negativeIntegerDecoder.setMaxPreallocationSize(maxSize);
+        byteStringDecoder.setMaxPreallocationSize(maxSize);
+        unicodeStringDecoder.setMaxPreallocationSize(maxSize);
+        arrayDecoder.setMaxPreallocationSize(maxSize);
+        mapDecoder.setMaxPreallocationSize(maxSize);
+        tagDecoder.setMaxPreallocationSize(maxSize);
+        specialDecoder.setMaxPreallocationSize(maxSize);
+    }
+
 }
