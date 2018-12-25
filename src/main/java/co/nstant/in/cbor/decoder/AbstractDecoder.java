@@ -1,5 +1,6 @@
 package co.nstant.in.cbor.decoder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
@@ -33,6 +34,29 @@ public abstract class AbstractDecoder<T> {
         } catch (IOException ioException) {
             throw new CborException(ioException);
         }
+    }
+
+    byte[] decodeBytes(long length) throws CborException {
+        if (length > Integer.MAX_VALUE) {
+            throw new CborException("Decoding fixed size items is limited to INTMAX");
+        }
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream(getPreallocationSize(length));
+        final int chunkSize = 4096;
+        int i = (int) length;
+        byte[] buf = new byte[chunkSize];
+        while (i > 0) {
+            try {
+                int read = inputStream.read(buf, 0, i > chunkSize ? chunkSize : i);
+                if (read == -1) {
+                    throw new IOException("Unexpected end of stream");
+                }
+                bytes.write(buf, 0, read);
+                i -= read;
+            } catch (IOException e) {
+                throw new CborException(e);
+            }
+        }
+        return bytes.toByteArray();
     }
 
     protected long getLength(int initialByte) throws CborException {

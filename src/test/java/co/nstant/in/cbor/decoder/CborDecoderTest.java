@@ -1,7 +1,9 @@
 package co.nstant.in.cbor.decoder;
 
+import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -18,7 +20,6 @@ import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.encoder.AbstractEncoder;
-import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.MajorType;
 import co.nstant.in.cbor.model.RationalNumber;
@@ -181,25 +182,39 @@ public class CborDecoderTest {
         assertEquals(expected, decoder.decodeNext());
     }
 
-    @Test(expected = CborException.class)
+    @Test
     public void shouldThrowOnItemWithForgedLength() throws CborException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        AbstractEncoder<Array> maliciousEncoder = new AbstractEncoder<Array>(null, buffer) {
+        AbstractEncoder<Long> maliciousEncoder = new AbstractEncoder<Long>(null, buffer) {
             @Override
-            public void encode(Array array) throws CborException {
-                encodeTypeAndLength(MajorType.ARRAY, Integer.MAX_VALUE - 100);
+            public void encode(Long length) throws CborException {
+                encodeTypeAndLength(MajorType.UNICODE_STRING, length.longValue());
             }
         };
-        maliciousEncoder.encode(new Array());
-        byte[] maliciousArray = buffer.toByteArray();
+        maliciousEncoder.encode(Long.valueOf(Integer.MAX_VALUE + 1L));
+        byte[] maliciousString = buffer.toByteArray();
         try {
-            CborDecoder.decode(maliciousArray);
+            CborDecoder.decode(maliciousString);
+            fail("Should have failed the huge allocation");
+        } catch (CborException e) {
+            assertThat("Exception message", e.getMessage(), containsString("limited to INTMAX"));
+        }
+
+        buffer.reset();
+        maliciousEncoder.encode(Long.valueOf(Integer.MAX_VALUE - 1));
+        maliciousString = buffer.toByteArray();
+        try {
+            CborDecoder.decode(maliciousString);
             fail("Should have failed the huge allocation");
         } catch (OutOfMemoryError e) {
             // Expected without limit
         }
-        CborDecoder decoder = new CborDecoder(new ByteArrayInputStream(maliciousArray));
+        CborDecoder decoder = new CborDecoder(new ByteArrayInputStream(maliciousString));
         decoder.setMaxPreallocationSize(1024);
-        decoder.decode();
+        try {
+            decoder.decode();
+        } catch (CborException e) {
+            // Expected without limit
+        }
     }
 }

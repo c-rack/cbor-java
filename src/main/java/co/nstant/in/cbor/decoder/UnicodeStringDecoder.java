@@ -55,11 +55,7 @@ public class UnicodeStringDecoder extends AbstractDecoder<UnicodeString> {
     }
 
     private UnicodeString decodeFixedLength(long length) throws CborException {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream(getPreallocationSize(length));
-        for (long i = 0; i < length; i++) {
-            bytes.write(nextSymbol());
-        }
-        return new UnicodeString(new String(bytes.toByteArray(), StandardCharsets.UTF_8));
+        return new UnicodeString(new String(decodeBytes(length), StandardCharsets.UTF_8));
     }
 
 }
