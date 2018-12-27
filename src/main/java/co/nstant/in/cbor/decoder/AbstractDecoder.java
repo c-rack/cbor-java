@@ -36,6 +36,31 @@ public abstract class AbstractDecoder<T> {
         }
     }
 
+    protected byte[] nextSymbols(int amount) throws CborException {
+        try {
+            byte[] symbols = new byte[amount];
+            int read = inputStream.read(symbols);
+            if (read == amount) {
+                return symbols;
+            }
+            if (read == -1) {
+                throw new IOException("Unexpected end of stream");
+            }
+            // Unlikely, but according to read contract possible:
+            int left = amount - read;
+            while (left > 0) {
+                read = inputStream.read(symbols, amount - left, left);
+                if (read == -1) {
+                    throw new IOException("Unexpected end of stream");
+                }
+                left -= read;
+            }
+            return symbols;
+        } catch (IOException ioException) {
+            throw new CborException(ioException);
+        }
+    }
+
     byte[] decodeBytes(long length) throws CborException {
         if (length > Integer.MAX_VALUE) {
             throw new CborException("Decoding fixed size items is limited to INTMAX");
@@ -67,26 +92,29 @@ public abstract class AbstractDecoder<T> {
             return nextSymbol();
         case TWO_BYTES:
             long twoByteValue = 0;
-            twoByteValue |= nextSymbol() << 8;
-            twoByteValue |= nextSymbol() << 0;
+            byte[] symbols = nextSymbols(2);
+            twoByteValue |= (symbols[0] & 0xFF) << 8;
+            twoByteValue |= (symbols[1] & 0xFF) << 0;
             return twoByteValue;
         case FOUR_BYTES:
             long fourByteValue = 0L;
-            fourByteValue |= (long) nextSymbol() << 24;
-            fourByteValue |= (long) nextSymbol() << 16;
-            fourByteValue |= (long) nextSymbol() << 8;
-            fourByteValue |= (long) nextSymbol() << 0;
+            symbols = nextSymbols(4);
+            fourByteValue |= (long) (symbols[0] & 0xFF) << 24;
+            fourByteValue |= (long) (symbols[1] & 0xFF) << 16;
+            fourByteValue |= (long) (symbols[2] & 0xFF) << 8;
+            fourByteValue |= (long) (symbols[3] & 0xFF) << 0;
             return fourByteValue;
         case EIGHT_BYTES:
             long eightByteValue = 0;
-            eightByteValue |= (long) nextSymbol() << 56;
-            eightByteValue |= (long) nextSymbol() << 48;
-            eightByteValue |= (long) nextSymbol() << 40;
-            eightByteValue |= (long) nextSymbol() << 32;
-            eightByteValue |= (long) nextSymbol() << 24;
-            eightByteValue |= (long) nextSymbol() << 16;
-            eightByteValue |= (long) nextSymbol() << 8;
-            eightByteValue |= (long) nextSymbol() << 0;
+            symbols = nextSymbols(8);
+            eightByteValue |= (long) (symbols[0] & 0xFF) << 56;
+            eightByteValue |= (long) (symbols[1] & 0xFF) << 48;
+            eightByteValue |= (long) (symbols[2] & 0xFF) << 40;
+            eightByteValue |= (long) (symbols[3] & 0xFF) << 32;
+            eightByteValue |= (long) (symbols[4] & 0xFF) << 24;
+            eightByteValue |= (long) (symbols[5] & 0xFF) << 16;
+            eightByteValue |= (long) (symbols[6] & 0xFF) << 8;
+            eightByteValue |= (long) (symbols[7] & 0xFF) << 0;
             return eightByteValue;
         case INDEFINITE:
             return INFINITY;
@@ -105,33 +133,36 @@ public abstract class AbstractDecoder<T> {
             return BigInteger.valueOf(nextSymbol());
         case TWO_BYTES:
             long twoByteValue = 0;
-            twoByteValue |= nextSymbol() << 8;
-            twoByteValue |= nextSymbol() << 0;
+            byte[] symbols = nextSymbols(2);
+            twoByteValue |= (symbols[0] & 0xFF) << 8;
+            twoByteValue |= (symbols[1] & 0xFF) << 0;
             return BigInteger.valueOf(twoByteValue);
         case FOUR_BYTES:
             long fourByteValue = 0L;
-            fourByteValue |= (long) nextSymbol() << 24;
-            fourByteValue |= (long) nextSymbol() << 16;
-            fourByteValue |= (long) nextSymbol() << 8;
-            fourByteValue |= (long) nextSymbol() << 0;
+            symbols = nextSymbols(4);
+            fourByteValue |= (long) (symbols[0] & 0xFF) << 24;
+            fourByteValue |= (long) (symbols[1] & 0xFF) << 16;
+            fourByteValue |= (long) (symbols[2] & 0xFF) << 8;
+            fourByteValue |= (long) (symbols[3] & 0xFF) << 0;
             return BigInteger.valueOf(fourByteValue);
         case EIGHT_BYTES:
             BigInteger eightByteValue = BigInteger.ZERO;
-            eightByteValue = eightByteValue.or(BigInteger.valueOf(nextSymbol())
+            symbols = nextSymbols(8);
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[0] & 0xFF))
                             .shiftLeft(56));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf(nextSymbol())
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[1] & 0xFF))
                             .shiftLeft(48));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf(nextSymbol())
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[2] & 0xFF))
                             .shiftLeft(40));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf(nextSymbol())
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[3] & 0xFF))
                             .shiftLeft(32));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf(nextSymbol())
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[4] & 0xFF))
                             .shiftLeft(24));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf(nextSymbol())
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[5] & 0xFF))
                             .shiftLeft(16));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf(nextSymbol())
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[6] & 0xFF))
                             .shiftLeft(8));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf(nextSymbol())
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[7] & 0xFF))
                             .shiftLeft(0));
             return eightByteValue;
         case INDEFINITE:
