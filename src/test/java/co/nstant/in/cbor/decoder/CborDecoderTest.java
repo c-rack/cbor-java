@@ -213,8 +213,9 @@ public class CborDecoderTest {
         decoder.setMaxPreallocationSize(1024);
         try {
             decoder.decode();
+            fail("Should have failed with unexpected end of stream exception");
         } catch (CborException e) {
-            // Expected without limit
+            // Expected with limit
         }
     }
 }
