@@ -14,10 +14,10 @@ public class HalfPrecisionFloatEncoder extends AbstractEncoder<HalfPrecisionFloa
 
 	@Override
 	public void encode(HalfPrecisionFloat dataItem) throws CborException {
-		write((7 << 5) | 25);
 		int bits = fromFloat(dataItem.getValue());
-		write((bits >> 8) & 0xFF);
-		write((bits >> 0) & 0xFF);
+		write((byte) ((7 << 5) | 25),
+		      (byte) ((bits >> 8) & 0xFF),
+		      (byte) ((bits >> 0) & 0xFF));
 	}
 
 	/**

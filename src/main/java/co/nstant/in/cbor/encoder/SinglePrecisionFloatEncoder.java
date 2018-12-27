@@ -14,12 +14,12 @@ public class SinglePrecisionFloatEncoder extends AbstractEncoder<SinglePrecision
 
 	@Override
 	public void encode(SinglePrecisionFloat dataItem) throws CborException {
-		write((7 << 5) | 26);
 		int bits = Float.floatToRawIntBits(dataItem.getValue());
-		write((bits >> 24) & 0xFF);
-		write((bits >> 16) & 0xFF);
-		write((bits >> 8) & 0xFF);
-		write((bits >> 0) & 0xFF);
+		write((byte) ((7 << 5) | 26),
+		      (byte) ((bits >> 24) & 0xFF),
+		      (byte) ((bits >> 16) & 0xFF),
+		      (byte) ((bits >> 8) & 0xFF),
+		      (byte) ((bits >> 0) & 0xFF));
 	}
 
 }
