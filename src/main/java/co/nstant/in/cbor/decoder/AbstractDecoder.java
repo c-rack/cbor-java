@@ -11,6 +11,8 @@ import co.nstant.in.cbor.model.AdditionalInformation;
 
 public abstract class AbstractDecoder<T> {
 
+    private static final int BUFFER_SIZE = 4096;
+
     protected static final int INFINITY = -1;
 
     protected final InputStream inputStream;
@@ -66,7 +68,7 @@ public abstract class AbstractDecoder<T> {
             throw new CborException("Decoding fixed size items is limited to INTMAX");
         }
         ByteArrayOutputStream bytes = new ByteArrayOutputStream(getPreallocationSize(length));
-        final int chunkSize = 4096;
+        final int chunkSize = (int) (length > BUFFER_SIZE ? BUFFER_SIZE : length);
         int i = (int) length;
         byte[] buf = new byte[chunkSize];
         while (i > 0) {
