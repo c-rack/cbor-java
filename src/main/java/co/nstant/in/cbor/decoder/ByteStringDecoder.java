@@ -57,11 +57,7 @@ public class ByteStringDecoder extends AbstractDecoder<ByteString> {
     }
 
     private ByteString decodeFixedLength(long length) throws CborException {
-        ByteArrayOutputStream bytes = new ByteArrayOutputStream((int) length);
-        for (long i = 0; i < length; i++) {
-            bytes.write(nextSymbol());
-        }
-        return new ByteString(bytes.toByteArray());
+        return new ByteString(decodeBytes(length));
     }
 
 }

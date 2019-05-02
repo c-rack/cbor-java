@@ -1,11 +1,13 @@
 package co.nstant.in.cbor.decoder;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.math.BigInteger;
+import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -22,6 +24,10 @@ public class AbstractDecoderTest {
 
         public void callNextSymbol() throws CborException {
             nextSymbol();
+        }
+
+        public byte[] callNextSymbols(int amount) throws CborException {
+            return nextSymbols(amount);
         }
 
         public long callGetLength(int initialByte) throws CborException {
@@ -44,6 +50,34 @@ public class AbstractDecoderTest {
         InputStream inputStream = new ByteArrayInputStream(new byte[] {});
         new TestableAbstractDecoder(inputStream).callNextSymbol();
         fail();
+    }
+
+    @Test(expected = CborException.class)
+    public void shouldThrowExceptionOnUnexpectedEndOfStream2() throws CborException {
+        InputStream inputStream = new ByteArrayInputStream(new byte[] {});
+        new TestableAbstractDecoder(inputStream).callNextSymbols(1);
+        fail();
+    }
+
+    @Test
+    public void shouldReadFullyFromIncompleteStream() throws CborException {
+        byte[] testArray = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 };
+        InputStream inputStream = new ByteArrayInputStream(testArray) {
+
+            @Override
+            public synchronized int read(byte[] b, int off, int len) {
+                return super.read(b, off, 4);
+            }
+        };
+        TestableAbstractDecoder decoder = new TestableAbstractDecoder(inputStream);
+        assertArrayEquals("Symbols array", decoder.callNextSymbols(8), Arrays.copyOf(testArray, 8));
+        // Also test unexpected end of stream while we have this "special" stream
+        try {
+            decoder.callNextSymbols(12);
+            fail("Should have failed with unexpected end of stream exception");
+        } catch (CborException e) {
+            // Expected
+        }
     }
 
     @Test

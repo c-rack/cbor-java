@@ -47,7 +47,7 @@ public class MapDecoder extends AbstractDecoder<Map> {
     }
 
     private Map decodeFixedLength(long length) throws CborException {
-        Map map = new Map((int) length);
+        Map map = new Map(getPreallocationSize(length));
         for (long i = 0; i < length; i++) {
             DataItem key = decoder.decodeNext();
             DataItem value = decoder.decodeNext();

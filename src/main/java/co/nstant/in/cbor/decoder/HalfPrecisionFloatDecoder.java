@@ -16,7 +16,8 @@ public class HalfPrecisionFloatDecoder extends
 
     @Override
     public HalfPrecisionFloat decode(int initialByte) throws CborException {
-        int bits = nextSymbol() << 8 | nextSymbol();
+        byte[] symbols = nextSymbols(2);
+        int bits = (symbols[0] & 0xFF) << 8 | (symbols[1] & 0xFF);
         return new HalfPrecisionFloat(toFloat(bits));
     }
 

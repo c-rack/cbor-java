@@ -17,21 +17,22 @@ public class DoublePrecisionFloatDecoder extends
     @Override
     public DoublePrecisionFloat decode(int initialByte) throws CborException {
         long bits = 0;
-        bits |= nextSymbol() & 0xFF;
+        byte[] symbols = nextSymbols(8);
+        bits |= symbols[0] & 0xFF;
         bits <<= 8;
-        bits |= nextSymbol() & 0xFF;
+        bits |= symbols[1] & 0xFF;
         bits <<= 8;
-        bits |= nextSymbol() & 0xFF;
+        bits |= symbols[2] & 0xFF;
         bits <<= 8;
-        bits |= nextSymbol() & 0xFF;
+        bits |= symbols[3] & 0xFF;
         bits <<= 8;
-        bits |= nextSymbol() & 0xFF;
+        bits |= symbols[4] & 0xFF;
         bits <<= 8;
-        bits |= nextSymbol() & 0xFF;
+        bits |= symbols[5] & 0xFF;
         bits <<= 8;
-        bits |= nextSymbol() & 0xFF;
+        bits |= symbols[6] & 0xFF;
         bits <<= 8;
-        bits |= nextSymbol() & 0xFF;
+        bits |= symbols[7] & 0xFF;
         return new DoublePrecisionFloat(Double.longBitsToDouble(bits));
     }
 

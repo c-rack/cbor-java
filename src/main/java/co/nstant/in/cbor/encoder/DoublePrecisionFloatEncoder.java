@@ -14,16 +14,16 @@ public class DoublePrecisionFloatEncoder extends AbstractEncoder<DoublePrecision
 
 	@Override
 	public void encode(DoublePrecisionFloat dataItem) throws CborException {
-		write((7 << 5) | 27);
 		long bits = Double.doubleToRawLongBits(dataItem.getValue());
-		write((int) ((bits >> 56) & 0xFF));
-		write((int) ((bits >> 48) & 0xFF));
-		write((int) ((bits >> 40) & 0xFF));
-		write((int) ((bits >> 32) & 0xFF));
-		write((int) ((bits >> 24) & 0xFF));
-		write((int) ((bits >> 16) & 0xFF));
-		write((int) ((bits >> 8) & 0xFF));
-		write((int) ((bits >> 0) & 0xFF));
+		write((byte) ((7 << 5) | 27),
+		      (byte) ((bits >> 56) & 0xFF),
+		      (byte) ((bits >> 48) & 0xFF),
+		      (byte) ((bits >> 40) & 0xFF),
+		      (byte) ((bits >> 32) & 0xFF),
+		      (byte) ((bits >> 24) & 0xFF),
+		      (byte) ((bits >> 16) & 0xFF),
+		      (byte) ((bits >> 8) & 0xFF),
+		      (byte) ((bits >> 0) & 0xFF));
 	}
 
 }

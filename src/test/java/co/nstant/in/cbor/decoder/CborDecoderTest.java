@@ -1,8 +1,11 @@
 package co.nstant.in.cbor.decoder;
 
+import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -16,7 +19,9 @@ import co.nstant.in.cbor.CborBuilder;
 import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
+import co.nstant.in.cbor.encoder.AbstractEncoder;
 import co.nstant.in.cbor.model.DataItem;
+import co.nstant.in.cbor.model.MajorType;
 import co.nstant.in.cbor.model.RationalNumber;
 import co.nstant.in.cbor.model.Tag;
 import co.nstant.in.cbor.model.UnsignedInteger;
@@ -175,5 +180,42 @@ public class CborDecoderTest {
         RationalNumber expected = new RationalNumber(new UnsignedInteger(1), new UnsignedInteger(2));
         expected.getTag().setTag(new Tag(1));
         assertEquals(expected, decoder.decodeNext());
+    }
+
+    @Test
+    public void shouldThrowOnItemWithForgedLength() throws CborException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        AbstractEncoder<Long> maliciousEncoder = new AbstractEncoder<Long>(null, buffer) {
+            @Override
+            public void encode(Long length) throws CborException {
+                encodeTypeAndLength(MajorType.UNICODE_STRING, length.longValue());
+            }
+        };
+        maliciousEncoder.encode(Long.valueOf(Integer.MAX_VALUE + 1L));
+        byte[] maliciousString = buffer.toByteArray();
+        try {
+            CborDecoder.decode(maliciousString);
+            fail("Should have failed the huge allocation");
+        } catch (CborException e) {
+            assertThat("Exception message", e.getMessage(), containsString("limited to INTMAX"));
+        }
+
+        buffer.reset();
+        maliciousEncoder.encode(Long.valueOf(Integer.MAX_VALUE - 1));
+        maliciousString = buffer.toByteArray();
+        try {
+            CborDecoder.decode(maliciousString);
+            fail("Should have failed the huge allocation");
+        } catch (OutOfMemoryError e) {
+            // Expected without limit
+        }
+        CborDecoder decoder = new CborDecoder(new ByteArrayInputStream(maliciousString));
+        decoder.setMaxPreallocationSize(1024);
+        try {
+            decoder.decode();
+            fail("Should have failed with unexpected end of stream exception");
+        } catch (CborException e) {
+            // Expected with limit
+        }
     }
 }
