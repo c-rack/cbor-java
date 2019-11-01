@@ -126,8 +126,7 @@ public abstract class AbstractDecoder<T> {
         }
     }
 
-    protected BigInteger getLengthAsBigInteger(int initialByte)
-                    throws CborException {
+    protected BigInteger getLengthAsBigInteger(int initialByte) throws CborException {
         switch (AdditionalInformation.ofByte(initialByte)) {
         case DIRECT:
             return BigInteger.valueOf(initialByte & 31);
@@ -150,22 +149,14 @@ public abstract class AbstractDecoder<T> {
         case EIGHT_BYTES:
             BigInteger eightByteValue = BigInteger.ZERO;
             symbols = nextSymbols(8);
-            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[0] & 0xFF))
-                            .shiftLeft(56));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[1] & 0xFF))
-                            .shiftLeft(48));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[2] & 0xFF))
-                            .shiftLeft(40));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[3] & 0xFF))
-                            .shiftLeft(32));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[4] & 0xFF))
-                            .shiftLeft(24));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[5] & 0xFF))
-                            .shiftLeft(16));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[6] & 0xFF))
-                            .shiftLeft(8));
-            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[7] & 0xFF))
-                            .shiftLeft(0));
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[0] & 0xFF)).shiftLeft(56));
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[1] & 0xFF)).shiftLeft(48));
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[2] & 0xFF)).shiftLeft(40));
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[3] & 0xFF)).shiftLeft(32));
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[4] & 0xFF)).shiftLeft(24));
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[5] & 0xFF)).shiftLeft(16));
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[6] & 0xFF)).shiftLeft(8));
+            eightByteValue = eightByteValue.or(BigInteger.valueOf((symbols[7] & 0xFF)).shiftLeft(0));
             return eightByteValue;
         case INDEFINITE:
             return BigInteger.valueOf(INFINITY);

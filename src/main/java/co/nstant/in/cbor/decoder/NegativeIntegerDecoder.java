@@ -9,15 +9,15 @@ import co.nstant.in.cbor.model.NegativeInteger;
 
 public class NegativeIntegerDecoder extends AbstractDecoder<NegativeInteger> {
 
-	private static final BigInteger MINUS_ONE = BigInteger.valueOf(-1);
+    private static final BigInteger MINUS_ONE = BigInteger.valueOf(-1);
 
-	public NegativeIntegerDecoder(CborDecoder decoder, InputStream inputStream) {
-		super(decoder, inputStream);
-	}
+    public NegativeIntegerDecoder(CborDecoder decoder, InputStream inputStream) {
+        super(decoder, inputStream);
+    }
 
-	@Override
-	public NegativeInteger decode(int initialByte) throws CborException {
-		return new NegativeInteger(MINUS_ONE.subtract(getLengthAsBigInteger(initialByte)));
-	}
+    @Override
+    public NegativeInteger decode(int initialByte) throws CborException {
+        return new NegativeInteger(MINUS_ONE.subtract(getLengthAsBigInteger(initialByte)));
+    }
 
 }

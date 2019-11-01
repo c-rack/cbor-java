@@ -32,10 +32,7 @@ public class LanguageTaggedStringDecoderTest {
 
     @Test(expected = CborException.class)
     public void testExceptionOnNotAnArray() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(38)
-            .add(true)
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(38).add(true).build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);
@@ -46,10 +43,7 @@ public class LanguageTaggedStringDecoderTest {
 
     @Test(expected = CborException.class)
     public void testExceptionOnNot2ElementArray() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(38)
-            .addArray().add(true).end()
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(38).addArray().add(true).end().build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);
@@ -60,10 +54,7 @@ public class LanguageTaggedStringDecoderTest {
 
     @Test(expected = CborException.class)
     public void testExceptionOnNotFirstElementIsString() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(38)
-            .addArray().add(true).add(true).end()
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(38).addArray().add(true).add(true).end().build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);
@@ -74,10 +65,7 @@ public class LanguageTaggedStringDecoderTest {
 
     @Test(expected = CborException.class)
     public void testExceptionOnNotSecondElementIsString() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(38)
-            .addArray().add("en").add(true).end()
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(38).addArray().add("en").add(true).end().build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);
@@ -88,10 +76,7 @@ public class LanguageTaggedStringDecoderTest {
 
     @Test
     public void testDecoding() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(38)
-            .addArray().add("en").add("string").end()
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(38).addArray().add("en").add("string").end().build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);

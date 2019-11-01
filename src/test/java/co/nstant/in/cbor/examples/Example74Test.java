@@ -21,13 +21,10 @@ import co.nstant.in.cbor.model.SimpleValue;
  */
 public class Example74Test {
 
-    private static final List<DataItem> VALUE = new CborBuilder()
-                    .add(new Array().setChunked(true))
-                    .add(SimpleValue.BREAK)
-                    .build();
+    private static final List<DataItem> VALUE = new CborBuilder().add(new Array().setChunked(true))
+        .add(SimpleValue.BREAK).build();
 
-    private static final byte[] ENCODED_VALUE = new byte[] {
-                    (byte) 0x9f, (byte) 0xff };
+    private static final byte[] ENCODED_VALUE = new byte[] { (byte) 0x9f, (byte) 0xff };
 
     @Test
     public void shouldEncode() throws CborException {

@@ -23,13 +23,8 @@ public class ByteStringDecoderTest {
     public void shouldDecodeChunkedByteString() throws CborException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(new CborBuilder()
-                .startByteString()
-                .add(new byte[] { '\0' })
-                .add(new byte[] { 0x10 })
-                .add(new byte[] { 0x13 })
-                .end()
-                .build());
+        encoder.encode(new CborBuilder().startByteString().add(new byte[] { '\0' }).add(new byte[] { 0x10 })
+            .add(new byte[] { 0x13 }).end().build());
         byte[] encodedBytes = baos.toByteArray();
         ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
         CborDecoder decoder = new CborDecoder(bais);

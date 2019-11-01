@@ -2,8 +2,7 @@ package co.nstant.in.cbor.builder;
 
 import co.nstant.in.cbor.model.SimpleValue;
 
-public class UnicodeStringBuilder<T extends AbstractBuilder<?>> extends
-                AbstractBuilder<T> {
+public class UnicodeStringBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T> {
 
     public UnicodeStringBuilder(T parent) {
         super(parent);

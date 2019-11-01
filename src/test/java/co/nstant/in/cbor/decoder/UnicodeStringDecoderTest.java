@@ -21,12 +21,7 @@ public class UnicodeStringDecoderTest {
     public void shouldDecodeChunkedUnicodeString() throws CborException {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(new CborBuilder()
-            .startString()
-            .add("foo")
-            .add("bar")
-            .end()
-            .build());
+        encoder.encode(new CborBuilder().startString().add("foo").add("bar").end().build());
         byte[] encodedBytes = baos.toByteArray();
         ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
         CborDecoder decoder = new CborDecoder(bais);
@@ -37,13 +32,13 @@ public class UnicodeStringDecoderTest {
 
     @Test(expected = CborException.class)
     public void shouldThrowOnIncompleteString() throws CborException {
-        byte[] bytes = new byte[] {0x62, 0x61};
+        byte[] bytes = new byte[] { 0x62, 0x61 };
         CborDecoder.decode(bytes);
     }
 
     @Test(expected = CborException.class)
     public void shouldThrowOnMissingBreak() throws CborException {
-        byte[] bytes = new byte[] {0x7f, 0x61, 0x61};
+        byte[] bytes = new byte[] { 0x7f, 0x61, 0x61 };
         CborDecoder.decode(bytes);
     }
 

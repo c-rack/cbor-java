@@ -6,11 +6,9 @@ import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.HalfPrecisionFloat;
 
-public class HalfPrecisionFloatDecoder extends
-                AbstractDecoder<HalfPrecisionFloat> {
+public class HalfPrecisionFloatDecoder extends AbstractDecoder<HalfPrecisionFloat> {
 
-    public HalfPrecisionFloatDecoder(CborDecoder decoder,
-                    InputStream inputStream) {
+    public HalfPrecisionFloatDecoder(CborDecoder decoder, InputStream inputStream) {
         super(decoder, inputStream);
     }
 
@@ -30,15 +28,12 @@ public class HalfPrecisionFloatDecoder extends
         int f = bits & 0x03FF;
 
         if (e == 0) {
-            return (float) ((s != 0 ? -1 : 1) * Math.pow(2, -14) * (f / Math
-                            .pow(2, 10)));
+            return (float) ((s != 0 ? -1 : 1) * Math.pow(2, -14) * (f / Math.pow(2, 10)));
         } else if (e == 0x1F) {
-            return f != 0 ? Float.NaN
-                            : (s != 0 ? -1 : 1) * Float.POSITIVE_INFINITY;
+            return f != 0 ? Float.NaN : (s != 0 ? -1 : 1) * Float.POSITIVE_INFINITY;
         }
 
-        return (float) ((s != 0 ? -1 : 1) * Math.pow(2, e - 15) * (1 + f / Math
-                        .pow(2, 10)));
+        return (float) ((s != 0 ? -1 : 1) * Math.pow(2, e - 15) * (1 + f / Math.pow(2, 10)));
     }
 
 }

@@ -20,33 +20,32 @@ import co.nstant.in.cbor.model.UnicodeString;
  */
 public class Example48Test {
 
-	private final List<DataItem> VALUE;
+    private final List<DataItem> VALUE;
 
-	private final byte[] ENCODED_VALUE = new byte[] { (byte) 0xc0, 0x74,
-			0x32, 0x30, 0x31, 0x33, 0x2d, 0x30, 0x33, 0x2d, 0x32, 0x31, 0x54,
-			0x32, 0x30, 0x3a, 0x30, 0x34, 0x3a, 0x30, 0x30, 0x5a };
+    private final byte[] ENCODED_VALUE = new byte[] { (byte) 0xc0, 0x74, 0x32, 0x30, 0x31, 0x33, 0x2d, 0x30, 0x33, 0x2d,
+            0x32, 0x31, 0x54, 0x32, 0x30, 0x3a, 0x30, 0x34, 0x3a, 0x30, 0x30, 0x5a };
 
-	public Example48Test() {
-		DataItem di = new UnicodeString("2013-03-21T20:04:00Z");
-		di.setTag(0);
+    public Example48Test() {
+        DataItem di = new UnicodeString("2013-03-21T20:04:00Z");
+        di.setTag(0);
 
-		VALUE = new CborBuilder().add(di).build();
-	}
+        VALUE = new CborBuilder().add(di).build();
+    }
 
-	@Test
-	public void shouldEncode() throws CborException {
-		ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-		CborEncoder encoder = new CborEncoder(byteOutputStream);
-		encoder.encode(VALUE);
-		Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
-	}
+    @Test
+    public void shouldEncode() throws CborException {
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+        CborEncoder encoder = new CborEncoder(byteOutputStream);
+        encoder.encode(VALUE);
+        Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
+    }
 
-	@Test
-	public void shouldDecode() throws CborException {
-		InputStream inputStream = new ByteArrayInputStream(ENCODED_VALUE);
-		CborDecoder decoder = new CborDecoder(inputStream);
-		List<DataItem> dataItems = decoder.decode();
-		Assert.assertArrayEquals(VALUE.toArray(), dataItems.toArray());
-	}
+    @Test
+    public void shouldDecode() throws CborException {
+        InputStream inputStream = new ByteArrayInputStream(ENCODED_VALUE);
+        CborDecoder decoder = new CborDecoder(inputStream);
+        List<DataItem> dataItems = decoder.decode();
+        Assert.assertArrayEquals(VALUE.toArray(), dataItems.toArray());
+    }
 
 }

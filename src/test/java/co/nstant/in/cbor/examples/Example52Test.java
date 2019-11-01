@@ -20,32 +20,31 @@ import co.nstant.in.cbor.model.DataItem;
  */
 public class Example52Test {
 
-	private final List<DataItem> VALUE;
+    private final List<DataItem> VALUE;
 
-	private final byte[] ENCODED_VALUE = new byte[] { (byte) 0xd8, 0x18,
-			0x45, 0x64, 0x49, 0x45, 0x54, 0x46 };
+    private final byte[] ENCODED_VALUE = new byte[] { (byte) 0xd8, 0x18, 0x45, 0x64, 0x49, 0x45, 0x54, 0x46 };
 
-	public Example52Test() {
-		DataItem di = new ByteString(new byte[] { 0x64, 0x49, 0x45, 0x54, 0x46 });
-		di.setTag(24);
+    public Example52Test() {
+        DataItem di = new ByteString(new byte[] { 0x64, 0x49, 0x45, 0x54, 0x46 });
+        di.setTag(24);
 
-		VALUE = new CborBuilder().add(di).build();
-	}
+        VALUE = new CborBuilder().add(di).build();
+    }
 
-	@Test
-	public void shouldEncode() throws CborException {
-		ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-		CborEncoder encoder = new CborEncoder(byteOutputStream);
-		encoder.encode(VALUE);
-		Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
-	}
+    @Test
+    public void shouldEncode() throws CborException {
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+        CborEncoder encoder = new CborEncoder(byteOutputStream);
+        encoder.encode(VALUE);
+        Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
+    }
 
-	@Test
-	public void shouldDecode() throws CborException {
-		InputStream inputStream = new ByteArrayInputStream(ENCODED_VALUE);
-		CborDecoder decoder = new CborDecoder(inputStream);
-		List<DataItem> dataItems = decoder.decode();
-		Assert.assertArrayEquals(VALUE.toArray(), dataItems.toArray());
-	}
+    @Test
+    public void shouldDecode() throws CborException {
+        InputStream inputStream = new ByteArrayInputStream(ENCODED_VALUE);
+        CborDecoder decoder = new CborDecoder(inputStream);
+        List<DataItem> dataItems = decoder.decode();
+        Assert.assertArrayEquals(VALUE.toArray(), dataItems.toArray());
+    }
 
 }

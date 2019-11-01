@@ -19,8 +19,7 @@ import co.nstant.in.cbor.model.SimpleValue;
 public class Example47Test {
 
     private static final SimpleValue VALUE = new SimpleValue(255);
-    private static final byte[] ENCODED_VALUE = new byte[] { (byte) 0xf8,
-                    (byte) 0xff };
+    private static final byte[] ENCODED_VALUE = new byte[] { (byte) 0xf8, (byte) 0xff };
 
     @Test
     public void shouldEncode() throws CborException {

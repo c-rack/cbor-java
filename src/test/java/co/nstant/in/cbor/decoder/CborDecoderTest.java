@@ -83,10 +83,7 @@ public class CborDecoderTest {
 
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode1() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(30)
-            .add(true)
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(30).add(true).build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);
@@ -97,10 +94,7 @@ public class CborDecoderTest {
 
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode2() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(30)
-            .addArray().add(true).end()
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(30).addArray().add(true).end().build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);
@@ -111,10 +105,7 @@ public class CborDecoderTest {
 
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode3() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(30)
-            .addArray().add(true).add(true).end()
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(30).addArray().add(true).add(true).end().build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);
@@ -125,10 +116,7 @@ public class CborDecoderTest {
 
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode4() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(30)
-            .addArray().add(1).add(true).end()
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(30).addArray().add(1).add(true).end().build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);
@@ -139,10 +127,7 @@ public class CborDecoderTest {
 
     @Test
     public void shouldDecodeRationalNumber() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(30)
-            .addArray().add(1).add(2).end()
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(30).addArray().add(1).add(2).end().build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);
@@ -153,7 +138,7 @@ public class CborDecoderTest {
 
     @Test
     public void shouldDecodeTaggedTags() throws CborException {
-        DataItem decoded = CborDecoder.decode(new byte[] {(byte) 0xC1, (byte) 0xC2, 0x02}).get(0);
+        DataItem decoded = CborDecoder.decode(new byte[] { (byte) 0xC1, (byte) 0xC2, 0x02 }).get(0);
 
         Tag outer = new Tag(1);
         Tag inner = new Tag(2);
@@ -166,11 +151,7 @@ public class CborDecoderTest {
 
     @Test
     public void shouldDecodeTaggedRationalNumber() throws CborException {
-        List<DataItem> items = new CborBuilder()
-            .addTag(1)
-            .addTag(30)
-            .addArray().add(1).add(2).end()
-            .build();
+        List<DataItem> items = new CborBuilder().addTag(1).addTag(30).addArray().add(1).add(2).end().build();
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         CborEncoder encoder = new CborEncoder(baos);
         encoder.encode(items);

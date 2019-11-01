@@ -7,9 +7,9 @@ import co.nstant.in.cbor.model.DataItem;
  */
 public interface DataItemListener {
 
-	/**
-	 * Gets called on every decoded {@link DataItem}.
-	 */
-	void onDataItem(DataItem dataItem);
+    /**
+     * Gets called on every decoded {@link DataItem}.
+     */
+    void onDataItem(DataItem dataItem);
 
 }

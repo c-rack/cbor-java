@@ -10,12 +10,9 @@ public class AdditionalInformationTest {
      */
     @Test
     public void shouldHandleReserved28() {
-        Assert.assertEquals(AdditionalInformation.RESERVED,
-                        AdditionalInformation.ofByte(28));
-        Assert.assertEquals(AdditionalInformation.RESERVED,
-                        AdditionalInformation.ofByte(29));
-        Assert.assertEquals(AdditionalInformation.RESERVED,
-                        AdditionalInformation.ofByte(30));
+        Assert.assertEquals(AdditionalInformation.RESERVED, AdditionalInformation.ofByte(28));
+        Assert.assertEquals(AdditionalInformation.RESERVED, AdditionalInformation.ofByte(29));
+        Assert.assertEquals(AdditionalInformation.RESERVED, AdditionalInformation.ofByte(30));
     }
 
 }

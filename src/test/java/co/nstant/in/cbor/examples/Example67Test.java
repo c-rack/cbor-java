@@ -19,8 +19,7 @@ import co.nstant.in.cbor.model.DataItem;
  */
 public class Example67Test {
 
-    private static final List<DataItem> VALUE = new CborBuilder()
-                    .addMap().end().build();
+    private static final List<DataItem> VALUE = new CborBuilder().addMap().end().build();
 
     private static final byte[] ENCODED_VALUE = new byte[] { (byte) 0xa0 };
 

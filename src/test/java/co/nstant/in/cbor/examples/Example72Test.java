@@ -19,16 +19,11 @@ import co.nstant.in.cbor.model.DataItem;
  */
 public class Example72Test {
 
-    private static final List<DataItem> VALUE = new CborBuilder()
-                    .startByteString()
-                    .add(new byte[] { 0x01, 0x02 })
-                    .add(new byte[] { 0x03, 0x04, 0x05 })
-                    .end()
-                    .build();
+    private static final List<DataItem> VALUE = new CborBuilder().startByteString().add(new byte[] { 0x01, 0x02 })
+        .add(new byte[] { 0x03, 0x04, 0x05 }).end().build();
 
-    private static final byte[] ENCODED_VALUE = new byte[] {
-                    0x5f, 0x42, 0x01, 0x02, 0x43, 0x03, 0x04, 0x05, (byte) 0xff
-    };
+    private static final byte[] ENCODED_VALUE = new byte[] { 0x5f, 0x42, 0x01, 0x02, 0x43, 0x03, 0x04, 0x05,
+            (byte) 0xff };
 
     @Test
     public void shouldEncode() throws CborException {

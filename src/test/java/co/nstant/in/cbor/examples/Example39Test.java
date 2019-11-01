@@ -8,9 +8,7 @@ import co.nstant.in.cbor.model.AbstractDoublePrecisionFloatTest;
 public class Example39Test extends AbstractDoublePrecisionFloatTest {
 
     public Example39Test() {
-        super(Double.NaN, new byte[] {
-                        (byte) 0xfb, 0x7f, (byte) 0xf8, 0x00, 0x00, 0x00, 0x00,
-                        0x00, 0x00 });
+        super(Double.NaN, new byte[] { (byte) 0xfb, 0x7f, (byte) 0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 });
     }
 
 }

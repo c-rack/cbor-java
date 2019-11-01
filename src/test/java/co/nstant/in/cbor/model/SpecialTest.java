@@ -6,10 +6,10 @@ import org.junit.Test;
 
 public class SpecialTest {
 
-	@Test
-	public void testToString() {
-		Special special = Special.BREAK;
-		assertEquals("BREAK", special.toString());
-	}
+    @Test
+    public void testToString() {
+        Special special = Special.BREAK;
+        assertEquals("BREAK", special.toString());
+    }
 
 }

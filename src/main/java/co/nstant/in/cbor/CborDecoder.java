@@ -67,11 +67,9 @@ public class CborDecoder {
     /**
      * Convenience method to decode a byte array directly.
      *
-     * @param bytes
-     *            the CBOR encoded data
+     * @param bytes the CBOR encoded data
      * @return a list of {@link DataItem}s
-     * @throws CborException
-     *             if decoding failed
+     * @throws CborException if decoding failed
      */
     public static List<DataItem> decode(byte[] bytes) throws CborException {
         return new CborDecoder(new ByteArrayInputStream(bytes)).decode();
@@ -81,8 +79,7 @@ public class CborDecoder {
      * Decode the {@link InputStream} to a list of {@link DataItem}s.
      *
      * @return the list of {@link DataItem}s
-     * @throws CborException
-     *             if decoding failed
+     * @throws CborException if decoding failed
      */
     public List<DataItem> decode() throws CborException {
         List<DataItem> dataItems = new LinkedList<>();
@@ -94,13 +91,11 @@ public class CborDecoder {
     }
 
     /**
-     * Streaming decoding of an input stream. On each decoded DataItem, the
-     * callback listener is invoked.
+     * Streaming decoding of an input stream. On each decoded DataItem, the callback
+     * listener is invoked.
      *
-     * @param dataItemListener
-     *            the callback listener
-     * @throws CborException
-     *             if decoding failed
+     * @param dataItemListener the callback listener
+     * @throws CborException if decoding failed
      */
     public void decode(DataItemListener dataItemListener) throws CborException {
         Objects.requireNonNull(dataItemListener);
@@ -115,8 +110,7 @@ public class CborDecoder {
      * Decodes exactly one DataItem from the input stream.
      *
      * @return a {@link DataItem} or null if end of stream has reached.
-     * @throws CborException
-     *             if decoding failed
+     * @throws CborException if decoding failed
      */
     public DataItem decodeNext() throws CborException {
         int symbol;
@@ -245,8 +239,7 @@ public class CborDecoder {
         return autoDecodeInfinitiveByteStrings;
     }
 
-    public void setAutoDecodeInfinitiveByteStrings(
-        boolean autoDecodeInfinitiveByteStrings) {
+    public void setAutoDecodeInfinitiveByteStrings(boolean autoDecodeInfinitiveByteStrings) {
         this.autoDecodeInfinitiveByteStrings = autoDecodeInfinitiveByteStrings;
     }
 
@@ -254,8 +247,7 @@ public class CborDecoder {
         return autoDecodeInfinitiveUnicodeStrings;
     }
 
-    public void setAutoDecodeInfinitiveUnicodeStrings(
-        boolean autoDecodeInfinitiveUnicodeStrings) {
+    public void setAutoDecodeInfinitiveUnicodeStrings(boolean autoDecodeInfinitiveUnicodeStrings) {
         this.autoDecodeInfinitiveUnicodeStrings = autoDecodeInfinitiveUnicodeStrings;
     }
 
@@ -263,8 +255,7 @@ public class CborDecoder {
         return autoDecodeRationalNumbers;
     }
 
-    public void setAutoDecodeRationalNumbers(
-        boolean autoDecodeRationalNumbers) {
+    public void setAutoDecodeRationalNumbers(boolean autoDecodeRationalNumbers) {
         this.autoDecodeRationalNumbers = autoDecodeRationalNumbers;
     }
 
@@ -272,8 +263,7 @@ public class CborDecoder {
         return autoDecodeLanguageTaggedStrings;
     }
 
-    public void setAutoDecodeLanguageTaggedStrings(
-        boolean autoDecodeLanguageTaggedStrings) {
+    public void setAutoDecodeLanguageTaggedStrings(boolean autoDecodeLanguageTaggedStrings) {
         this.autoDecodeLanguageTaggedStrings = autoDecodeLanguageTaggedStrings;
     }
 
@@ -286,11 +276,14 @@ public class CborDecoder {
     }
 
     /**
-     * Sets the given amount of bytes as maximum preallocation limit for arrays in all decoders. This prevents
-     * OutOfMemory exceptions on malicious CBOR with forged fixed length items. Note that items may exceed the given
-     * size when the decoded data actually contains much data. This may be limited by using a limiting stream.
+     * Sets the given amount of bytes as maximum preallocation limit for arrays in
+     * all decoders. This prevents OutOfMemory exceptions on malicious CBOR with
+     * forged fixed length items. Note that items may exceed the given size when the
+     * decoded data actually contains much data. This may be limited by using a
+     * limiting stream.
      *
-     * @param maxSize Maximum number of bytes to preallocate in array-based items. Set to 0 to disable.
+     * @param maxSize Maximum number of bytes to preallocate in array-based items.
+     *                Set to 0 to disable.
      */
     public void setMaxPreallocationSize(int maxSize) {
         unsignedIntegerDecoder.setMaxPreallocationSize(maxSize);

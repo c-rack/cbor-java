@@ -72,8 +72,7 @@ public class SpecialEncoder extends AbstractEncoder<Special> {
                 throw new CborException("Wrong data item type");
             }
             SimpleValue simpleValueNextByte = (SimpleValue) dataItem;
-			write((byte) ((7 << 5) | 24),
-			      (byte) simpleValueNextByte.getValue());
+            write((byte) ((7 << 5) | 24), (byte) simpleValueNextByte.getValue());
             break;
         }
     }

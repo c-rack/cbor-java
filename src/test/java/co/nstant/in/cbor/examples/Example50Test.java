@@ -20,33 +20,32 @@ import co.nstant.in.cbor.model.DoublePrecisionFloat;
  */
 public class Example50Test {
 
-	private final List<DataItem> VALUE;
+    private final List<DataItem> VALUE;
 
-	private final byte[] ENCODED_VALUE = new byte[] { (byte) 0xc1,
-			(byte) 0xfb, 0x41, (byte) 0xd4, 0x52, (byte) 0xd9, (byte) 0xec,
-			0x20, 0x00, 0x00 };
+    private final byte[] ENCODED_VALUE = new byte[] { (byte) 0xc1, (byte) 0xfb, 0x41, (byte) 0xd4, 0x52, (byte) 0xd9,
+            (byte) 0xec, 0x20, 0x00, 0x00 };
 
-	public Example50Test() {
-		DataItem di = new DoublePrecisionFloat(1363896240.5);
-		di.setTag(1);
+    public Example50Test() {
+        DataItem di = new DoublePrecisionFloat(1363896240.5);
+        di.setTag(1);
 
-		VALUE = new CborBuilder().add(di).build();
-	}
+        VALUE = new CborBuilder().add(di).build();
+    }
 
-	@Test
-	public void shouldEncode() throws CborException {
-		ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-		CborEncoder encoder = new CborEncoder(byteOutputStream);
-		encoder.encode(VALUE);
-		Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
-	}
+    @Test
+    public void shouldEncode() throws CborException {
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+        CborEncoder encoder = new CborEncoder(byteOutputStream);
+        encoder.encode(VALUE);
+        Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
+    }
 
-	@Test
-	public void shouldDecode() throws CborException {
-		InputStream inputStream = new ByteArrayInputStream(ENCODED_VALUE);
-		CborDecoder decoder = new CborDecoder(inputStream);
-		List<DataItem> dataItems = decoder.decode();
-		Assert.assertArrayEquals(VALUE.toArray(), dataItems.toArray());
-	}
+    @Test
+    public void shouldDecode() throws CborException {
+        InputStream inputStream = new ByteArrayInputStream(ENCODED_VALUE);
+        CborDecoder decoder = new CborDecoder(inputStream);
+        List<DataItem> dataItems = decoder.decode();
+        Assert.assertArrayEquals(VALUE.toArray(), dataItems.toArray());
+    }
 
 }

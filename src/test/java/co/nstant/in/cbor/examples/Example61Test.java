@@ -8,8 +8,7 @@ import co.nstant.in.cbor.model.AbstractStringTest;
 public class Example61Test extends AbstractStringTest {
 
     public Example61Test() {
-        super("\u6c34", new byte[] { 0x63, (byte) 0xe6, (byte) 0xb0,
-                        (byte) 0xb4 });
+        super("\u6c34", new byte[] { 0x63, (byte) 0xe6, (byte) 0xb0, (byte) 0xb4 });
     }
 
 }

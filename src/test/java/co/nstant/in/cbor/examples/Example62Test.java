@@ -8,8 +8,7 @@ import co.nstant.in.cbor.model.AbstractStringTest;
 public class Example62Test extends AbstractStringTest {
 
     public Example62Test() {
-        super("\ud800\udd51", new byte[] { 0x64, (byte) 0xf0, (byte) 0x90,
-                        (byte) 0x85, (byte) 0x91 });
+        super("\ud800\udd51", new byte[] { 0x64, (byte) 0xf0, (byte) 0x90, (byte) 0x85, (byte) 0x91 });
     }
 
 }

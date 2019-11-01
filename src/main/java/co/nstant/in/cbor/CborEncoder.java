@@ -36,6 +36,7 @@ public class CborEncoder {
     private final MapEncoder mapEncoder;
     private final TagEncoder tagEncoder;
     private final SpecialEncoder specialEncoder;
+    private boolean canonical = true;
 
     /**
      * Initialize a new encoder which writes the binary encoded data to an
@@ -56,11 +57,9 @@ public class CborEncoder {
     /**
      * Encode a list of {@link DataItem}s, also known as a stream.
      *
-     * @param dataItems
-     *            a list of {@link DataItem}s
-     * @throws CborException
-     *             if the {@link DataItem}s could not be encoded or there was an
-     *             problem with the {@link OutputStream}.
+     * @param dataItems a list of {@link DataItem}s
+     * @throws CborException if the {@link DataItem}s could not be encoded or there
+     *                       was an problem with the {@link OutputStream}.
      */
     public void encode(List<DataItem> dataItems) throws CborException {
         for (DataItem dataItem : dataItems) {
@@ -71,12 +70,10 @@ public class CborEncoder {
     /**
      * Encode a single {@link DataItem}.
      *
-     * @param dataItem
-     *            the {@link DataItem} to encode. If null, encoder encodes a
-     *            {@link SimpleValue} NULL value.
-     * @throws CborException
-     *             if {@link DataItem} could not be encoded or there was an
-     *             problem with the {@link OutputStream}.
+     * @param dataItem the {@link DataItem} to encode. If null, encoder encodes a
+     *                 {@link SimpleValue} NULL value.
+     * @throws CborException if {@link DataItem} could not be encoded or there was
+     *                       an problem with the {@link OutputStream}.
      */
     public void encode(DataItem dataItem) throws CborException {
         if (dataItem == null) {
@@ -116,6 +113,15 @@ public class CborEncoder {
         default:
             throw new CborException("Unknown major type");
         }
+    }
+
+    public boolean isCanonical() {
+        return canonical;
+    }
+
+    public CborEncoder nonCanonical() {
+        canonical = false;
+        return this;
     }
 
 }

@@ -8,8 +8,7 @@ import co.nstant.in.cbor.model.AbstractSinglePrecisionFloatTest;
 public class Example25Test extends AbstractSinglePrecisionFloatTest {
 
     public Example25Test() {
-        super(100000.0f, new byte[] { (byte) 0xfa, 0x47, (byte) 0xc3, 0x50,
-                        0x00 });
+        super(100000.0f, new byte[] { (byte) 0xfa, 0x47, (byte) 0xc3, 0x50, 0x00 });
     }
 
 }

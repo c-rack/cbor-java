@@ -8,8 +8,7 @@ import co.nstant.in.cbor.model.AbstractHalfPrecisionFloatTest;
 public class Example33Test extends AbstractHalfPrecisionFloatTest {
 
     public Example33Test() {
-        super(Float.NaN, new byte[] {
-                        (byte) 0xf9, 0x7e, 0x00 });
+        super(Float.NaN, new byte[] { (byte) 0xf9, 0x7e, 0x00 });
     }
 
 }

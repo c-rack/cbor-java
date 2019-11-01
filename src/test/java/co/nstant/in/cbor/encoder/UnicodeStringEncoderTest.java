@@ -15,19 +15,14 @@ public class UnicodeStringEncoderTest {
     @Test
     public void shouldEncodeNullString() throws CborException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        List<DataItem> dataItems = new CborBuilder()
-            .add((String) null)
-            .build();
+        List<DataItem> dataItems = new CborBuilder().add((String) null).build();
         new CborEncoder(byteArrayOutputStream).encode(dataItems);
     }
 
     @Test
     public void shouldEncodeChunkedString() throws CborException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        List<DataItem> dataItems = new CborBuilder()
-            .startString("test")
-            .end()
-            .build();
+        List<DataItem> dataItems = new CborBuilder().startString("test").end().build();
         new CborEncoder(byteArrayOutputStream).encode(dataItems);
     }
 

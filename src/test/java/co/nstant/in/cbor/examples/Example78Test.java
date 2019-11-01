@@ -19,27 +19,26 @@ import co.nstant.in.cbor.model.DataItem;
  */
 public class Example78Test {
 
-	private static final List<DataItem> VALUE = new CborBuilder().addArray()
-			.add(1).startArray().add(2).add(3).end().addArray().add(4).add(5)
-			.end().end().build();
+    private static final List<DataItem> VALUE = new CborBuilder().addArray().add(1).startArray().add(2).add(3).end()
+        .addArray().add(4).add(5).end().end().build();
 
-	private static final byte[] ENCODED_VALUE = new byte[] { (byte) 0x83, 0x01,
-			(byte) 0x9f, 0x02, 0x03, (byte) 0xff, (byte) 0x82, 0x04, 0x05 };
+    private static final byte[] ENCODED_VALUE = new byte[] { (byte) 0x83, 0x01, (byte) 0x9f, 0x02, 0x03, (byte) 0xff,
+            (byte) 0x82, 0x04, 0x05 };
 
-	@Test
-	public void shouldEncode() throws CborException {
-		ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-		CborEncoder encoder = new CborEncoder(byteOutputStream);
-		encoder.encode(VALUE);
-		Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
-	}
+    @Test
+    public void shouldEncode() throws CborException {
+        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
+        CborEncoder encoder = new CborEncoder(byteOutputStream);
+        encoder.encode(VALUE);
+        Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
+    }
 
-	@Test
-	public void shouldDecode() throws CborException {
-		InputStream inputStream = new ByteArrayInputStream(ENCODED_VALUE);
-		CborDecoder decoder = new CborDecoder(inputStream);
-		List<DataItem> dataItems = decoder.decode();
-		Assert.assertArrayEquals(VALUE.toArray(), dataItems.toArray());
-	}
+    @Test
+    public void shouldDecode() throws CborException {
+        InputStream inputStream = new ByteArrayInputStream(ENCODED_VALUE);
+        CborDecoder decoder = new CborDecoder(inputStream);
+        List<DataItem> dataItems = decoder.decode();
+        Assert.assertArrayEquals(VALUE.toArray(), dataItems.toArray());
+    }
 
 }

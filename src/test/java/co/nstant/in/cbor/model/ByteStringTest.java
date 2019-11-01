@@ -14,8 +14,7 @@ public class ByteStringTest extends AbstractDataItemTest {
 
     @Test
     public void testByteString() throws CborException {
-        shouldEncodeAndDecode("1-byte array", new ByteString(
-            new byte[] { (byte) 0x00 }));
+        shouldEncodeAndDecode("1-byte array", new ByteString(new byte[] { (byte) 0x00 }));
     }
 
     @Test

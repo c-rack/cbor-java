@@ -5,8 +5,7 @@ import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.Map;
 import co.nstant.in.cbor.model.SimpleValue;
 
-public class ArrayBuilder<T extends AbstractBuilder<?>> extends
-                AbstractBuilder<T> {
+public class ArrayBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T> {
 
     private final Array array;
 

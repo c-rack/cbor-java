@@ -4,8 +4,7 @@ import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.Map;
 
-public class MapBuilder<T extends AbstractBuilder<?>> extends
-                AbstractBuilder<T> {
+public class MapBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T> {
 
     private final Map map;
 

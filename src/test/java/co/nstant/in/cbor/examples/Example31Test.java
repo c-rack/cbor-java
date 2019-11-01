@@ -8,9 +8,8 @@ import co.nstant.in.cbor.model.AbstractDoublePrecisionFloatTest;
 public class Example31Test extends AbstractDoublePrecisionFloatTest {
 
     public Example31Test() {
-        super(Double.parseDouble("-4.1"), new byte[] {
-                        (byte) 0xfb, (byte) 0xc0, 0x10, 0x66, 0x66, 0x66, 0x66,
-                        0x66, 0x66 });
+        super(Double.parseDouble("-4.1"),
+            new byte[] { (byte) 0xfb, (byte) 0xc0, 0x10, 0x66, 0x66, 0x66, 0x66, 0x66, 0x66 });
     }
 
 }

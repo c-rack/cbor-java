@@ -6,11 +6,9 @@ import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.DoublePrecisionFloat;
 
-public class DoublePrecisionFloatDecoder extends
-                AbstractDecoder<DoublePrecisionFloat> {
+public class DoublePrecisionFloatDecoder extends AbstractDecoder<DoublePrecisionFloat> {
 
-    public DoublePrecisionFloatDecoder(CborDecoder decoder,
-                    InputStream inputStream) {
+    public DoublePrecisionFloatDecoder(CborDecoder decoder, InputStream inputStream) {
         super(decoder, inputStream);
     }
 

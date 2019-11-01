@@ -20,11 +20,7 @@ public class ArrayBuilderTest {
     @Test
     public void shouldAddBoolean() {
         CborBuilder builder = new CborBuilder();
-        List<DataItem> dataItems = builder.addArray()
-            .add(true)
-            .add(false)
-            .end()
-            .build();
+        List<DataItem> dataItems = builder.addArray().add(true).add(false).end().build();
         assertEquals(1, dataItems.size());
         assertTrue(dataItems.get(0) instanceof Array);
         Array array = (Array) dataItems.get(0);
@@ -36,10 +32,7 @@ public class ArrayBuilderTest {
     @Test
     public void shouldAddFloat() {
         CborBuilder builder = new CborBuilder();
-        List<DataItem> dataItems = builder.addArray()
-            .add(1.0f)
-            .end()
-            .build();
+        List<DataItem> dataItems = builder.addArray().add(1.0f).end().build();
         assertEquals(1, dataItems.size());
         assertTrue(dataItems.get(0) instanceof Array);
         Array array = (Array) dataItems.get(0);
@@ -50,10 +43,7 @@ public class ArrayBuilderTest {
     @Test
     public void shouldAddDouble() {
         CborBuilder builder = new CborBuilder();
-        List<DataItem> dataItems = builder.addArray()
-            .add(1.0d)
-            .end()
-            .build();
+        List<DataItem> dataItems = builder.addArray().add(1.0d).end().build();
         assertEquals(1, dataItems.size());
         assertTrue(dataItems.get(0) instanceof Array);
         Array array = (Array) dataItems.get(0);
@@ -64,10 +54,7 @@ public class ArrayBuilderTest {
     @Test
     public void shouldAddByteArray() {
         CborBuilder builder = new CborBuilder();
-        List<DataItem> dataItems = builder.addArray()
-            .add(new byte[] { 0x0 })
-            .end()
-            .build();
+        List<DataItem> dataItems = builder.addArray().add(new byte[] { 0x0 }).end().build();
         assertEquals(1, dataItems.size());
         assertTrue(dataItems.get(0) instanceof Array);
         Array array = (Array) dataItems.get(0);

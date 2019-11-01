@@ -49,8 +49,7 @@ public class ByteStringDecoder extends AbstractDecoder<ByteString> {
                     bytes.write(byteArray, 0, byteArray.length);
                 }
             } else {
-                throw new CborException("Unexpected major type "
-                        + majorType);
+                throw new CborException("Unexpected major type " + majorType);
             }
         }
         return new ByteString(bytes.toByteArray());

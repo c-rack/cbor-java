@@ -31,7 +31,7 @@ Add this to the dependencies section of your pom.xml file:
 <dependency>
     <groupId>co.nstant.in</groupId>
     <artifactId>cbor</artifactId>
-    <version>0.8</version>
+    <version>0.9</version>
 </dependency>
 ```
 
@@ -77,13 +77,29 @@ new CborDecoder(bais).decode(new DataItemListener() {
 });
 ```
 
+### Preserving order of map entries
+
+By default, [maps are encoded in canonical format](https://tools.ietf.org/html/rfc7049#section-3.9).
+If you want to preserve the order of map entries, use the encoder in non-canonical mode:
+
+```java
+ByteArrayOutputStream baos = new ByteArrayOutputStream();
+new CborEncoder(baos).nonCanonical().encode(new CborBuilder()
+    .addMap()
+        .put(1, "v1")
+        .put(0, "v2")
+        .end()
+    .build());
+byte[] encodedBytes = baos.toByteArray();
+```
+
 ## Contribution Process
 
 This project uses the [C4 process](https://rfc.zeromq.org/spec:42/C4/) for all code changes.
 
 ## License
 
-    Copyright 2013-2017 Constantin Rack
+    Copyright 2013-2019 Constantin Rack
  
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

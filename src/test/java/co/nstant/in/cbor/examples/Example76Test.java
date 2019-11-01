@@ -21,17 +21,11 @@ import co.nstant.in.cbor.model.SimpleValue;
  */
 public class Example76Test {
 
-    private static final List<DataItem> VALUE = new CborBuilder()
-                    .add(new Array().setChunked(true))
-                    .add(1)
-                    .addArray().add(2).add(3).end()
-                    .addArray().add(4).add(5).end()
-                    .add(SimpleValue.BREAK)
-                    .build();
+    private static final List<DataItem> VALUE = new CborBuilder().add(new Array().setChunked(true)).add(1).addArray()
+        .add(2).add(3).end().addArray().add(4).add(5).end().add(SimpleValue.BREAK).build();
 
-    private static final byte[] ENCODED_VALUE = new byte[] {
-                    (byte) 0x9f, 0x01, (byte) 0x82, 0x02, 0x03, (byte) 0x82,
-                    0x04, 0x05, (byte) 0xff };
+    private static final byte[] ENCODED_VALUE = new byte[] { (byte) 0x9f, 0x01, (byte) 0x82, 0x02, 0x03, (byte) 0x82,
+            0x04, 0x05, (byte) 0xff };
 
     @Test
     public void shouldEncode() throws CborException {

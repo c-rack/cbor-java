@@ -7,26 +7,22 @@ public class MajorTypeTest {
 
     @Test
     public void shouldParseUnsignedInteger() {
-        Assert.assertEquals(MajorType.UNSIGNED_INTEGER,
-            MajorType.ofByte(0b000_00000));
+        Assert.assertEquals(MajorType.UNSIGNED_INTEGER, MajorType.ofByte(0b000_00000));
     }
 
     @Test
     public void shouldParseNegativeInteger() {
-        Assert.assertEquals(MajorType.NEGATIVE_INTEGER,
-            MajorType.ofByte(0b001_00000));
+        Assert.assertEquals(MajorType.NEGATIVE_INTEGER, MajorType.ofByte(0b001_00000));
     }
 
     @Test
     public void shouldParseByteString() {
-        Assert.assertEquals(MajorType.BYTE_STRING,
-            MajorType.ofByte(0b010_00000));
+        Assert.assertEquals(MajorType.BYTE_STRING, MajorType.ofByte(0b010_00000));
     }
 
     @Test
     public void shouldParseUnicodeString() {
-        Assert.assertEquals(MajorType.UNICODE_STRING,
-            MajorType.ofByte(0b011_00000));
+        Assert.assertEquals(MajorType.UNICODE_STRING, MajorType.ofByte(0b011_00000));
     }
 
     @Test

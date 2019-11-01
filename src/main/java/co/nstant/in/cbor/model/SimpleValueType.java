@@ -2,12 +2,7 @@ package co.nstant.in.cbor.model;
 
 public enum SimpleValueType {
 
-    FALSE(20),
-    TRUE(21),
-    NULL(22),
-    UNDEFINED(23),
-    RESERVED(0),
-    UNALLOCATED(0);
+    FALSE(20), TRUE(21), NULL(22), UNDEFINED(23), RESERVED(0), UNALLOCATED(0);
 
     private final int value;
 
