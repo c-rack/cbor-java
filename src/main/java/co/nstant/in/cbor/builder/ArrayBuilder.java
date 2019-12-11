@@ -49,6 +49,18 @@ public class ArrayBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<
         return this;
     }
 
+    public ArrayBuilder<T> tagged(long value) {
+        DataItem item = array.peekLast();
+        if (item == null) {
+            throw new IndexOutOfBoundsException();
+        }
+        while (item.getTag() != null) {
+            item = item.getTag();
+        }
+        item.setTag(value);
+        return this;
+    }
+
     public ArrayBuilder<ArrayBuilder<T>> addArray() {
         Array nestedArray = new Array();
         add(nestedArray);
