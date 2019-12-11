@@ -19,11 +19,16 @@ public class Example83Test {
             new CborBuilder()
                     .add("foo").tagged(300).tagged(301).tagged(302)
                     .add("bar").tagged(400)
+                    .addMap()
+                       .put("a", "b")
+                    .end().tagged(402)
                     .build();
 
     private final byte[] ENCODED_VALUE =
             new byte[]{(byte) 0xD9, 0x01, 0x2E, (byte) 0xD9, 0x01, 0x2D, (byte) 0xD9, 0x01, 0x2C,
-                    0x63, 0x66, 0x6F, 0x6F, (byte) 0xD9, 0x01, (byte) 0x90, 0x63, 0x62, 0x61, 0x72};
+                    0x63, 0x66, 0x6F, 0x6F, (byte) 0xD9, 0x01, (byte) 0x90, 0x63, 0x62, 0x61, 0x72,
+                    (byte) 0xD9, 0x01, (byte)0x92, (byte)0xA1, 0x61, 0x61, 0x61, 0x62
+    };
 
     @Test
     public void shouldEncode() throws CborException {
