@@ -3,10 +3,14 @@ package co.nstant.in.cbor.builder;
 import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.Map;
+import sun.plugin.dom.exception.InvalidStateException;
+
+import java.lang.annotation.Repeatable;
 
 public class MapBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T> {
 
     private final Map map;
+    private DataItem lastItem = null;
 
     public MapBuilder(T parent, Map map) {
         super(parent);
@@ -15,6 +19,7 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T>
 
     public MapBuilder<T> put(DataItem key, DataItem value) {
         map.put(key, value);
+        lastItem = value;
         return this;
     }
 
@@ -139,6 +144,14 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T>
         return new MapBuilder<>(this, nestedMap);
     }
 
+    public MapBuilder<T> tagged(long tag) {
+        if (lastItem == null) {
+            throw new IllegalStateException("Can't add a tag before adding an item");
+        }
+        lastItem.getOuterTaggable().setTag(tag);
+        return this;
+    }
+
     public MapBuilder<MapBuilder<T>> startMap(long key) {
         return startMap(convert(key));
     }
@@ -151,4 +164,11 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T>
         return getParent();
     }
 
+    public MapEntryBuilder<MapBuilder<T>> addKey(long key) {
+        return new MapEntryBuilder(this, convert(key));
+    }
+
+    public MapEntryBuilder<MapBuilder<T>> addKey(String key) {
+        return new MapEntryBuilder(this, convert(key));
+    }
 }

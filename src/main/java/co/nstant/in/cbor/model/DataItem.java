@@ -66,4 +66,11 @@ public class DataItem {
         }
     }
 
+    public DataItem getOuterTaggable() {
+        DataItem item = this;
+        while (item.getTag() != null) {
+            item = item.getTag();
+        }
+        return item;
+    }
 }

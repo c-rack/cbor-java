@@ -98,12 +98,9 @@ public class CborBuilder extends AbstractBuilder<CborBuilder> {
     public CborBuilder tagged(long value) {
         DataItem item = dataItems.peekLast();
         if (item == null) {
-            throw new IndexOutOfBoundsException();
+            throw new IllegalStateException("Can't add a tag before adding an item");
         }
-        while (item.getTag() != null) {
-            item = item.getTag();
-        }
-        item.setTag(value);
+        item.getOuterTaggable().setTag(value);
         return this;
     }
 

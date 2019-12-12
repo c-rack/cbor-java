@@ -49,15 +49,12 @@ public class ArrayBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<
         return this;
     }
 
-    public ArrayBuilder<T> tagged(long value) {
+    public ArrayBuilder<T> tagged(long tag) {
         DataItem item = array.peekLast();
         if (item == null) {
-            throw new IndexOutOfBoundsException();
+            throw new IllegalStateException("Can't add a tag before adding an item");
         }
-        while (item.getTag() != null) {
-            item = item.getTag();
-        }
-        item.setTag(value);
+        item.getOuterTaggable().setTag(tag);
         return this;
     }
 
