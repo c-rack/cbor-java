@@ -16,7 +16,7 @@ public class DataItem {
         return majorType;
     }
 
-    public void setTag(int tag) {
+    public void setTag(long tag) {
         if (tag < 0) {
             throw new IllegalArgumentException("tag number must be 0 or greater");
         }
@@ -66,4 +66,11 @@ public class DataItem {
         }
     }
 
+    public DataItem getOuterTaggable() {
+        DataItem item = this;
+        while (item.getTag() != null) {
+            item = item.getTag();
+        }
+        return item;
+    }
 }

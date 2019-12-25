@@ -51,4 +51,10 @@ public class Array extends ChunkableDataItem {
         return stringBuilder.toString();
     }
 
+    public DataItem peekLast() {
+        if (objects.isEmpty()) {
+            return null;
+        }
+        return objects.get(objects.size() - 1);
+    }
 }

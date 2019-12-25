@@ -49,6 +49,15 @@ public class ArrayBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<
         return this;
     }
 
+    public ArrayBuilder<T> tagged(long tag) {
+        DataItem item = array.peekLast();
+        if (item == null) {
+            throw new IllegalStateException("Can't add a tag before adding an item");
+        }
+        item.getOuterTaggable().setTag(tag);
+        return this;
+    }
+
     public ArrayBuilder<ArrayBuilder<T>> addArray() {
         Array nestedArray = new Array();
         add(nestedArray);

@@ -17,7 +17,7 @@ import co.nstant.in.cbor.model.UnicodeString;
 
 public class CborBuilder extends AbstractBuilder<CborBuilder> {
 
-    private final List<DataItem> dataItems = new LinkedList<>();
+    private final LinkedList<DataItem> dataItems = new LinkedList<>();
 
     public CborBuilder() {
         super(null);
@@ -92,6 +92,15 @@ public class CborBuilder extends AbstractBuilder<CborBuilder> {
 
     public CborBuilder addTag(long value) {
         add(tag(value));
+        return this;
+    }
+
+    public CborBuilder tagged(long value) {
+        DataItem item = dataItems.peekLast();
+        if (item == null) {
+            throw new IllegalStateException("Can't add a tag before adding an item");
+        }
+        item.getOuterTaggable().setTag(value);
         return this;
     }
 

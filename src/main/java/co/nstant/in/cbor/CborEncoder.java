@@ -82,7 +82,7 @@ public class CborEncoder {
 
         if (dataItem.hasTag()) {
             Tag tagDi = dataItem.getTag();
-            tagEncoder.encode(tagDi);
+            encode(tagDi);
         }
 
         switch (dataItem.getMajorType()) {
