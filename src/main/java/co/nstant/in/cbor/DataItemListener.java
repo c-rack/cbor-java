@@ -9,6 +9,8 @@ public interface DataItemListener {
 
     /**
      * Gets called on every decoded {@link DataItem}.
+     * 
+     * @param dataItem the {@link DataItem}
      */
     void onDataItem(DataItem dataItem);
 

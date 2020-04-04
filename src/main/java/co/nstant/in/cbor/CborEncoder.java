@@ -41,6 +41,8 @@ public class CborEncoder {
     /**
      * Initialize a new encoder which writes the binary encoded data to an
      * {@link OutputStream}.
+     * 
+     * @param outputStream the {@link OutputStream} to write the encoded data to
      */
     public CborEncoder(OutputStream outputStream) {
         Objects.requireNonNull(outputStream);

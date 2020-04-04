@@ -19,10 +19,10 @@ public class HalfPrecisionFloatEncoder extends AbstractEncoder<HalfPrecisionFloa
     }
 
     /**
+     * @param fval the float value
+     * @return all higher 16 bits as 0 for all results
      * @see <a href="http://stackoverflow.com/a/6162687">Stack Overflow</a>
      */
-
-    // returns all higher 16 bits as 0 for all results
     public static int fromFloat(float fval) {
         int fbits = Float.floatToIntBits(fval);
         int sign = fbits >>> 16 & 0x8000; // sign only
