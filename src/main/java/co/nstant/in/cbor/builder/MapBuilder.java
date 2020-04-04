@@ -3,9 +3,6 @@ package co.nstant.in.cbor.builder;
 import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.Map;
-import sun.plugin.dom.exception.InvalidStateException;
-
-import java.lang.annotation.Repeatable;
 
 public class MapBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T> {
 
@@ -165,10 +162,10 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T>
     }
 
     public MapEntryBuilder<MapBuilder<T>> addKey(long key) {
-        return new MapEntryBuilder(this, convert(key));
+        return new MapEntryBuilder<>(this, convert(key));
     }
 
     public MapEntryBuilder<MapBuilder<T>> addKey(String key) {
-        return new MapEntryBuilder(this, convert(key));
+        return new MapEntryBuilder<>(this, convert(key));
     }
 }
