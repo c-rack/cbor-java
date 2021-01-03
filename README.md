@@ -99,7 +99,7 @@ This project uses the [C4 process](https://rfc.zeromq.org/spec:42/C4/) for all c
 
 ## License
 
-    Copyright 2013-2020 Constantin Rack
+    Copyright 2013-2021 Constantin Rack
  
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
