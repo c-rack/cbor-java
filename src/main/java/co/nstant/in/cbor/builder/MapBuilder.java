@@ -135,10 +135,18 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T>
     }
 
     public MapBuilder<MapBuilder<T>> startMap(DataItem key) {
+        return startMap(key, true);
+    }
+
+    private MapBuilder<MapBuilder<T>> startMap(DataItem key, boolean chunked) {
         Map nestedMap = new Map();
-        nestedMap.setChunked(true);
+        nestedMap.setChunked(chunked);
         put(key, nestedMap);
         return new MapBuilder<>(this, nestedMap);
+    }
+
+    public MapBuilder<MapBuilder<T>> startMapNotChunked(DataItem key) {
+        return startMap(key, false);
     }
 
     public MapBuilder<T> tagged(long tag) {
@@ -155,6 +163,14 @@ public class MapBuilder<T extends AbstractBuilder<?>> extends AbstractBuilder<T>
 
     public MapBuilder<MapBuilder<T>> startMap(String key) {
         return startMap(convert(key));
+    }
+
+    public MapBuilder<MapBuilder<T>> startMapNotChunked(long key) {
+        return startMap(convert(key), false);
+    }
+
+    public MapBuilder<MapBuilder<T>> startMapNotChunked(String key) {
+        return startMap(convert(key), false);
     }
 
     public T end() {
