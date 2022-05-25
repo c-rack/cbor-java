@@ -58,21 +58,21 @@ public abstract class AbstractEncoder<T> {
     protected void encodeTypeAndLength(MajorType majorType, BigInteger length) throws CborException {
         boolean negative = majorType == MajorType.NEGATIVE_INTEGER;
         int symbol = majorType.getValue() << 5;
-        if (length.compareTo(BigInteger.valueOf(24)) == -1) {
+        if (length.compareTo(BigInteger.valueOf(24)) < 0) {
             write(symbol | length.intValue());
-        } else if (length.compareTo(BigInteger.valueOf(256)) == -1) {
+        } else if (length.compareTo(BigInteger.valueOf(256)) < 0) {
             symbol |= AdditionalInformation.ONE_BYTE.getValue();
             write((byte) symbol, (byte) length.intValue());
-        } else if (length.compareTo(BigInteger.valueOf(65536L)) == -1) {
+        } else if (length.compareTo(BigInteger.valueOf(65536L)) < 0) {
             symbol |= AdditionalInformation.TWO_BYTES.getValue();
             long twoByteValue = length.longValue();
             write((byte) symbol, (byte) (twoByteValue >> 8), (byte) (twoByteValue & 0xFF));
-        } else if (length.compareTo(BigInteger.valueOf(4294967296L)) == -1) {
+        } else if (length.compareTo(BigInteger.valueOf(4294967296L)) < 0) {
             symbol |= AdditionalInformation.FOUR_BYTES.getValue();
             long fourByteValue = length.longValue();
             write((byte) symbol, (byte) ((fourByteValue >> 24) & 0xFF), (byte) ((fourByteValue >> 16) & 0xFF),
                 (byte) ((fourByteValue >> 8) & 0xFF), (byte) (fourByteValue & 0xFF));
-        } else if (length.compareTo(new BigInteger("18446744073709551616")) == -1) {
+        } else if (length.compareTo(new BigInteger("18446744073709551616")) < 0) {
             symbol |= AdditionalInformation.EIGHT_BYTES.getValue();
             BigInteger mask = BigInteger.valueOf(0xFF);
             write((byte) symbol, length.shiftRight(56).and(mask).byteValue(),
