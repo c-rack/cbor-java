@@ -19,13 +19,6 @@ public class SpecialEncoderTest {
 
     }
 
-    @Test(expected = CborException.class)
-    public void shouldNotEncodeReserved() throws CborException {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        Special dataItem = new Mock(SpecialType.UNALLOCATED);
-        new CborEncoder(byteArrayOutputStream).encode(dataItem);
-    }
-
     @Test(expected = ClassCastException.class)
     public void shouldExpectDoublePrecisionFloatImplementation() throws CborException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();

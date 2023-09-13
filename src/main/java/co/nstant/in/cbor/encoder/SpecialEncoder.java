@@ -25,7 +25,7 @@ public class SpecialEncoder extends AbstractEncoder<Special> {
     }
 
     @Override
-    public void encode(Special dataItem) throws CborException {
+    public void encode(Special dataItem)  throws CborException{
         switch (dataItem.getSpecialType()) {
         case BREAK:
             write((7 << 5) | 31);
@@ -47,8 +47,6 @@ public class SpecialEncoder extends AbstractEncoder<Special> {
                 break;
             }
             break;
-        case UNALLOCATED:
-            throw new CborException("Unallocated special type");
         case IEEE_754_HALF_PRECISION_FLOAT:
             halfPrecisionFloatEncoder.encode((HalfPrecisionFloat) dataItem);
             break;
@@ -62,6 +60,8 @@ public class SpecialEncoder extends AbstractEncoder<Special> {
             SimpleValue simpleValueNextByte = (SimpleValue) dataItem;
             write((byte) ((7 << 5) | 24), (byte) simpleValueNextByte.getValue());
             break;
+        default:
+            throw new AssertionError("Unknown special value type");
         }
     }
 

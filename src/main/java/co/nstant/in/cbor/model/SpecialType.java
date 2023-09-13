@@ -1,11 +1,13 @@
 package co.nstant.in.cbor.model;
 
+import co.nstant.in.cbor.CborException;
+
 public enum SpecialType {
 
     SIMPLE_VALUE, SIMPLE_VALUE_NEXT_BYTE, IEEE_754_HALF_PRECISION_FLOAT, IEEE_754_SINGLE_PRECISION_FLOAT,
-    IEEE_754_DOUBLE_PRECISION_FLOAT, UNALLOCATED, BREAK;
+    IEEE_754_DOUBLE_PRECISION_FLOAT, BREAK;
 
-    public static SpecialType ofByte(int b) {
+    public static SpecialType ofByte(int b) throws CborException {
         switch (b & 31) {
         case 24:
             return SIMPLE_VALUE_NEXT_BYTE;
@@ -18,7 +20,7 @@ public enum SpecialType {
         case 28:
         case 29:
         case 30:
-            return UNALLOCATED;
+            throw new CborException("Not implemented special type " + b);
         case 31:
             return BREAK;
         default:
