@@ -158,7 +158,6 @@ public class CborDecoder {
                     return next;
                 }
             }
-        case INVALID:
         default:
             throw new CborException("Not implemented major type " + symbol);
         }

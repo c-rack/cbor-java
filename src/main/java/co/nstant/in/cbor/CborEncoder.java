@@ -113,7 +113,7 @@ public class CborEncoder {
             tagEncoder.encode((Tag) dataItem);
             break;
         default:
-            throw new CborException("Unknown major type");
+            throw new AssertionError("Unknown major type");
         }
     }
 

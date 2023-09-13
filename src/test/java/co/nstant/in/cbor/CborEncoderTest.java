@@ -25,11 +25,6 @@ public class CborEncoderTest {
         encoder = new CborEncoder(new ByteArrayOutputStream());
     }
 
-    @Test(expected = CborException.class)
-    public void shouldNotEncodeInvalidMajorType() throws CborException {
-        encoder.encode(new Mock(MajorType.INVALID));
-    }
-
     @Test(expected = ClassCastException.class)
     public void shouldExpectUnsignedIntegerImplementation() throws CborException {
         encoder.encode(new Mock(MajorType.UNSIGNED_INTEGER));
