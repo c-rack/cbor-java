@@ -1,5 +1,6 @@
 package co.nstant.in.cbor;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
@@ -70,6 +71,43 @@ public class CborEncoder {
     public CborEncoder nonCanonical() {
         cborOutputStream.setCanonical(false);
         return this;
+    }
+
+    /**
+     * Encode a list of {@link DataItem}s, also known as a stream, to a byte array.
+     *
+     * @param dataItems a list of {@link DataItem}s
+     */
+    public static byte[] encodeToBytes(List<DataItem> dataItems) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        CborOutputStream cborOutputStream = new CborOutputStream(byteArrayOutputStream);
+        try {
+            for (DataItem dataItem : dataItems) {
+                cborOutputStream.writeDataItem(dataItem);
+            }
+        } catch (IOException ioException) {
+            // A ByteArrayOutputStream does not actually throw an IOException.
+            throw new AssertionError(ioException);
+        }
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    /**
+     * Encode a single {@link DataItem} to a byte array.
+     *
+     * @param dataItem the {@link DataItem} to encode. If null, encoder encodes a
+     *                 {@link SimpleValue} NULL value.
+     */
+    public static byte[] encodeToBytes(DataItem dataItem) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        CborOutputStream cborOutputStream = new CborOutputStream(byteArrayOutputStream);
+        try {
+            cborOutputStream.writeDataItem(dataItem);
+        } catch (IOException ioException) {
+            // A ByteArrayOutputStream does not actually throw an IOException.
+            throw new AssertionError(ioException);
+        }
+        return byteArrayOutputStream.toByteArray();
     }
 
 }
