@@ -6,9 +6,9 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigInteger;
 
+import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.decoder.HalfPrecisionFloatDecoder;
-import co.nstant.in.cbor.encoder.HalfPrecisionFloatEncoder;
 import co.nstant.in.cbor.model.ByteString;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.DoublePrecisionFloat;
@@ -87,7 +87,7 @@ public abstract class AbstractBuilder<T> {
     private boolean isHalfPrecisionEnough(float value) {
         try {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            HalfPrecisionFloatEncoder encoder = getHalfPrecisionFloatEncoder(outputStream);
+            CborEncoder encoder = new CborEncoder(outputStream);
             encoder.encode(new HalfPrecisionFloat(value));
             byte[] bytes = outputStream.toByteArray();
             ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
@@ -100,10 +100,6 @@ public abstract class AbstractBuilder<T> {
         } catch (CborException cborException) {
             return false;
         }
-    }
-
-    protected HalfPrecisionFloatEncoder getHalfPrecisionFloatEncoder(OutputStream outputStream) {
-        return new HalfPrecisionFloatEncoder(null, outputStream);
     }
 
     protected HalfPrecisionFloatDecoder getHalfPrecisionFloatDecoder(InputStream inputStream) {

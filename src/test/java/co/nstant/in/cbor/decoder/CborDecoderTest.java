@@ -19,7 +19,6 @@ import co.nstant.in.cbor.CborBuilder;
 import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
-import co.nstant.in.cbor.encoder.AbstractEncoder;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.MajorType;
 import co.nstant.in.cbor.model.RationalNumber;
@@ -165,15 +164,7 @@ public class CborDecoderTest {
 
     @Test
     public void shouldThrowOnItemWithForgedLength() throws CborException {
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        AbstractEncoder<Long> maliciousEncoder = new AbstractEncoder<Long>(null, buffer) {
-            @Override
-            public void encode(Long length) throws CborException {
-                encodeTypeAndLength(MajorType.UNICODE_STRING, length.longValue());
-            }
-        };
-        maliciousEncoder.encode(Long.valueOf(Integer.MAX_VALUE + 1L));
-        byte[] maliciousString = buffer.toByteArray();
+        byte[] maliciousString = new byte[] { 0x7a, (byte) 0x80, 0x00, 0x00, 0x00 };
         try {
             CborDecoder.decode(maliciousString);
             fail("Should have failed the huge allocation");
@@ -181,9 +172,7 @@ public class CborDecoderTest {
             assertThat("Exception message", e.getMessage(), containsString("limited to INTMAX"));
         }
 
-        buffer.reset();
-        maliciousEncoder.encode(Long.valueOf(Integer.MAX_VALUE - 1));
-        maliciousString = buffer.toByteArray();
+        maliciousString = new byte[] { 0x7a, 0x7f, (byte) 0xff, (byte) 0xff, (byte) 0xfe };
         try {
             CborDecoder.decode(maliciousString);
             fail("Should have failed the huge allocation");
