@@ -1,17 +1,10 @@
 package co.nstant.in.cbor;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.util.List;
 import java.util.Objects;
 
-import co.nstant.in.cbor.encoder.ArrayEncoder;
-import co.nstant.in.cbor.encoder.ByteStringEncoder;
-import co.nstant.in.cbor.encoder.MapEncoder;
-import co.nstant.in.cbor.encoder.NegativeIntegerEncoder;
-import co.nstant.in.cbor.encoder.SpecialEncoder;
-import co.nstant.in.cbor.encoder.TagEncoder;
-import co.nstant.in.cbor.encoder.UnicodeStringEncoder;
-import co.nstant.in.cbor.encoder.UnsignedIntegerEncoder;
 import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.ByteString;
 import co.nstant.in.cbor.model.DataItem;
@@ -28,32 +21,17 @@ import co.nstant.in.cbor.model.UnsignedInteger;
  */
 public class CborEncoder {
 
-    private final UnsignedIntegerEncoder unsignedIntegerEncoder;
-    private final NegativeIntegerEncoder negativeIntegerEncoder;
-    private final ByteStringEncoder byteStringEncoder;
-    private final UnicodeStringEncoder unicodeStringEncoder;
-    private final ArrayEncoder arrayEncoder;
-    private final MapEncoder mapEncoder;
-    private final TagEncoder tagEncoder;
-    private final SpecialEncoder specialEncoder;
-    private boolean canonical = true;
+    private CborOutputStream cborOutputStream;
 
     /**
      * Initialize a new encoder which writes the binary encoded data to an
      * {@link OutputStream}.
-     * 
+     *
      * @param outputStream the {@link OutputStream} to write the encoded data to
      */
     public CborEncoder(OutputStream outputStream) {
         Objects.requireNonNull(outputStream);
-        unsignedIntegerEncoder = new UnsignedIntegerEncoder(this, outputStream);
-        negativeIntegerEncoder = new NegativeIntegerEncoder(this, outputStream);
-        byteStringEncoder = new ByteStringEncoder(this, outputStream);
-        unicodeStringEncoder = new UnicodeStringEncoder(this, outputStream);
-        arrayEncoder = new ArrayEncoder(this, outputStream);
-        mapEncoder = new MapEncoder(this, outputStream);
-        tagEncoder = new TagEncoder(this, outputStream);
-        specialEncoder = new SpecialEncoder(this, outputStream);
+        cborOutputStream = new CborOutputStream(outputStream);
     }
 
     /**
@@ -78,51 +56,19 @@ public class CborEncoder {
      *                       an problem with the {@link OutputStream}.
      */
     public void encode(DataItem dataItem) throws CborException {
-        if (dataItem == null) {
-            dataItem = SimpleValue.NULL;
-        }
-
-        if (dataItem.hasTag()) {
-            Tag tagDi = dataItem.getTag();
-            encode(tagDi);
-        }
-
-        switch (dataItem.getMajorType()) {
-        case UNSIGNED_INTEGER:
-            unsignedIntegerEncoder.encode((UnsignedInteger) dataItem);
-            break;
-        case NEGATIVE_INTEGER:
-            negativeIntegerEncoder.encode((NegativeInteger) dataItem);
-            break;
-        case BYTE_STRING:
-            byteStringEncoder.encode((ByteString) dataItem);
-            break;
-        case UNICODE_STRING:
-            unicodeStringEncoder.encode((UnicodeString) dataItem);
-            break;
-        case ARRAY:
-            arrayEncoder.encode((Array) dataItem);
-            break;
-        case MAP:
-            mapEncoder.encode((Map) dataItem);
-            break;
-        case SPECIAL:
-            specialEncoder.encode((Special) dataItem);
-            break;
-        case TAG:
-            tagEncoder.encode((Tag) dataItem);
-            break;
-        default:
-            throw new AssertionError("Unknown major type");
+        try {
+            cborOutputStream.writeDataItem(dataItem);
+        } catch (IOException ioException) {
+            throw new CborException(ioException);
         }
     }
 
     public boolean isCanonical() {
-        return canonical;
+        return cborOutputStream.isCanonical();
     }
 
     public CborEncoder nonCanonical() {
-        canonical = false;
+        cborOutputStream.setCanonical(false);
         return this;
     }
 
