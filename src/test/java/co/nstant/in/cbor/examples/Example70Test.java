@@ -1,7 +1,6 @@
 package co.nstant.in.cbor.examples;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -26,11 +25,8 @@ public class Example70Test {
             0x63 };
 
     @Test
-    public void shouldEncode() throws CborException {
-        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(byteOutputStream);
-        encoder.encode(VALUE);
-        Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
+    public void shouldEncode() {
+        Assert.assertArrayEquals(ENCODED_VALUE, CborEncoder.encodeToBytes(VALUE));
     }
 
     @Test

@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -83,10 +82,7 @@ public class CborDecoderTest {
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode1() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(30).add(true).build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
         decoder.decode();
     }
@@ -94,10 +90,7 @@ public class CborDecoderTest {
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode2() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(30).addArray().add(true).end().build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
         decoder.decode();
     }
@@ -105,10 +98,7 @@ public class CborDecoderTest {
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode3() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(30).addArray().add(true).add(true).end().build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
         decoder.decode();
     }
@@ -116,10 +106,7 @@ public class CborDecoderTest {
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode4() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(30).addArray().add(1).add(true).end().build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
         decoder.decode();
     }
@@ -127,10 +114,7 @@ public class CborDecoderTest {
     @Test
     public void shouldDecodeRationalNumber() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(30).addArray().add(1).add(2).end().build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
         assertEquals(new RationalNumber(new UnsignedInteger(1), new UnsignedInteger(2)), decoder.decodeNext());
     }
@@ -151,10 +135,7 @@ public class CborDecoderTest {
     @Test
     public void shouldDecodeTaggedRationalNumber() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(1).addTag(30).addArray().add(1).add(2).end().build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
 
         RationalNumber expected = new RationalNumber(new UnsignedInteger(1), new UnsignedInteger(2));

@@ -1,7 +1,6 @@
 package co.nstant.in.cbor.examples;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import org.junit.Assert;
@@ -23,11 +22,9 @@ public class Example64Test {
     private static final byte[] ENCODED_VALUE = new byte[] { (byte) 0x83, 0x01, 0x02, 0x03 };
 
     @Test
-    public void shouldEncode() throws CborException {
-        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(byteOutputStream);
-        encoder.encode(new CborBuilder().addArray().add(1).add(2).add(3).end().build());
-        Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
+    public void shouldEncode() {
+        Assert.assertArrayEquals(ENCODED_VALUE, CborEncoder.encodeToBytes(
+            new CborBuilder().addArray().add(1).add(2).add(3).end().build()));
     }
 
     @Test

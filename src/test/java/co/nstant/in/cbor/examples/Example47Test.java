@@ -1,14 +1,12 @@
 package co.nstant.in.cbor.examples;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import co.nstant.in.cbor.CborDecoder;
-import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.SimpleValue;
@@ -22,11 +20,8 @@ public class Example47Test {
     private static final byte[] ENCODED_VALUE = new byte[] { (byte) 0xf8, (byte) 0xff };
 
     @Test
-    public void shouldEncode() throws CborException {
-        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(byteOutputStream);
-        encoder.encode(VALUE);
-        Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
+    public void shouldEncode() {
+        Assert.assertArrayEquals(ENCODED_VALUE, VALUE.encodeToBytes());
     }
 
     @Test

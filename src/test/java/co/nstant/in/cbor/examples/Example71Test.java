@@ -1,7 +1,6 @@
 package co.nstant.in.cbor.examples;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -27,11 +26,8 @@ public class Example71Test {
             0x42, 0x61, 0x63, 0x61, 0x43, 0x61, 0x64, 0x61, 0x44, 0x61, 0x65, 0x61, 0x45 };
 
     @Test
-    public void shouldEncode() throws CborException {
-        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(byteOutputStream);
-        encoder.encode(VALUE);
-        Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
+    public void shouldEncode() {
+        Assert.assertArrayEquals(ENCODED_VALUE, CborEncoder.encodeToBytes(VALUE));
     }
 
     @Test

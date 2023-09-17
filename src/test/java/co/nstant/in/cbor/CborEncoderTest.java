@@ -2,11 +2,9 @@ package co.nstant.in.cbor;
 
 import static org.junit.Assert.assertEquals;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import co.nstant.in.cbor.model.DataItem;
@@ -22,51 +20,44 @@ public class CborEncoderTest {
 
     }
 
-    private CborEncoder encoder;
-
-    @Before
-    public void setup() {
-        encoder = new CborEncoder(new ByteArrayOutputStream());
+    @Test(expected = ClassCastException.class)
+    public void shouldExpectUnsignedIntegerImplementation() {
+        new Mock(MajorType.UNSIGNED_INTEGER).encodeToBytes();
     }
 
     @Test(expected = ClassCastException.class)
-    public void shouldExpectUnsignedIntegerImplementation() throws CborException {
-        encoder.encode(new Mock(MajorType.UNSIGNED_INTEGER));
+    public void shouldExpectNegativeIntegerImplementation() {
+        new Mock(MajorType.NEGATIVE_INTEGER).encodeToBytes();
     }
 
     @Test(expected = ClassCastException.class)
-    public void shouldExpectNegativeIntegerImplementation() throws CborException {
-        encoder.encode(new Mock(MajorType.NEGATIVE_INTEGER));
+    public void shouldExpectByteStringImplementation() {
+        new Mock(MajorType.BYTE_STRING).encodeToBytes();
     }
 
     @Test(expected = ClassCastException.class)
-    public void shouldExpectByteStringImplementation() throws CborException {
-        encoder.encode(new Mock(MajorType.BYTE_STRING));
+    public void shouldExpectUnicodeStringImplementation() {
+        new Mock(MajorType.UNICODE_STRING).encodeToBytes();
     }
 
     @Test(expected = ClassCastException.class)
-    public void shouldExpectUnicodeStringImplementation() throws CborException {
-        encoder.encode(new Mock(MajorType.UNICODE_STRING));
+    public void shouldExpectArrayImplementation() {
+        new Mock(MajorType.ARRAY).encodeToBytes();
     }
 
     @Test(expected = ClassCastException.class)
-    public void shouldExpectArrayImplementation() throws CborException {
-        encoder.encode(new Mock(MajorType.ARRAY));
+    public void shouldExpectMapImplementation() {
+        new Mock(MajorType.MAP).encodeToBytes();
     }
 
     @Test(expected = ClassCastException.class)
-    public void shouldExpectMapImplementation() throws CborException {
-        encoder.encode(new Mock(MajorType.MAP));
+    public void shouldExpectTagImplementation() {
+        new Mock(MajorType.TAG).encodeToBytes();
     }
 
     @Test(expected = ClassCastException.class)
-    public void shouldExpectTagImplementation() throws CborException {
-        encoder.encode(new Mock(MajorType.TAG));
-    }
-
-    @Test(expected = ClassCastException.class)
-    public void shouldExpectSpecialImplementation() throws CborException {
-        encoder.encode(new Mock(MajorType.SPECIAL));
+    public void shouldExpectSpecialImplementation() {
+        new Mock(MajorType.SPECIAL).encodeToBytes();
     }
 
     @Test(expected = CborException.class)
@@ -98,10 +89,8 @@ public class CborEncoderTest {
     }
 
     @Test
-    public void shallEncode32bit() throws CborException {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        new CborEncoder(outputStream).encode(new CborBuilder().addTag(4294967296L).build());
-        byte[] bytes = outputStream.toByteArray();
+    public void shallEncode32bit() {
+        byte[] bytes = CborEncoder.encodeToBytes(new CborBuilder().addTag(4294967296L).build());
         assertEquals(9, bytes.length);
         assertEquals((byte) 0xdB, bytes[0]);
         assertEquals((byte) 0x00, bytes[1]);

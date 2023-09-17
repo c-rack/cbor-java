@@ -1,7 +1,6 @@
 package co.nstant.in.cbor.builder;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigInteger;
@@ -86,10 +85,7 @@ public abstract class AbstractBuilder<T> {
 
     private boolean isHalfPrecisionEnough(float value) {
         try {
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            CborEncoder encoder = new CborEncoder(outputStream);
-            encoder.encode(new HalfPrecisionFloat(value));
-            byte[] bytes = outputStream.toByteArray();
+            byte[] bytes = new HalfPrecisionFloat(value).encodeToBytes();
             ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
             HalfPrecisionFloatDecoder decoder = getHalfPrecisionFloatDecoder(inputStream);
             if (inputStream.read() == -1) { // to skip type byte
