@@ -1,14 +1,12 @@
 package co.nstant.in.cbor.examples;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import co.nstant.in.cbor.CborDecoder;
-import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.ByteString;
 import co.nstant.in.cbor.model.DataItem;
@@ -21,12 +19,9 @@ import co.nstant.in.cbor.model.UnsignedInteger;
 public class Example12Test {
 
     @Test
-    public void shouldEncode() throws CborException {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(byteArrayOutputStream);
-        encoder.encode(new UnsignedInteger(new BigInteger("18446744073709551616")));
+    public void shouldEncode() {
         Assert.assertArrayEquals(new byte[] { (byte) 0xc2, 0x49, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 },
-            byteArrayOutputStream.toByteArray());
+            new UnsignedInteger(new BigInteger("18446744073709551616")).encodeToBytes());
     }
 
     @Test

@@ -13,7 +13,7 @@ public class DataItemTest {
     private class TestDataItem extends DataItem {
 
         protected TestDataItem() {
-            super(MajorType.INVALID);
+            super(MajorType.SPECIAL);
         }
 
     }

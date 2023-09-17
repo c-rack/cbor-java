@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 
 import org.junit.Test;
 
@@ -16,9 +15,8 @@ public class DatemItemListenerTest {
     @Test
     public void shouldDecodeZero() throws CborException {
         final int[] dataItems = new int[1];
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        new CborEncoder(outputStream).encode(new CborBuilder().add(1234).build());
-        new CborDecoder(new ByteArrayInputStream(outputStream.toByteArray())).decode(new DataItemListener() {
+        byte[] bytes = CborEncoder.encodeToBytes(new CborBuilder().add(1234).build());
+        new CborDecoder(new ByteArrayInputStream(bytes)).decode(new DataItemListener() {
 
             @Override
             public void onDataItem(DataItem dataItem) {

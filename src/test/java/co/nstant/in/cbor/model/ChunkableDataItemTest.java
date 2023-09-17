@@ -10,7 +10,7 @@ public class ChunkableDataItemTest {
     private class TestDataItem extends ChunkableDataItem {
 
         protected TestDataItem() {
-            super(MajorType.INVALID);
+            super(MajorType.SPECIAL);
         }
 
     }

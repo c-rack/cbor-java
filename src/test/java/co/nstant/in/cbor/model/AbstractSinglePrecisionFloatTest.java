@@ -1,14 +1,12 @@
 package co.nstant.in.cbor.model;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
 import org.junit.Assert;
 import org.junit.Test;
 
 import co.nstant.in.cbor.CborDecoder;
-import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.SinglePrecisionFloat;
@@ -24,11 +22,8 @@ public abstract class AbstractSinglePrecisionFloatTest {
     }
 
     @Test
-    public void shouldEncode() throws CborException {
-        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(byteOutputStream);
-        encoder.encode(new SinglePrecisionFloat(value));
-        Assert.assertArrayEquals(encodedValue, byteOutputStream.toByteArray());
+    public void shouldEncode() {
+        Assert.assertArrayEquals(encodedValue, new SinglePrecisionFloat(value).encodeToBytes());
     }
 
     @Test

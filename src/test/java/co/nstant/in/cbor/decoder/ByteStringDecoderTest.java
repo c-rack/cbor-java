@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
 import org.junit.Test;
@@ -21,11 +20,8 @@ public class ByteStringDecoderTest {
 
     @Test
     public void shouldDecodeChunkedByteString() throws CborException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(new CborBuilder().startByteString().add(new byte[] { '\0' }).add(new byte[] { 0x10 })
-            .add(new byte[] { 0x13 }).end().build());
-        byte[] encodedBytes = baos.toByteArray();
+        byte[] encodedBytes = CborEncoder.encodeToBytes(new CborBuilder().startByteString()
+            .add(new byte[] { '\0' }).add(new byte[] { 0x10 }).add(new byte[] { 0x13 }).end().build());
         ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
         CborDecoder decoder = new CborDecoder(bais);
         List<DataItem> dataItems = decoder.decode();
@@ -35,10 +31,7 @@ public class ByteStringDecoderTest {
 
     @Test
     public void shouldDecodeByteString1K() throws CborException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(new CborBuilder().add(new byte[1024]).build());
-        byte[] encodedBytes = baos.toByteArray();
+        byte[] encodedBytes = CborEncoder.encodeToBytes(new CborBuilder().add(new byte[1024]).build());
         ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
         CborDecoder decoder = new CborDecoder(bais);
         List<DataItem> dataItems = decoder.decode();
@@ -48,10 +41,7 @@ public class ByteStringDecoderTest {
 
     @Test
     public void shouldDecodeByteString1M() throws CborException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(new CborBuilder().add(new byte[1024 * 1024]).build());
-        byte[] encodedBytes = baos.toByteArray();
+        byte[] encodedBytes = CborEncoder.encodeToBytes(new CborBuilder().add(new byte[1024 * 1024]).build());
         ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
         CborDecoder decoder = new CborDecoder(bais);
         List<DataItem> dataItems = decoder.decode();
@@ -74,9 +64,7 @@ public class ByteStringDecoderTest {
     public void decodingExample() throws CborException {
         byte bytes[] = { 0, 1, 2, 3 };
         // Encode
-        ByteArrayOutputStream encodedStream = new ByteArrayOutputStream();
-        new CborEncoder(encodedStream).encode(new ByteString(bytes));
-        byte encodedBytes[] = encodedStream.toByteArray();
+        byte[] encodedBytes = new ByteString(bytes).encodeToBytes();
         // Decode
         ByteArrayInputStream inputStream = new ByteArrayInputStream(encodedBytes);
         CborDecoder decoder = new CborDecoder(inputStream);

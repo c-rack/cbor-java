@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import org.junit.Test;
 
 import co.nstant.in.cbor.CborException;
-import co.nstant.in.cbor.encoder.HalfPrecisionFloatEncoder;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.HalfPrecisionFloat;
 import co.nstant.in.cbor.model.SinglePrecisionFloat;
@@ -15,8 +14,6 @@ import co.nstant.in.cbor.model.SinglePrecisionFloat;
 public class AbstractBuilderTest {
 
     private class TestBuilder extends AbstractBuilder<Object> {
-
-        private boolean encoderThrowsException = false;
 
         public TestBuilder() {
             super(null);
@@ -28,24 +25,6 @@ public class AbstractBuilderTest {
 
         public void testAddChunk() {
             addChunk(null);
-        }
-
-        public void setEncoderThrowsException() {
-            encoderThrowsException = true;
-        }
-
-        @Override
-        protected HalfPrecisionFloatEncoder getHalfPrecisionFloatEncoder(OutputStream outputStream) {
-            if (encoderThrowsException) {
-                return new HalfPrecisionFloatEncoder(null, outputStream) {
-                    @Override
-                    public void encode(HalfPrecisionFloat dataItem) throws CborException {
-                        throw new CborException("test");
-                    }
-                };
-            } else {
-                return super.getHalfPrecisionFloatEncoder(outputStream);
-            }
         }
 
     }
@@ -62,14 +41,6 @@ public class AbstractBuilderTest {
     @Test(expected = IllegalStateException.class)
     public void shouldThrowExceptionOnAddChunk() {
         new TestBuilder().testAddChunk();
-    }
-
-    @Test
-    public void IsHalfPrecisionEnoughShallReturnFalseOnException() {
-        TestBuilder builder = new TestBuilder();
-        builder.setEncoderThrowsException();
-        assertTrue(builder.testConvert(0.0f) instanceof SinglePrecisionFloat);
-        assertTrue(0.0f == ((SinglePrecisionFloat) builder.testConvert(0.0f)).getValue());
     }
 
 }

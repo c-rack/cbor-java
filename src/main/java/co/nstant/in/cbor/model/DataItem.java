@@ -2,6 +2,8 @@ package co.nstant.in.cbor.model;
 
 import java.util.Objects;
 
+import co.nstant.in.cbor.CborEncoder;
+
 public class DataItem {
 
     private final MajorType majorType;
@@ -72,5 +74,9 @@ public class DataItem {
             item = item.getTag();
         }
         return item;
+    }
+
+    public byte[] encodeToBytes() {
+        return CborEncoder.encodeToBytes(this);
     }
 }

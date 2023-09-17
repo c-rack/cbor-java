@@ -9,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -38,11 +37,8 @@ public class Example83Test {
                     (byte) 0xF7, 0x61, 0x63};
 
     @Test
-    public void shouldEncode() throws CborException {
-        ByteArrayOutputStream byteOutputStream = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(byteOutputStream);
-        encoder.encode(VALUE);
-        Assert.assertArrayEquals(ENCODED_VALUE, byteOutputStream.toByteArray());
+    public void shouldEncode() {
+        Assert.assertArrayEquals(ENCODED_VALUE, CborEncoder.encodeToBytes(VALUE));
     }
 
     @Test

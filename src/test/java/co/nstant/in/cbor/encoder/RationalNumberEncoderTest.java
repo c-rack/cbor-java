@@ -4,13 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import co.nstant.in.cbor.CborDecoder;
-import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.RationalNumber;
@@ -22,19 +19,10 @@ public class RationalNumberEncoderTest {
     private static final UnsignedInteger ONE = new UnsignedInteger(1);
     private static final UnsignedInteger TWO = new UnsignedInteger(2);
 
-    private ByteArrayOutputStream outputStream;
-    private CborEncoder encoder;
-
-    @Before
-    public void setup() {
-        outputStream = new ByteArrayOutputStream();
-        encoder = new CborEncoder(outputStream);
-    }
-
     @Test
     public void shouldEncode() throws CborException {
-        encoder.encode(new RationalNumber(ONE, TWO));
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(outputStream.toByteArray());
+        byte[] bytes = new RationalNumber(ONE, TWO).encodeToBytes();
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
         CborDecoder decoder = new CborDecoder(inputStream);
 
         Array expected = new Array();

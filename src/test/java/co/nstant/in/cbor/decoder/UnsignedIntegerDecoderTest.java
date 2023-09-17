@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.math.BigInteger;
 import java.util.List;
 
@@ -25,10 +24,7 @@ public class UnsignedIntegerDecoderTest {
         BigInteger value = BigInteger.ONE;
         for (int i = 1; i < 64; i++) {
             value = value.shiftLeft(1);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            CborEncoder encoder = new CborEncoder(baos);
-            encoder.encode(new CborBuilder().add(value).build());
-            byte[] encodedBytes = baos.toByteArray();
+            byte[] encodedBytes = CborEncoder.encodeToBytes(new CborBuilder().add(value).build());
             ByteArrayInputStream bais = new ByteArrayInputStream(encodedBytes);
             CborDecoder decoder = new CborDecoder(bais);
             List<DataItem> dataItems = decoder.decode();

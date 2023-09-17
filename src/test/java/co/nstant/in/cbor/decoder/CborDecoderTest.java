@@ -8,7 +8,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -19,7 +18,6 @@ import co.nstant.in.cbor.CborBuilder;
 import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
-import co.nstant.in.cbor.encoder.AbstractEncoder;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.MajorType;
 import co.nstant.in.cbor.model.RationalNumber;
@@ -84,10 +82,7 @@ public class CborDecoderTest {
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode1() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(30).add(true).build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
         decoder.decode();
     }
@@ -95,10 +90,7 @@ public class CborDecoderTest {
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode2() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(30).addArray().add(true).end().build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
         decoder.decode();
     }
@@ -106,10 +98,7 @@ public class CborDecoderTest {
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode3() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(30).addArray().add(true).add(true).end().build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
         decoder.decode();
     }
@@ -117,10 +106,7 @@ public class CborDecoderTest {
     @Test(expected = CborException.class)
     public void shouldThrowOnRationalNumberDecode4() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(30).addArray().add(1).add(true).end().build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
         decoder.decode();
     }
@@ -128,10 +114,7 @@ public class CborDecoderTest {
     @Test
     public void shouldDecodeRationalNumber() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(30).addArray().add(1).add(2).end().build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
         assertEquals(new RationalNumber(new UnsignedInteger(1), new UnsignedInteger(2)), decoder.decodeNext());
     }
@@ -152,10 +135,7 @@ public class CborDecoderTest {
     @Test
     public void shouldDecodeTaggedRationalNumber() throws CborException {
         List<DataItem> items = new CborBuilder().addTag(1).addTag(30).addArray().add(1).add(2).end().build();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        CborEncoder encoder = new CborEncoder(baos);
-        encoder.encode(items);
-        ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+        ByteArrayInputStream bais = new ByteArrayInputStream(CborEncoder.encodeToBytes(items));
         CborDecoder decoder = new CborDecoder(bais);
 
         RationalNumber expected = new RationalNumber(new UnsignedInteger(1), new UnsignedInteger(2));
@@ -165,15 +145,7 @@ public class CborDecoderTest {
 
     @Test
     public void shouldThrowOnItemWithForgedLength() throws CborException {
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        AbstractEncoder<Long> maliciousEncoder = new AbstractEncoder<Long>(null, buffer) {
-            @Override
-            public void encode(Long length) throws CborException {
-                encodeTypeAndLength(MajorType.UNICODE_STRING, length.longValue());
-            }
-        };
-        maliciousEncoder.encode(Long.valueOf(Integer.MAX_VALUE + 1L));
-        byte[] maliciousString = buffer.toByteArray();
+        byte[] maliciousString = new byte[] { 0x7a, (byte) 0x80, 0x00, 0x00, 0x00 };
         try {
             CborDecoder.decode(maliciousString);
             fail("Should have failed the huge allocation");
@@ -181,9 +153,7 @@ public class CborDecoderTest {
             assertThat("Exception message", e.getMessage(), containsString("limited to INTMAX"));
         }
 
-        buffer.reset();
-        maliciousEncoder.encode(Long.valueOf(Integer.MAX_VALUE - 1));
-        maliciousString = buffer.toByteArray();
+        maliciousString = new byte[] { 0x7a, 0x7f, (byte) 0xff, (byte) 0xff, (byte) 0xfe };
         try {
             CborDecoder.decode(maliciousString);
             fail("Should have failed the huge allocation");

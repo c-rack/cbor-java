@@ -1,8 +1,8 @@
 package co.nstant.in.cbor.model;
 
-public enum MajorType {
+import co.nstant.in.cbor.CborException;
 
-    INVALID(-1),
+public enum MajorType {
 
     /**
      * Major type 0: an unsigned integer. The 5-bit additional information is either
@@ -98,7 +98,7 @@ public enum MajorType {
         return value;
     }
 
-    public static MajorType ofByte(int b) {
+    public static MajorType ofByte(int b) throws CborException {
         switch (b >> 5) {
         case 0:
             return UNSIGNED_INTEGER;
@@ -117,7 +117,7 @@ public enum MajorType {
         case 7:
             return SPECIAL;
         default:
-            return INVALID;
+            throw new CborException("Not implemented major type " + b);
         }
     }
 

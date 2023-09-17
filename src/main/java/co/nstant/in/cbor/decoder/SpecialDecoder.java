@@ -51,7 +51,6 @@ public class SpecialDecoder extends AbstractDecoder<Special> {
             return doublePrecisionFloatDecoder.decode(initialByte);
         case SIMPLE_VALUE_NEXT_BYTE:
             return new SimpleValue(nextSymbol());
-        case UNALLOCATED:
         default:
             throw new CborException("Not implemented");
         }
