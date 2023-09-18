@@ -37,7 +37,7 @@ Add this to the dependencies section of your pom.xml file:
 
 ## Usage
 
-### Encoding Example
+### Encoding Examples
 
 ```java
 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -51,6 +51,15 @@ new CborEncoder(baos).encode(new CborBuilder()
         .end()
     .build());
 byte[] encodedBytes = baos.toByteArray();
+```
+
+```java
+byte[] encodedBytes = CborEncoder.encodeToBytes(
+    new CborBuilder().add("text").add(1234).build());
+```
+
+```java
+byte[] encodedBytes = new UnsignedInteger(1234).encodeToBytes();
 ```
 
 ### Decoding Example
