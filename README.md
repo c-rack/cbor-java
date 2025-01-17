@@ -86,6 +86,26 @@ new CborDecoder(bais).decode(new DataItemListener() {
 });
 ```
 
+### GWT Usage
+
+The library can be used in GWT projects.
+You just need to add the sources dependency to your project:
+
+```xml
+<dependency>
+    <groupId>co.nstant.in</groupId>
+    <artifactId>cbor</artifactId>
+    <version>0.9</version>
+    <classifier>sources</classifier>
+</dependency>
+```
+
+And the following inherits statement to your module file:
+
+```xml
+<inherits name="co.nstant.in.cbor"/>
+```
+
 ### Preserving order of map entries
 
 By default, [maps are encoded in canonical format](https://tools.ietf.org/html/rfc7049#section-3.9).
