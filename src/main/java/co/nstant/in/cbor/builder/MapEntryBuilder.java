@@ -1,6 +1,8 @@
 package co.nstant.in.cbor.builder;
 
+import co.nstant.in.cbor.model.Array;
 import co.nstant.in.cbor.model.DataItem;
+import co.nstant.in.cbor.model.Map;
 
 public class MapEntryBuilder<T extends MapBuilder<?>> extends AbstractBuilder<T> {
     private final DataItem key;
@@ -24,6 +26,18 @@ public class MapEntryBuilder<T extends MapBuilder<?>> extends AbstractBuilder<T>
 
     public T value(String value) {
         return put(key, convert(value));
+    }
+
+    public ArrayBuilder<T> valueArray() {
+        Array nestedArray = new Array();
+        this.put(key, nestedArray);
+        return new ArrayBuilder<>(getParent(), nestedArray);
+    }
+
+    public MapBuilder<T> valueMap() {
+        Map nestedMap = new Map();
+        this.put(key, nestedMap);
+        return new MapBuilder<>(getParent(), nestedMap);
     }
 
     private T put(DataItem key, DataItem value) {
