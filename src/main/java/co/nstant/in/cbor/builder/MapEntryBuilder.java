@@ -10,6 +10,10 @@ public class MapEntryBuilder<T extends MapBuilder<?>> extends AbstractBuilder<T>
         this.key = key;
     }
 
+    public T value(DataItem value) {
+        return put(key, value);
+    }
+
     public T value(boolean value) {
         return put(key, convert(value));
     }
