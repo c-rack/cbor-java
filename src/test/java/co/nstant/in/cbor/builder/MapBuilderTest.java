@@ -52,6 +52,12 @@ public class MapBuilderTest {
                     .addKey("28").value(1.0f)
                     .addKey("29").value(1L)
                     .addKey("30").value("value")
+                    .addKey(31)
+                        .valueMap()
+                            .addKey(3111).value(3112)
+                            .addKey(3121).value(3122)
+                        .end()
+                    .addKey(34).valueArray().add(35).end()
                 .end()
                 .startMap()
                     .startArray(1).end()
@@ -61,7 +67,7 @@ public class MapBuilderTest {
         assertEquals(2, dataItems.size());
         assertTrue(dataItems.get(0) instanceof Map);
         Map map = (Map) dataItems.get(0);
-        assertEquals(31, map.getKeys().size());
+        assertEquals(33, map.getKeys().size());
     }
 
     @Test
