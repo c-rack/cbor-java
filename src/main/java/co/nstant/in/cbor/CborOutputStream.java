@@ -197,10 +197,15 @@ class CborOutputStream extends OutputStream {
                     return 1;
                 }
                 for (int i = 0; i < o1.length; i++) {
-                    if (o1[i] < o2[i]) {
+                    // Byte-wise lexical order is unsigned; Java's byte is signed,
+                    // so compare the unsigned values or keys with a byte >= 0x80
+                    // would sort before keys with smaller bytes.
+                    int b1 = o1[i] & 0xFF;
+                    int b2 = o2[i] & 0xFF;
+                    if (b1 < b2) {
                         return -1;
                     }
-                    if (o1[i] > o2[i]) {
+                    if (b1 > b2) {
                         return 1;
                     }
                 }
