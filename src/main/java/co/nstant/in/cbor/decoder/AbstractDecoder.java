@@ -168,7 +168,21 @@ public abstract class AbstractDecoder<T> {
 
     int getPreallocationSize(long length) {
         int len = Math.abs((int) length);
-        return maxPreallocationSize > 0 ? Math.min(maxPreallocationSize, len) : len;
+        if (maxPreallocationSize > 0) {
+            len = Math.min(maxPreallocationSize, len);
+        }
+        try {
+            // Never preallocate more than the stream can actually provide, so a
+            // crafted length in a small message cannot trigger an out-of-memory
+            // allocation before the data is even read.
+            int available = inputStream.available();
+            if (len > available) {
+                len = available;
+            }
+        } catch (IOException ignored) {
+            // available() is only a hint; keep the length-based estimate.
+        }
+        return len;
     }
 
     public void setMaxPreallocationSize(int maxPreallocationSize) {
