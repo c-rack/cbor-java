@@ -156,9 +156,10 @@ public class CborDecoderTest {
         maliciousString = new byte[] { 0x7a, 0x7f, (byte) 0xff, (byte) 0xff, (byte) 0xfe };
         try {
             CborDecoder.decode(maliciousString);
-            fail("Should have failed the huge allocation");
-        } catch (OutOfMemoryError e) {
-            // Expected without limit
+            fail("Should have failed with unexpected end of stream exception");
+        } catch (CborException e) {
+            // Preallocation is bounded by the available input, so the forged
+            // length no longer triggers an OutOfMemoryError.
         }
         CborDecoder decoder = new CborDecoder(new ByteArrayInputStream(maliciousString));
         decoder.setMaxPreallocationSize(1024);
@@ -167,6 +168,26 @@ public class CborDecoderTest {
             fail("Should have failed with unexpected end of stream exception");
         } catch (CborException e) {
             // Expected with limit
+        }
+    }
+
+    @Test
+    public void shouldNotPreallocateHugeArrayOrMap() throws CborException {
+        // An array or map that claims ~2.1 billion items but carries no data must
+        // fail with a CborException, not exhaust memory (issue #119).
+        byte[] hugeArray = new byte[] { (byte) 0x9a, 0x7f, (byte) 0xff, (byte) 0xff, (byte) 0xff };
+        try {
+            CborDecoder.decode(hugeArray);
+            fail("Should have failed with unexpected end of stream exception");
+        } catch (CborException e) {
+            // Expected.
+        }
+        byte[] hugeMap = new byte[] { (byte) 0xba, 0x7f, (byte) 0xff, (byte) 0xff, (byte) 0xff };
+        try {
+            CborDecoder.decode(hugeMap);
+            fail("Should have failed with unexpected end of stream exception");
+        } catch (CborException e) {
+            // Expected.
         }
     }
 }
