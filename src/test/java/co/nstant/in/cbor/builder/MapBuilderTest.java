@@ -5,14 +5,10 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import co.nstant.in.cbor.model.*;
 import org.junit.Test;
 
 import co.nstant.in.cbor.CborBuilder;
-import co.nstant.in.cbor.model.ByteString;
-import co.nstant.in.cbor.model.DataItem;
-import co.nstant.in.cbor.model.Map;
-import co.nstant.in.cbor.model.UnicodeString;
-import co.nstant.in.cbor.model.UnsignedInteger;
 
 public class MapBuilderTest {
 
@@ -52,6 +48,7 @@ public class MapBuilderTest {
                     .addKey("28").value(1.0f)
                     .addKey("29").value(1L)
                     .addKey("30").value("value")
+                    .addKey("31").value(SimpleValue.NULL)
                 .end()
                 .startMap()
                     .startArray(1).end()
@@ -61,7 +58,7 @@ public class MapBuilderTest {
         assertEquals(2, dataItems.size());
         assertTrue(dataItems.get(0) instanceof Map);
         Map map = (Map) dataItems.get(0);
-        assertEquals(31, map.getKeys().size());
+        assertEquals(32, map.getKeys().size());
     }
 
     @Test
