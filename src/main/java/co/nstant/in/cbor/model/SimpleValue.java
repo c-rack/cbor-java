@@ -22,7 +22,9 @@ public class SimpleValue extends Special {
     public SimpleValue(int value) {
         super(value <= 23 ? SpecialType.SIMPLE_VALUE : SpecialType.SIMPLE_VALUE_NEXT_BYTE);
         this.value = value;
-        this.simpleValueType = SimpleValueType.ofByte(value);
+        // ofByte reads the low 5 bits of an initial byte; values 32..255 are one-byte
+        // simple values that are not false/true/null/undefined
+        this.simpleValueType = value < 32 ? SimpleValueType.ofByte(value) : SimpleValueType.UNALLOCATED;
     }
 
     public SimpleValueType getSimpleValueType() {

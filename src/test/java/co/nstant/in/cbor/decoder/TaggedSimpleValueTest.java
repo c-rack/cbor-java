@@ -16,6 +16,7 @@ import co.nstant.in.cbor.CborEncoder;
 import co.nstant.in.cbor.CborException;
 import co.nstant.in.cbor.model.DataItem;
 import co.nstant.in.cbor.model.SimpleValue;
+import co.nstant.in.cbor.model.SimpleValueType;
 
 public class TaggedSimpleValueTest {
 
@@ -52,6 +53,20 @@ public class TaggedSimpleValueTest {
         assertFalse(SimpleValue.TRUE.hasTag());
         assertFalse(SimpleValue.FALSE.hasTag());
         assertFalse(new CborBuilder().add(true).build().get(0).hasTag());
+    }
+
+    @Test
+    public void twoByteSimpleValuesShouldNotLookLikeFalseTrueNullOrUndefined() throws CborException {
+        // simple(116..119) and simple(180..183) share the low 5 bits with false/true/null/undefined
+        for (int value : new int[] { 116, 117, 118, 119, 180, 183, 255 }) {
+            DataItem dataItem = CborDecoder.decode(new byte[] { (byte) 0xf8, (byte) value }).get(0);
+            SimpleValue simpleValue = (SimpleValue) dataItem;
+            assertEquals(value, simpleValue.getValue());
+            assertEquals(SimpleValueType.UNALLOCATED, simpleValue.getSimpleValueType());
+            assertArrayEquals(new byte[] { (byte) 0xf8, (byte) value }, encode(dataItem));
+        }
+        assertEquals(SimpleValueType.UNALLOCATED, new SimpleValue(117).getSimpleValueType());
+        assertEquals(SimpleValueType.TRUE, new SimpleValue(21).getSimpleValueType());
     }
 
 }
