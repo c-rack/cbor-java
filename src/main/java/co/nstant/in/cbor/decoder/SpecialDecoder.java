@@ -28,15 +28,16 @@ public class SpecialDecoder extends AbstractDecoder<Special> {
         case BREAK:
             return Special.BREAK;
         case SIMPLE_VALUE:
+            // new instances: a tag set on a decoded value must not change the shared constants
             switch (SimpleValueType.ofByte(initialByte)) {
             case FALSE:
-                return SimpleValue.FALSE;
+                return new SimpleValue(SimpleValueType.FALSE);
             case TRUE:
-                return SimpleValue.TRUE;
+                return new SimpleValue(SimpleValueType.TRUE);
             case NULL:
-                return SimpleValue.NULL;
+                return new SimpleValue(SimpleValueType.NULL);
             case UNDEFINED:
-                return SimpleValue.UNDEFINED;
+                return new SimpleValue(SimpleValueType.UNDEFINED);
             case UNALLOCATED:
                 return new SimpleValue(initialByte & 31);
             case RESERVED:

@@ -14,6 +14,7 @@ import co.nstant.in.cbor.model.DoublePrecisionFloat;
 import co.nstant.in.cbor.model.HalfPrecisionFloat;
 import co.nstant.in.cbor.model.NegativeInteger;
 import co.nstant.in.cbor.model.SimpleValue;
+import co.nstant.in.cbor.model.SimpleValueType;
 import co.nstant.in.cbor.model.SinglePrecisionFloat;
 import co.nstant.in.cbor.model.Tag;
 import co.nstant.in.cbor.model.UnicodeString;
@@ -52,11 +53,8 @@ public abstract class AbstractBuilder<T> {
     }
 
     protected DataItem convert(boolean value) {
-        if (value) {
-            return SimpleValue.TRUE;
-        } else {
-            return SimpleValue.FALSE;
-        }
+        // new instances: tagged() must not change the shared constants
+        return new SimpleValue(value ? SimpleValueType.TRUE : SimpleValueType.FALSE);
     }
 
     protected DataItem convert(byte[] bytes) {
