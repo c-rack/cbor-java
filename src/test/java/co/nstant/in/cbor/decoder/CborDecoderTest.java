@@ -190,4 +190,21 @@ public class CborDecoderTest {
             // Expected.
         }
     }
+
+    // Integers and tags have no indefinite-length form (RFC 8949, section 3.2.4).
+
+    @Test(expected = CborException.class)
+    public void shouldThrowOnIndefiniteLengthUnsignedInteger() throws CborException {
+        CborDecoder.decode(new byte[] { 0x1f });
+    }
+
+    @Test(expected = CborException.class)
+    public void shouldThrowOnIndefiniteLengthNegativeInteger() throws CborException {
+        CborDecoder.decode(new byte[] { 0x3f });
+    }
+
+    @Test(expected = CborException.class)
+    public void shouldThrowOnIndefiniteLengthTag() throws CborException {
+        CborDecoder.decode(new byte[] { (byte) 0xdf, 0x01 });
+    }
 }
