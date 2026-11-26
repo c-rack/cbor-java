@@ -5,6 +5,7 @@ import java.math.BigInteger;
 
 import co.nstant.in.cbor.CborDecoder;
 import co.nstant.in.cbor.CborException;
+import co.nstant.in.cbor.model.AdditionalInformation;
 import co.nstant.in.cbor.model.NegativeInteger;
 
 public class NegativeIntegerDecoder extends AbstractDecoder<NegativeInteger> {
@@ -17,6 +18,9 @@ public class NegativeIntegerDecoder extends AbstractDecoder<NegativeInteger> {
 
     @Override
     public NegativeInteger decode(int initialByte) throws CborException {
+        if (AdditionalInformation.ofByte(initialByte) == AdditionalInformation.INDEFINITE) {
+            throw new CborException("Indefinite length is not allowed for integers");
+        }
         return new NegativeInteger(MINUS_ONE.subtract(getLengthAsBigInteger(initialByte)));
     }
 
